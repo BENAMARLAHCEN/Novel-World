@@ -19,6 +19,11 @@ class UserRepository implements IUserRepository
         return User::where('email', $email)->first();
     }
 
+    public function findByVerifyToken(string $token)
+    {
+        return User::where('verify_token', $token)->first();
+    }
+
     public function findById(int $id)
     {
         return User::find($id);
