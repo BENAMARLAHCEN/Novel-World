@@ -8,9 +8,13 @@ use App\Repositories\Interfaces\IUserRepository;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
-class UserService {
+class UserService
+{
 
     protected $userRepository;
 
@@ -27,11 +31,12 @@ class UserService {
             'password' => Hash::make($request->password)
         ]);
 
-        
+
         if ($user) {
             $user->assignRole('user');
-            return redirect()->route('login')->with('success', 'Registered successfully');
-        }else{
+            $this->sendVerificationEmail($user);
+            return redirect()->route('login')->with('success', 'Registered successfully. Please check your email to verify your account');
+        } else {
             return back()->with('error', 'Failed to register');
         }
     }
@@ -40,7 +45,7 @@ class UserService {
     {
         if (auth()->attempt($request->only('email', 'password'))) {
             return redirect()->intended('/')->with('success', 'Logged in successfully');
-        }else{
+        } else {
             return back()->with('error', 'Invalid login details');
         }
     }
@@ -53,28 +58,74 @@ class UserService {
 
     public function forgotPassword($request)
     {
+        // check if user exists and if it does, generate a token and store it in the password_reset_tokens table
+
+        $passwordResetToken = DB::table('password_reset_tokens')->where('email', $request->email)->first();
+        if ($passwordResetToken) {
+            DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+        }
+
         $user = $this->userRepository->findByEmail($request->email);
 
         if ($user) {
-            $user->sendPasswordResetNotification($user->createToken('password_reset')->plainTextToken);
+            $token = Str::random(64);
+            DB::table('password_reset_tokens')->insert([
+                'email' => $user->email,
+                'token' => $token
+            ]);
+            // send email with token
+
+            Mail::send('emails.resetPassword', ['token' => $token], function ($message) use ($user) {
+                $message->to($user->email);
+                $message->subject('Reset your password');
+            });
             return back()->with('success', 'Password reset link sent to your email');
-        }else{
+        } else {
             return back()->with('error', 'User not found');
         }
     }
 
     public function resetPassword($request)
     {
-        $user = $this->userRepository->findByEmail($request->email);
-
-        if ($user) {
+        // check if token exists in the password_reset_tokens table and if it does, update the user's password and delete the token
+        $update = DB::table('password_reset_tokens')->where('token', $request->token)->where('email', $request->email)->first();
+        if ($update) {
+            $user = $this->userRepository->findByEmail($request->email);
             $user->password = Hash::make($request->password);
             $user->save();
+            DB::table('password_reset_tokens')->where('token', $request->token)->delete();
             return redirect()->route('login')->with('success', 'Password reset successfully');
-        }else{
-            return back()->with('error', 'User not found');
+        } else {
+            return back()->with('error', 'Invalid token');
         }
     }
 
-   
+
+    // verify email address using the token sent to the user's email 
+
+    public function verify($token)
+    {
+        $user = $this->userRepository->findByVerifyToken($token);
+        if ($user) {
+            $user->email_verified_at = now();
+            $user->verify_token = null;
+            $user->save();
+            return redirect()->route('login')->with('success', 'Email verified successfully');
+        } else {
+            return redirect()->route('login')->with('error', 'Invalid token');
+        }
+    }
+
+    // send email verification link to the user's email
+
+    public function sendVerificationEmail($user)
+    {
+        $token = Str::random(64);
+        $user->verify_token = $token;
+        $user->save();
+        Mail::send('emails.verifyEmail', ['token' => $token, 'user' => $user], function ($message) use ($user) {
+            $message->to($user->email);
+            $message->subject('Verify your email address');
+        });
+    }
 }
