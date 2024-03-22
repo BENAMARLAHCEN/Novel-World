@@ -18,6 +18,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\IUserRepository::class,
             \App\Repositories\UserRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Interfaces\IRoleRepository::class,
+            \App\Repositories\RoleRepository::class
+        );
     }
 
     /**
