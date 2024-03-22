@@ -18,6 +18,7 @@
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar ">
+    <x-success-message />
     <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">
