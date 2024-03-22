@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Novel;
+use App\Models\Ranking;
+use App\Models\Statu;
 use App\Repositories\Interfaces\INovelRepository;
 
 class NovelRepository implements INovelRepository
@@ -77,5 +79,15 @@ class NovelRepository implements INovelRepository
     public function forceDelete(int $id)
     {
         return Novel::onlyTrashed()->find($id)->forceDelete();
+    }
+
+    public function getStatus()
+    {
+        return Statu::all();
+    }
+
+    public function getRankings()
+    {
+        return Ranking::all();
     }
 }
