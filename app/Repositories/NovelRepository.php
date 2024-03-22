@@ -3,12 +3,18 @@
 namespace App\Repositories;
 
 use App\Models\Novel;
+use App\Repositories\Interfaces\INovelRepository;
 
-class NovelRepository
+class NovelRepository implements INovelRepository
 {
     public function all()
     {
         return Novel::all();
+    }
+
+    public function paginate(int $perPage = 10)
+    {
+        return Novel::paginate($perPage);
     }
 
     public function findById(int $id)
@@ -29,5 +35,47 @@ class NovelRepository
     public function delete(int $id)
     {
         Novel::destroy($id);
+    }
+
+    public function attachRanking(int $novelId, int $rankingId)
+    {
+        $novel = Novel::find($novelId);
+        $novel->rankings()->attach($rankingId);
+    }
+
+    public function detachRanking(int $novelId, int $rankingId)
+    {
+        $novel = Novel::find($novelId);
+        $novel->rankings()->detach($rankingId);
+    }
+
+    public function syncRankings(int $novelId, array $rankings)
+    {
+        $novel = Novel::find($novelId);
+        $novel->rankings()->sync($rankings);
+    }
+
+    public function getAuthorNovels(int $authorId)
+    {
+        return Novel::where('user_id', $authorId)->get();
+    }
+
+   
+    public function trash(int $authorId = null)
+    {
+        if ($authorId) {
+            return Novel::onlyTrashed()->where('user_id', $authorId)->get();
+        }
+        return Novel::onlyTrashed()->get();
+    }
+
+    public function restore(int $id)
+    {
+        return Novel::onlyTrashed()->find($id)->restore();
+    }
+
+    public function forceDelete(int $id)
+    {
+        return Novel::onlyTrashed()->find($id)->forceDelete();
     }
 }
