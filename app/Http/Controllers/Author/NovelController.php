@@ -4,15 +4,24 @@ namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use App\Models\Novel;
+use App\Services\NovelService;
 use Illuminate\Http\Request;
 
 class NovelController extends Controller
 {
+    protected $novelService;
+
+    public function __construct(NovelService $novelService)
+    {
+        $this->novelService = $novelService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $novels = $this->novelService->getAuthorNovels(auth()->id());
+        return view('author.novels.index', compact('novels'));
     }
 
     /**
@@ -20,7 +29,7 @@ class NovelController extends Controller
      */
     public function create()
     {
-        //
+        return view('author.novels.create');
     }
 
     /**
@@ -59,6 +68,31 @@ class NovelController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Novel $novel)
+    {
+        //
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore(Novel $novel)
+    {
+        //
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function trash()
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+
+    public function forceDelete(Novel $novel)
     {
         //
     }

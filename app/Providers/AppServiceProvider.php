@@ -23,6 +23,25 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\IRoleRepository::class,
             \App\Repositories\RoleRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Interfaces\IStatuRepository::class,
+            \App\Repositories\StatuRepository::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\Interfaces\INovelRepository::class,
+            \App\Repositories\NovelRepository::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\Interfaces\IRankingRepository::class,
+            \App\Repositories\RankingRepository::class
+        );
+
+   
+
+
     }
 
     /**
