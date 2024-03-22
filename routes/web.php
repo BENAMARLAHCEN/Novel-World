@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerifyController;
@@ -23,7 +24,7 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.admin.index');
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/register',[AuthController::class,'showRegisterForm'])->name('register.form');
@@ -36,3 +37,13 @@ Route::post('/forgot-password',[ForgotPasswordController::class,'forgotPassword'
 Route::get('/reset-password/{token}',[ForgotPasswordController::class,'showResetPasswordForm'])->name('reset-password.form');
 Route::post('/reset-password',[ForgotPasswordController::class,'resetPassword'])->name('password.reset');
 Route::get('/verify-email/{token}',[VerifyController::class,'verify'])->name('verify-email');
+
+// role routes
+// Route::resource('roles', RoleController::class)->except(['show']);
+Route::get('/roles',[RoleController::class,'index'])->name('roles.index');
+Route::get('/roles/create',[RoleController::class,'create'])->name('roles.create');
+Route::post('/roles',[RoleController::class,'store'])->name('roles.store');
+Route::get('/roles/{id}/edit',[RoleController::class,'edit'])->name('roles.edit');
+Route::put('/roles/{id}',[RoleController::class,'update'])->name('roles.update');
+Route::delete('/roles/{id}',[RoleController::class,'destroy'])->name('roles.destroy');
+Route::get('/roles/{id}',[RoleController::class,'show'])->name('roles.show');
