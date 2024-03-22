@@ -77,4 +77,6 @@ class NovelPolicy
             ? Response::allow()
             : Response::deny('You do not have permission to permanently delete novels.');
     }
+
+
 }
