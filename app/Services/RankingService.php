@@ -13,8 +13,11 @@ class RankingService
         $this->rankingRepository = $rankingRepository;
     }
 
-    public function all()
+    public function all(int $perPage = null)
     {
+        if ($perPage) {
+            return $this->rankingRepository->paginate($perPage);
+        }
         return $this->rankingRepository->all();
     }
 
