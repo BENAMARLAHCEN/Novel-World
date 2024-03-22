@@ -2,39 +2,42 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\IRankingRepository;
+use App\Repositories\Interfaces\IStatuRepository;
 
-class RankingService
+class StatuService
 {
-    private $rankingRepository;
+    private $statuRepository;
 
-    public function __construct(IRankingRepository $rankingRepository)
+    public function __construct(IStatuRepository $statuRepository)
     {
-        $this->rankingRepository = $rankingRepository;
+        $this->statuRepository = $statuRepository;
     }
 
-    public function all()
+    public function all(int $perPage = null)
     {
-        return $this->rankingRepository->all();
+        if ($perPage) {
+            return $this->statuRepository->paginate($perPage);
+        }
+        return $this->statuRepository->all();
     }
 
     public function findById(int $id)
     {
-        return $this->rankingRepository->findById($id);
+        return $this->statuRepository->findById($id);
     }
 
-    public function create(array $attributes)
+    public function store(array $attributes)
     {
-        return $this->rankingRepository->create($attributes);
+        return $this->statuRepository->create($attributes);
     }
 
     public function update(int $id, array $attributes)
     {
-        return $this->rankingRepository->update($id, $attributes);
+        return $this->statuRepository->update($id, $attributes);
     }
 
-    public function delete(int $id)
+    public function destroy(int $id)
     {
-        return $this->rankingRepository->delete($id);
+        return $this->statuRepository->delete($id);
     }
 }
