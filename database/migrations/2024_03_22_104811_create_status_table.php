@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('status', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->uniqid();
+            $table->string('color');
+            $table->string('background_color');
+            $table->string('border_color');
+            $table->string('text_color');
+            $table->string('icon');
             $table->timestamps();
         });
     }
