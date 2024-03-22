@@ -63,5 +63,29 @@ class NovelService
         return $this->novelRepository->delete($id);
     }
 
+    public function getTrash(int $authorId = null)
+    {
+        return $this->novelRepository->trash($authorId);
+    }
+
+    public function restore(int $id)
+    {
+        return $this->novelRepository->restore($id);
+    }
+
+    public function forceDelete(int $id)
+    {
+        return $this->novelRepository->forceDelete($id);
+    }
+
+    public function getRankings()
+    {
+        return $this->novelRepository->getRankings();
+    }
+
+    public function getStatus()
+    {
+        return $this->novelRepository->getStatus();
+    }
 
 }
