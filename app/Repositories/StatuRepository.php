@@ -8,7 +8,12 @@ class StatuRepository
 {
     public function all()
     {
-        return Statu::all();
+        return Statu::latest()->all();
+    }
+
+    public function paginate(int $perPage = 10)
+    {
+        return Statu::latest()->paginate($perPage);
     }
 
     public function findById(int $id)
