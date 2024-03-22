@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Author;
 
+use App\Http\Controllers\Controller;
 use App\Models\Novel;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,6 @@ class NovelController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
