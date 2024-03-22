@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('likes', function (Blueprint $table) {
-            $table->id();
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Novel::class);
             $table->timestamps();
         });
     }

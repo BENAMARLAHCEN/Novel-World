@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Novel::class)->nullable();
+            $table->text('content');
+            $table->integer('comment_id')->nullable();
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
             $table->timestamps();
         });
     }
