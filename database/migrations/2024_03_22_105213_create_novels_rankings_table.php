@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('novels_rankings', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\Novel::class);
+            $table->foreignIdFor(\App\Models\Ranking::class);
             $table->timestamps();
         });
     }
