@@ -29,19 +29,6 @@
                 </div><!-- .nk-block-head-content -->
             </div><!-- .nk-block-between -->
         </div><!-- .nk-block-head -->
-        <!--  public function up(): void
-        {
-            Schema::create('status', function (Blueprint $table) {
-                $table->id();
-                $table->string('name')->uniqid();
-                $table->string('color');
-                $table->string('background_color');
-                $table->string('border_color');
-                $table->string('text_color');
-                $table->string('icon');
-                $table->timestamps();
-            });
-        } -->
         <div class="nk-block">
             <table class="nk-tb-list is-separate nk-tb-ulist">
                 <thead>
@@ -80,17 +67,6 @@
                                     </div>
                                 </li>
                             </ul>
-
-                            {{-- <div class="dropdown">
-                                <button href="#" class="btn btn-xs btn-trigger btn-icon dropdown-toggle" data-toggle="dropdown" data-offset="0,5"><em class="icon ni ni-more-h"></em></button>
-                                <div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
-                                    <ul class="link-check">
-                                        <li><a href="#">Check All</a></li>
-                                        <li><a href="#">Uncheck All</a></li>
-                                        <li><a href="#">Bulk Remove</a></li>
-                                    </ul>
-                                </div>
-                            </div> --}}
                         </th>
                     </tr>
                 </thead>
@@ -143,7 +119,7 @@
                                         <form action="{{ route('status.destroy', $statu->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-icon btn-trigger btn-tooltip" title="Delete statu">
+                                            <button class="btn btn-icon btn-trigger btn-tooltip delete" title="Delete statu">
                                                 <em class="icon ni ni-trash"></em>
                                             </button>
                                         </form>
@@ -165,7 +141,7 @@
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
-                                                            <button class="btn btn-icon"><em class="icon ni ni-trash"></em><span>Remove
+                                                            <button class="btn delete"><em class="icon ni ni-trash"></em><span>Remove
                                                                     Status</span></button>
                                                         </form>
                                                     </li>
