@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('statu_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('views')->default(0); 
-            $table->enum('published', ['rejected', 'published', 'pending'])->default('pending');
+            $table->enum('status', ['rejected', 'published', 'pending'])->default('pending');
             // foreign keys
             $table->foreign('statu_id')->references('id')->on('status');
             $table->foreign('user_id')->references('id')->on('users');  
