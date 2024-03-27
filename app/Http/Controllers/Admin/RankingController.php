@@ -24,7 +24,7 @@ class RankingController extends Controller
     public function index()
     {
         $rankings = $this->rankingService->all(10);
-        return view('admin.rankings.index', compact('rankings'));
+        return view('dashboard.admin.rankings.index', compact('rankings'));
     }
 
     /**
@@ -32,7 +32,7 @@ class RankingController extends Controller
      */
     public function create()
     {
-        return view('admin.rankings.create');
+        return view('dashboard.admin.rankings.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class RankingController extends Controller
      */
     public function show(ranking $ranking)
     {
-        return view('admin.rankings.show', compact('ranking'));
+        return view('dashboard.admin.rankings.show', compact('ranking'));
     }
 
     /**
@@ -57,7 +57,7 @@ class RankingController extends Controller
      */
     public function edit(ranking $ranking)
     {
-        return view('admin.rankings.edit', compact('ranking'));
+        return view('dashboard.admin.rankings.edit', compact('ranking'));
     }
 
     /**
@@ -65,16 +65,16 @@ class RankingController extends Controller
      */
     public function update(UpdateRequest $request, ranking $ranking)
     {
-        $this->rankingService->update($request->validated(), $ranking->id);
+        $this->rankingService->update( $ranking->id,$request->validated());
         return redirect()->route('rankings.index')->with('success', 'Ranking updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ranking $ranking)
+    public function destroy(int $id)
     {
-        $this->rankingService->delete($ranking->id);
+        $this->rankingService->delete($id);
         return redirect()->route('rankings.index')->with('success', 'Ranking deleted successfully');
     }
 }
