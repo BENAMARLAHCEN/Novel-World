@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\RankingController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\StatuController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerifyController;
@@ -47,3 +49,27 @@ Route::get('/roles/{id}/edit',[RoleController::class,'edit'])->name('roles.edit'
 Route::put('/roles/{id}',[RoleController::class,'update'])->name('roles.update');
 Route::delete('/roles/{id}',[RoleController::class,'destroy'])->name('roles.destroy');
 Route::get('/roles/{id}',[RoleController::class,'show'])->name('roles.show');
+
+
+// status routes
+
+// Route::resource('statuses', StatuController::class)->except(['show']);
+Route::get('/status',[StatuController::class,'index'])->name('status.index');
+Route::get('/status/create',[StatuController::class,'create'])->name('status.create');
+Route::post('/status',[StatuController::class,'store'])->name('status.store');
+Route::get('/status/{status}/edit',[StatuController::class,'edit'])->name('status.edit');
+Route::put('/status/{status}',[StatuController::class,'update'])->name('status.update');
+Route::delete('/status/{id}',[StatuController::class,'destroy'])->name('status.destroy');
+Route::get('/status/{id}',[StatuController::class,'show'])->name('status.show');
+
+// ranking routes
+
+// Route::resource('rankings', RankingController::class)->except(['show']);
+Route::get('/rankings',[RankingController::class,'index'])->name('rankings.index');
+Route::get('/rankings/create',[RankingController::class,'create'])->name('rankings.create');
+Route::post('/rankings',[RankingController::class,'store'])->name('rankings.store');
+Route::get('/rankings/{ranking}/edit',[RankingController::class,'edit'])->name('rankings.edit');
+Route::put('/rankings/{ranking}',[RankingController::class,'update'])->name('rankings.update');
+Route::delete('/rankings/{id}',[RankingController::class,'destroy'])->name('rankings.destroy');
+Route::get('/rankings/{id}',[RankingController::class,'show'])->name('rankings.show');
+
