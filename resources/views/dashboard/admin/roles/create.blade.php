@@ -21,7 +21,11 @@
                                     <div class="form-group">
                                         <label class="form-label" for="role-name">Role Name</label>
                                         <div class="form-control-wrap">
-                                            <input type="text" class="form-control" id="role-name" name="name">
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                                id="role-name" name="name">
+                                            @error('name')
+                                                <span class="invalid text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -31,16 +35,17 @@
                                     <div class="form-group @error('permissions') is-invalid @enderror">
                                         <label class="form-label" for="role-permissions">Permissions</label>
                                         <div class="form-control-wrap">
-                                            <select class="form-select js-select2" id="role-permissions"
-                                                name="permissions[]" data-placeholder="Select multiple permissions"
-                                                multiple="multiple">
+                                            <select
+                                                class="form-select js-select2 @error('permissions') is-invalid @enderror"
+                                                id="role-permissions" name="permissions[]"
+                                                data-placeholder="Select multiple permissions" multiple="multiple">
                                                 @foreach ($permissions as $permission)
                                                     <option value="{{ $permission->id }}">{{ $permission->name }}</option>
                                                 @endforeach
                                             </select>
 
                                             @error('permissions')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <span class="invalid text-danger">{{ $message }}</span>
                                             @enderror
 
                                         </div>
@@ -60,10 +65,10 @@
                                     </ul>
                                 </div>
                             </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div><!-- .nk-block -->
-    </div>
+            </div><!-- .nk-block -->
+        </div>
     </div>
 @endsection
