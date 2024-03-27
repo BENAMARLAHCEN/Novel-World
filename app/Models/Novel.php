@@ -81,5 +81,10 @@ class Novel extends Model
         return $this->chapters()->where('published', true)->orderByDesc('number')->first();
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 
 }

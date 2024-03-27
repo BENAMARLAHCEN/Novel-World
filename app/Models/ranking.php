@@ -15,6 +15,6 @@ class Ranking extends Model
 
     public function novels()
     {
-        return $this->belongsToMany(Novel::class);
+        return $this->belongsToMany(Novel::class, 'novels_rankings');
     }
 }
