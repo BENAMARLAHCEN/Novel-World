@@ -9,14 +9,28 @@ use App\Repositories\Interfaces\INovelRepository;
 
 class NovelRepository implements INovelRepository
 {
-    public function all()
+    public function all($status = null, $authorId = null)
     {
-        return Novel::all();
+        $query = Novel::query();
+        if ($status) {
+            $query->where('status', $status);
+        }
+        if ($authorId) {
+            $query->where('user_id', $authorId);
+        }
+        return $query->get();
     }
 
-    public function paginate(int $perPage = 10)
+    public function paginate(int $perPage = 10, $status = null, $authorId = null)
     {
-        return Novel::paginate($perPage);
+        $query = Novel::query();
+        if ($status) {
+            $query->where('status', $status);
+        }
+        if ($authorId) {
+            $query->where('user_id', $authorId);
+        }
+        return $query->paginate($perPage);
     }
 
     public function findById(int $id)

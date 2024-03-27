@@ -128,4 +128,44 @@ class UserService
             $message->subject('Verify your email address');
         });
     }
+
+    // user favorite a novel methods
+
+    public function getFavorites()
+    {
+        return auth()->user()->favorites;
+    }
+
+    public function toggleFavorite($novelId)
+    {
+        $user = $this->userRepository->findById(auth()->id());
+        $novel = $user->favorites()->where('novel_id', $novelId)->first();
+        if ($novel) {
+            $user->favorites()->detach($novelId);
+            return response()->json(['message' => 'Novel removed from favorites successfully']);
+        } else {
+            $user->favorites()->attach($novelId);
+            return response()->json(['message' => 'Novel added to favorites successfully']);
+        }
+    }
+
+    // user like a novel methods
+
+    public function getLikes()
+    {
+        return auth()->user()->likes;
+    }
+
+    public function toggleLike($novelId)
+    {
+        $user = $this->userRepository->findById(auth()->id());
+        $novel = $user->likes()->where('novel_id', $novelId)->first();
+        if ($novel) {
+            $user->likes()->detach($novelId);
+            return response()->json(['message' => 'Novel unliked successfully']);
+        } else {
+            $user->likes()->attach($novelId);
+            return response()->json(['message' => 'Novel liked successfully']);
+        }
+    }
 }

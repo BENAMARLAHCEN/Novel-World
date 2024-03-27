@@ -88,4 +88,21 @@ class NovelService
         return $this->novelRepository->getStatus();
     }
 
+    // admin methods
+
+    public function getAdminNovels(string $status = 'pending')
+    {
+        return $this->novelRepository->paginate(10, $status);
+    }
+
+    public function publish(int $id)
+    {
+        return $this->novelRepository->update($id, ['status' => 'published']);
+    }
+
+    public function reject(int $id)
+    {
+        return $this->novelRepository->update($id, ['status' => 'rejected']);
+    }
+
 }

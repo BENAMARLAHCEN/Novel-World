@@ -75,6 +75,7 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        return view('dashboard.admin.roles.show');
+        $role = $this->roleService->getRole($id);
+        return view('dashboard.admin.roles.show', compact('role'));
     }
 }
