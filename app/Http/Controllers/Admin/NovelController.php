@@ -23,37 +23,39 @@ class NovelController extends Controller
     public function index()
     {
         $novels = $this->novelService->getAdminNovels();
-        return view('admin.novels.index', compact('novels'));
+        return view('dashboard.admin.novels.index', compact('novels'));
     }
 
     public function rejectedNovels()
     {
         $novels = $this->novelService->getAdminNovels('rejected');
-        return view('admin.novels.index', compact('novels'));
+        return view('dashboard.admin.novels.index', compact('novels'));
     }
 
     public function publishedNovels()
     {
         $novels = $this->novelService->getAdminNovels('published');
-        return view('admin.novels.index', compact('novels'));
+        return view('dashboard.admin.novels.index', compact('novels'));
     }
 
     public function showNovel(int $id)
     {
         $novel = $this->novelService->findById($id);
-        return view('admin.novels.show', compact('novel'));
+        return view('dashboard.admin.novels.show', compact('novel'));
     }
 
     public function rejectNovel(int $id)
     {
         $this->novelService->reject($id);
-        return redirect()->route('novels.index')->with('success', 'Novel rejected successfully');
+        return redirect()->back()->with('success', 'Novel rejected successfully');
     }
 
     public function publishNovel(int $id)
     {
         $this->novelService->publish($id);
-        return redirect()->route('novels.index')->with('success', 'Novel published successfully');
+        return redirect()->back()->with('success', 'Novel published successfully');
     }
+
+    
     
 }
