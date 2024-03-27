@@ -39,8 +39,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\RankingRepository::class
         );
 
-   
-
+        $this->app->bind(
+            \App\Repositories\Interfaces\IReviewRepository::class,
+            \App\Repositories\ReviewRepository::class
+        );
 
     }
 
