@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Statu;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,17 @@ class NovelFactory extends Factory
      */
     public function definition(): array
     {
+        $user_id = User::get()->random()->id;
+        $status_id = Statu::get()->random()->id;
         return [
-            //
+            'title' => $this->faker->sentence,
+            'slug' => $this->faker->slug,
+            'description' => $this->faker->paragraph,
+            'cover' => $this->faker->imageUrl(),
+            'statu_id' => $status_id,
+            'user_id' => $user_id,
+            'views' => 0,
+            'status' => 'pending',
         ];
     }
 }

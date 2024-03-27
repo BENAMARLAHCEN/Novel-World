@@ -17,9 +17,8 @@ class Novel extends Model
         'status_id',
         'cover',
         'slug',
-        'genre_id',
         'views',
-        'published',
+        'status',
         'user_id',
     ];
 
