@@ -23,8 +23,8 @@ class StatuController extends Controller
      */
     public function index()
     {
-        $status = $this->statuService->all();
-        return view('admin.status.index', compact('status'));
+        $status = $this->statuService->all(5);
+        return view('dashboard.admin.status.index', compact('status'));
     }
 
     /**
@@ -32,7 +32,7 @@ class StatuController extends Controller
      */
     public function create()
     {
-        return view('admin.status.create');
+        return view('dashboard.admin.status.create');
     }
 
     /**
@@ -47,34 +47,36 @@ class StatuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Statu $statu)
+    public function show(int $id)
     {
-        return view('admin.status.show', compact('statu'));
+        $status = $this->statuService->findById($id);
+        return view('dashboard.admin.status.show', compact('status'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Statu $statu)
+    public function edit(Statu $status)
     {
-        return view('admin.status.edit', compact('statu'));
+        $status = $this->statuService->findById($status->id);
+        return view('dashboard.admin.status.edit', compact('status'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Statu $statu)
+    public function update(UpdateRequest $request, Statu $status)
     {
-        $this->statuService->update($request->validated(), $statu->id);
+        $this->statuService->update($status->id,$request->validated() );
         return redirect()->route('status.index')->with('success', 'Status updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Statu $statu)
+    public function destroy(int $id)
     {
-        $this->statuService->destroy($statu->id);
+        $this->statuService->destroy($id);
         return redirect()->route('status.index')->with('success', 'Status deleted successfully');
     }
 }

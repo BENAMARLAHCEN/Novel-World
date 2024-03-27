@@ -8,7 +8,7 @@ class StatuRepository
 {
     public function all()
     {
-        return Statu::latest()->all();
+        return Statu::latest()->get();
     }
 
     public function paginate(int $perPage = 10)

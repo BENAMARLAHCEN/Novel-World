@@ -3,12 +3,13 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\IStatuRepository;
+use App\Repositories\StatuRepository;
 
 class StatuService
 {
     private $statuRepository;
 
-    public function __construct(IStatuRepository $statuRepository)
+    public function __construct(StatuRepository $statuRepository)
     {
         $this->statuRepository = $statuRepository;
     }
