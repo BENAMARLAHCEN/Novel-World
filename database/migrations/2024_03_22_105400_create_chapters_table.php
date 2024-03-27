@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->integer('number')->uniqid();
-            $table->boolean('published')->default(false);
+            $table->enum('status', ['rejected', 'published','pending'])->default('pending');
             $table->integer('views')->default(0);
             $table->timestamps();
         });

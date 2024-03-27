@@ -15,16 +15,18 @@ return new class extends Migration
             $table->id();
             // author profile
             $table->foreignIdFor(\App\Models\User::class);
+            // general information
             $table->string('full_name');
             $table->string('pen_name');
-            $table->string('avatar')->nullable();
-            $table->text('bio')->nullable();
+            $table->text('about')->nullable();
             $table->enum('gender',['male','female'])->nullable();
+            // social media
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->string('website')->nullable();
             $table->string('phone')->nullable();
+            // address
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();

@@ -17,14 +17,13 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('cover')->nullable();
-            $table->integer('status_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->unsignedBigInteger('statu_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('views')->default(0); 
-            $table->boolean('published')->default(false);
+            $table->enum('published', ['rejected', 'published', 'pending'])->default('pending');
             // foreign keys
-            $table->foreign('status_id')->references('id')->on('status');
+            $table->foreign('statu_id')->references('id')->on('status');
             $table->foreign('user_id')->references('id')->on('users');  
-            $table->foreign('genre_id')->references('id')->on('genres');
             // add soft delete
             $table->softDeletes();
 
