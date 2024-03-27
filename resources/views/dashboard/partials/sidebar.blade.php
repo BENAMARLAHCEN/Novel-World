@@ -58,15 +58,18 @@
                     </li><!-- .nk-menu-heading -->
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb-fill"></em></span>
-                            <span class="nk-menu-text">Projects</span>
+                            <span class="nk-menu-icon"><em class="icon ni ni-inbox-fill"></em></span>
+                            <span class="nk-menu-text">Novels</span>
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="html/project-card.html" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+                                <a href="{{route('novels.index')}}" class="nk-menu-link"><span class="nk-menu-text">New Novels</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+                                <a href="{{route('novels.published')}}" class="nk-menu-link"><span class="nk-menu-text">Published Novels</span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{route('novels.rejected')}}" class="nk-menu-link"><span class="nk-menu-text">Rejected Novels</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
