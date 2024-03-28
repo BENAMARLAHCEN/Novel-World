@@ -179,10 +179,20 @@ class UserService
         }
         return $this->userRepository->all();
     }
-    
+
     public function getUser($id)
     {
         return $this->userRepository->findById($id);
+    }
+
+    public function createUser($request)
+    {
+        $this->userRepository->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
     }
 
     public function updateUser($request, $id)
