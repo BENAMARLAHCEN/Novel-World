@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\NovelController;
 use App\Http\Controllers\Admin\RankingController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StatuController;
@@ -73,3 +74,11 @@ Route::put('/rankings/{ranking}',[RankingController::class,'update'])->name('ran
 Route::delete('/rankings/{id}',[RankingController::class,'destroy'])->name('rankings.destroy');
 Route::get('/rankings/{id}',[RankingController::class,'show'])->name('rankings.show');
 
+// novel admin routes
+
+Route::get('/novels',[NovelController::class,'index'])->name('novels.index');
+Route::get('/novels/rejected',[NovelController::class,'rejectedNovels'])->name('novels.rejected');
+Route::get('/novels/published',[NovelController::class,'publishedNovels'])->name('novels.published');
+Route::get('/novels/{id}',[NovelController::class,'showNovel'])->name('novels.show');
+Route::post('/novels/{id}/reject',[NovelController::class,'rejectNovel'])->name('novels.reject');
+Route::post('/novels/{id}/publish',[NovelController::class,'publishNovel'])->name('novels.publish');

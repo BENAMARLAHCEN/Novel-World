@@ -168,4 +168,67 @@ class UserService
             return response()->json(['message' => 'Novel liked successfully']);
         }
     }
+
+
+    // admin user management methods
+
+    public function getAllUsers(int $perPage = null)
+    {
+        if ($perPage) {
+            return $this->userRepository->paginate($perPage);
+        }
+        return $this->userRepository->all();
+    }
+    
+    public function getUser($id)
+    {
+        return $this->userRepository->findById($id);
+    }
+
+    public function updateUser($request, $id)
+    {
+        $user = $this->userRepository->findById($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
+    }
+
+    public function deleteUser($id)
+    {
+        $user = $this->userRepository->findById($id);
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
+    }
+
+    public function toggleAdmin($id)
+    {
+        $user = $this->userRepository->findById($id);
+        if ($user->hasRole('admin')) {
+            $user->removeRole('admin');
+            return redirect()->route('admin.users.index')->with('success', 'Admin role removed successfully');
+        } else {
+            $user->assignRole('admin');
+            return redirect()->route('admin.users.index')->with('success', 'Admin role assigned successfully');
+        }
+    }
+
+    public function toggleBan($id)
+    {
+        $user = $this->userRepository->findById($id);
+        if ($user->banned_at) {
+            $user->banned_at = null;
+            $user->save();
+            return redirect()->route('admin.users.index')->with('success', 'User unbanned successfully');
+        } else {
+            $user->banned_at = now();
+            $user->save();
+            return redirect()->route('admin.users.index')->with('success', 'User banned successfully');
+        }
+    }
+
+    public function search($request)
+    {
+        return $this->userRepository->search($request->search);
+    }
 }
