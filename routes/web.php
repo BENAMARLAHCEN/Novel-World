@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\NovelController;
 use App\Http\Controllers\Admin\RankingController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StatuController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerifyController;
@@ -82,3 +83,15 @@ Route::get('/novels/published',[NovelController::class,'publishedNovels'])->name
 Route::get('/novels/{id}',[NovelController::class,'showNovel'])->name('novels.show');
 Route::post('/novels/{id}/reject',[NovelController::class,'rejectNovel'])->name('novels.reject');
 Route::post('/novels/{id}/publish',[NovelController::class,'publishNovel'])->name('novels.publish');
+
+// user admin routes
+
+// Route::resource('users', UserController::class)->except(['show']);
+
+Route::get('/users',[UserController::class,'index'])->name('users.index');
+Route::get('/users/create',[UserController::class,'create'])->name('users.create');
+Route::post('/users',[UserController::class,'store'])->name('users.store');
+Route::get('/users/{user}/edit',[UserController::class,'edit'])->name('users.edit');
+Route::put('/users/{user}',[UserController::class,'update'])->name('users.update');
+Route::delete('/users/{id}',[UserController::class,'destroy'])->name('users.destroy');
+Route::get('/users/{id}',[UserController::class,'show'])->name('users.show');

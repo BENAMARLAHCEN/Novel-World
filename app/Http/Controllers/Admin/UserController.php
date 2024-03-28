@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Users\StoreRequest;
+use App\Http\Requests\Users\UpdateRequest;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -26,7 +28,7 @@ class UserController extends Controller
         return view('dashboard.admin.users.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $this->userService->createUser($request);
         return redirect()->route('dashboard.admin.users.index')->with('success', 'User created successfully');
@@ -38,7 +40,7 @@ class UserController extends Controller
         return view('dashboard.admin.users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $this->userService->updateUser($request, $id);
     }
