@@ -23,9 +23,33 @@ class UserController extends Controller
         return view('dashboard.admin.users.index', compact('users'));
     }
 
+    public function admins()
+    {
+        $users = $this->userService->getAllUsers(10, 'admin');
+        return view('dashboard.admin.users.index', compact('users'));
+    }
+
+    public function readers()
+    {
+        $users = $this->userService->getAllUsers(10, 'reader');
+        return view('dashboard.admin.users.index', compact('users'));
+    }
+
+    public function authors()
+    {
+        $users = $this->userService->getAllUsers(10, 'author');
+        return view('dashboard.admin.users.index', compact('users'));
+    }
+
     public function create()
     {
         return view('dashboard.admin.users.create');
+    }
+
+    public function show($id)
+    {
+        $user = $this->userService->getUser($id);
+        return view('dashboard.admin.users.show', compact('user'));
     }
 
     public function store(StoreRequest $request)
@@ -57,7 +81,7 @@ class UserController extends Controller
 
     public function toggleBan($id)
     {
-        $this->userService->toggleBan($id);
+        return $this->userService->toggleBan($id);
     }
 
 

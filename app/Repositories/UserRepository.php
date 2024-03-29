@@ -4,6 +4,7 @@
 // with the user model and the database
 namespace App\Repositories;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Repositories\Interfaces\IUserRepository;
 
@@ -44,9 +45,15 @@ class UserRepository implements IUserRepository
         return User::all();
     }
 
-    public function paginate(int $perPage)
+    public function paginate(int $perPage,$role)
     {
+        if ($role) {
+            return User::whereHas('roles', function ($query) use ($role) {
+                $query->where('name', $role);
+            })->paginate($perPage);
+        }
         return User::paginate($perPage);
     }
-    
+
+
 }

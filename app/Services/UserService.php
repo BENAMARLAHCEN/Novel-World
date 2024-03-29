@@ -172,14 +172,15 @@ class UserService
 
     // admin user management methods
 
-    public function getAllUsers(int $perPage = null)
+    public function getAllUsers(int $perPage = null,$role=null)
     {
+
         if ($perPage) {
-            return $this->userRepository->paginate($perPage);
+            return $this->userRepository->paginate($perPage,$role);
         }
         return $this->userRepository->all();
     }
-
+    
     public function getUser($id)
     {
         return $this->userRepository->findById($id);
@@ -229,16 +230,12 @@ class UserService
         if ($user->banned_at) {
             $user->banned_at = null;
             $user->save();
-            return redirect()->route('admin.users.index')->with('success', 'User unbanned successfully');
+            return redirect()->route('users.index')->with('success', 'User unbanned successfully');
         } else {
             $user->banned_at = now();
             $user->save();
-            return redirect()->route('admin.users.index')->with('success', 'User banned successfully');
+            return redirect()->route('users.index')->with('success', 'User banned successfully');
         }
     }
 
-    public function search($request)
-    {
-        return $this->userRepository->search($request->search);
-    }
 }

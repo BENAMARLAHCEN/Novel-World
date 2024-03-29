@@ -12,5 +12,5 @@ interface IUserRepository
     public function update(int $id, array $attributes);
     public function delete(int $id);
     public function all();
-    public function paginate(int $perPage);
+    public function paginate(int $perPage,$role);
 }

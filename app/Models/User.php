@@ -26,6 +26,7 @@ class User extends Authenticatable
         'verify_token',
         'avatar',
         'birthday',
+        'banned_at',
     ];
 
     /**
