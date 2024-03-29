@@ -3,8 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Chapter;
+use App\Repositories\Interfaces\IChapterRepository;
 
-class ChapterRepository
+class ChapterRepository implements IChapterRepository
 {
     public function all($novelId = null, $status = null)
     {

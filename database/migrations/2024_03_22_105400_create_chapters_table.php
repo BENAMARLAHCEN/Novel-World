@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Novel::class);
             $table->string('title');
             $table->text('content');
-            $table->integer('number')->uniqid();
+            $table->integer('number');
             $table->enum('status', ['rejected', 'published','pending'])->default('pending');
             $table->integer('views')->default(0);
             $table->timestamps();

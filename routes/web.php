@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ChapterController;
 use App\Http\Controllers\Admin\NovelController;
 use App\Http\Controllers\Admin\RankingController;
 use App\Http\Controllers\Admin\RoleController;
@@ -89,9 +90,24 @@ Route::post('/novels/{id}/publish',[NovelController::class,'publishNovel'])->nam
 // Route::resource('users', UserController::class)->except(['show']);
 
 Route::get('/users',[UserController::class,'index'])->name('users.index');
+Route::get('/users/admins',[UserController::class,'admins'])->name('users.admins');
+Route::get('/users/readers',[UserController::class,'readers'])->name('users.readers');
+Route::get('/users/authors',[UserController::class,'authors'])->name('users.authors');
 Route::get('/users/create',[UserController::class,'create'])->name('users.create');
 Route::post('/users',[UserController::class,'store'])->name('users.store');
 Route::get('/users/{user}/edit',[UserController::class,'edit'])->name('users.edit');
 Route::put('/users/{user}',[UserController::class,'update'])->name('users.update');
 Route::delete('/users/{id}',[UserController::class,'destroy'])->name('users.destroy');
 Route::get('/users/{id}',[UserController::class,'show'])->name('users.show');
+Route::post('/users/{id}/toggle-admin',[UserController::class,'toggleAdmin'])->name('users.toggle-admin');
+Route::post('/users/{id}/toggle-ban',[UserController::class,'toggleBan'])->name('users.toggle-ban');
+
+// admin chapter routes
+
+// Route::resource('chapters', ChapterController::class)->except(['create','store','update','destroy']);
+Route::get('/chapters',[ChapterController::class,'index'])->name('chapters.index');
+Route::get('/chapters/rejected',[ChapterController::class,'rejectedChapters'])->name('chapters.rejected');
+Route::get('/chapters/published',[ChapterController::class,'publishedChapters'])->name('chapters.published');
+Route::get('/chapters/{id}',[ChapterController::class,'show'])->name('chapters.show');
+Route::post('/chapters/{id}/reject',[ChapterController::class,'rejectChapter'])->name('chapters.reject');
+Route::post('/chapters/{id}/publish',[ChapterController::class,'publishChapter'])->name('chapters.publish');

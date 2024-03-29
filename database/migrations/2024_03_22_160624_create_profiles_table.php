@@ -16,8 +16,7 @@ return new class extends Migration
             // author profile
             $table->foreignIdFor(\App\Models\User::class);
             // general information
-            $table->string('full_name');
-            $table->string('pen_name');
+            $table->string('pen_name')->unique();
             $table->text('about')->nullable();
             $table->enum('gender',['male','female'])->nullable();
             // social media

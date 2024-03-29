@@ -16,8 +16,14 @@ class ChapterFactory extends Factory
      */
     public function definition(): array
     {
+        $novelIds = \App\Models\Novel::pluck('id')->toArray();
         return [
-            //
+            'novel_id' => $this->faker->randomElement($novelIds),
+            'title' => $this->faker->sentence,
+            'content' => $this->faker->paragraphs(20, true),
+            'status' => $this->faker->randomElement(['rejected', 'published', 'pending']),
+            'number' => $this->faker->numberBetween(1, 100),
+            'views' => $this->faker->numberBetween(0, 1000),
         ];
     }
 }

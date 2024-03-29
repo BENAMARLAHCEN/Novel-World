@@ -12,6 +12,6 @@ class ChapterSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Chapter::factory(30)->create();
     }
 }

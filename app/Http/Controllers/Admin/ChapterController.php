@@ -19,25 +19,25 @@ class ChapterController extends Controller
     public function index()
     {
         $chapters = $this->chapterService->getAdminChapters();
-        return view('admin.chapters.index', compact('chapters'));
+        return view('dashboard.admin.chapters.index', compact('chapters'));
     }
 
     public function rejectedChapters()
     {
         $chapters = $this->chapterService->getAdminChapters('rejected');
-        return view('admin.chapters.index', compact('chapters'));
+        return view('dashboard.admin.chapters.index', compact('chapters'));
     }
 
     public function publishedChapters()
     {
         $chapters = $this->chapterService->getAdminChapters('published');
-        return view('admin.chapters.index', compact('chapters'));
+        return view('dashboard.admin.chapters.index', compact('chapters'));
     }
 
-    public function showChapter(int $id)
+    public function show(int $id)
     {
         $chapter = $this->chapterService->findById($id);
-        return view('admin.chapters.show', compact('chapter'));
+        return view('dashboard.admin.chapters.show', compact('chapter'));
     }
 
     public function rejectChapter(int $id)
