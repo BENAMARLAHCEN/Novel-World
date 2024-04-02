@@ -194,9 +194,9 @@
                                         </li>
                                     @else
                                         <li class="nk-tb-action-hidden">
-                                            <form action="{{ route('users.toggle-ban', $user->id) }}" method="post">
+                                            <form action="{{ route('users.toggle-ban', $user->id) }}" method="post" >
                                                 @csrf
-                                                <button type="submit" class="btn btn-trigger btn-icon"
+                                                <button type="submit" class="btn btn-trigger btn-icon banne"
                                                     data-toggle="tooltip" data-placement="top" title="Ban">
                                                     <em class="icon ni ni-user-cross-fill"></em>
                                                 </button>

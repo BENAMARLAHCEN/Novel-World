@@ -111,7 +111,7 @@
 
                                             <form action="{{ route('novels.publish', $novel->id) }}" method="post">
                                                 @csrf
-                                                <button type="submit" class="btn btn-trigger btn-icon"
+                                                <button type="submit" class="btn btn-trigger btn-icon accept-publish"
                                                     data-toggle="tooltip" data-placement="top">
                                                     <em class="icon ni ni-check-circle"></em>
                                                 </button>
@@ -122,7 +122,7 @@
                                         <li class="nk-tb-action-hidden">
                                             <form action="{{ route('novels.reject', $novel->id) }}" method="post">
                                                 @csrf
-                                                <button type="submit" class="btn btn-trigger btn-icon"
+                                                <button type="submit" class="btn btn-trigger btn-icon reject"
                                                     data-toggle="tooltip" data-placement="top">
                                                     <em class="icon ni ni-cross-circle"></em>
                                                 </button>

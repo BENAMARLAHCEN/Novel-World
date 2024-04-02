@@ -238,4 +238,12 @@ class UserService
         }
     }
 
+    public function blockPermission($request, $id)
+    {
+        $user = $this->userRepository->findById($id);
+        $permissions = implode(',', $request->permissions);
+        $user->blockPermissionsTo($permissions);
+        return redirect()->route('users.index')->with('success', 'Permission revoked successfully');
+    }
+
 }

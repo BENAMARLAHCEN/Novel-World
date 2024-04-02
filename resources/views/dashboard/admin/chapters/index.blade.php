@@ -1,19 +1,5 @@
 @extends('dashboard.layouts.app')
 
-{{-- protected $fillable = [
-        'novel_id',
-        'title',
-        'content',
-        'status',
-        'number',
-        'views',
-    ];
-
-    public function novel()
-    {
-        return $this->belongsTo(Novel::class);
-    } --}}
-
 @section('content')
     <div class="nk-content-body">
         <div class="nk-block-head nk-block-head-sm">
@@ -66,7 +52,7 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col">
-                                <span class="tb-sub text">Chapter-{{$chapter->number}} {{ $chapter->title }}</span>
+                                <span class="tb-sub text">Chapter-{{ $chapter->number }} {{ $chapter->title }}</span>
                             </td>
                             <td class="nk-tb-col  tb-col-mb">
 
@@ -87,50 +73,67 @@
                                 <span class="tb-sub">{{ $chapter->views }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1">
-                                    <li>
-                                        <div class="drodown">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                data-toggle="dropdown">
-                                                <em class="icon ni ni-more-h"></em>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li>
-                                                        <a href="{{ route('chapters.show', $chapter->id) }}">
-                                                            <em class="icon ni ni-eye"></em>
-                                                            <span>View</span>
-                                                        </a>
-                                                    </li>
 
+                                <ul class="nk-tb-actions gx-1">
+                                    @if ($chapter->status != 'published')
+                                        <li class="nk-tb-action-hidden">
+                                            <form action="{{ route('chapters.publish', $chapter->id) }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="btn btn-trigger btn-icon accept-publish"
+                                                    data-toggle="tooltip" data-placement="top">
+                                                    <em class="icon ni ni-check-circle"></em>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    @endif
+                                    @if ($chapter->status != 'rejected')
+                                        <li class="nk-tb-action-hidden">
+                                            <form action="{{ route('chapters.reject', $chapter->id) }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="btn btn-trigger btn-icon reject"
+                                                    data-toggle="tooltip" data-placement="top">
+                                                    <em class="icon ni ni-cross-circle"></em>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    @endif
+
+                                    <li>
+                                        <div class="drodown me-n1">
+                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <ul class="link-list-opt no-bdr">
                                                     @if ($chapter->status != 'published')
                                                         <li>
-                                                            <a href="{{ route('chapters.publish', $chapter->id) }}"
-                                                                onclick="event.preventDefault(); document.getElementById('publish-chapter-{{ $chapter->id }}').submit();">
-                                                                <em class="icon ni ni-check-circle"></em>
-                                                                <span>Publish</span>
-                                                            </a>
-                                                            <form id="publish-chapter-{{ $chapter->id }}"
-                                                                action="{{ route('chapters.publish', $chapter->id) }}"
-                                                                method="POST" class="d-none">
+                                                            <form action="{{ route('chapters.publish', $chapter->id) }}"
+                                                                method="post">
                                                                 @csrf
+                                                                <button type="submit"
+                                                                    class="btn btn-trigger btn-icon accept-publish"
+                                                                    data-toggle="tooltip" data-placement="top">
+                                                                    <em class="icon ni ni-check-circle"></em>Publish
+                                                                </button>
                                                             </form>
                                                         </li>
                                                     @endif
                                                     @if ($chapter->status != 'rejected')
                                                         <li>
-                                                            <a href="{{ route('chapters.reject', $chapter->id) }}"
-                                                                onclick="event.preventDefault(); document.getElementById('reject-chapter-{{ $chapter->id }}').submit();">
-                                                                <em class="icon ni ni-cross-circle"></em>
-                                                                <span>Reject</span>
-                                                            </a>
-                                                            <form id="reject-chapter-{{ $chapter->id }}"
-                                                                action="{{ route('chapters.reject', $chapter->id) }}"
-                                                                method="POST" class="d-none">
+                                                            <form action="{{ route('chapters.reject', $chapter->id) }}"
+                                                                method="post">
                                                                 @csrf
+                                                                <button type="submit"
+                                                                    class="btn btn-trigger btn-icon reject"
+                                                                    data-toggle="tooltip" data-placement="top">
+                                                                    <em class="icon ni ni-cross-circle"></em>Reject
+                                                                </button>
                                                             </form>
                                                         </li>
                                                     @endif
+                                                    <li><a href="{{ route('chapters.show', $chapter->id) }}"><em
+                                                                class="icon ni ni-eye"></em><span>View
+                                                                Chapter</span></a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>

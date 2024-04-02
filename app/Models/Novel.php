@@ -35,7 +35,7 @@ class Novel extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function status()
+    public function statu()
     {
         return $this->belongsTo(Statu::class);
     }

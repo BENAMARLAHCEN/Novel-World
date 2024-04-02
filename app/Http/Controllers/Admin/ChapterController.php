@@ -16,11 +16,20 @@ class ChapterController extends Controller
     }
     // admin have to accept or reject the chapters of the novels before they are published on the platform
 
-    public function index()
+    public function index(Request $request)
     {
-        $chapters = $this->chapterService->getAdminChapters();
+        $status = "pending";
+        $novelId = null;
+        if ($request->has('status')) {
+            $status = $request->status;
+        }
+        if ($request->has('novel')) {
+            $novelId = $request->novel;
+        }
+        $chapters = $this->chapterService->getAdminChapters($status, $novelId);
         return view('dashboard.admin.chapters.index', compact('chapters'));
     }
+
 
     public function rejectedChapters()
     {

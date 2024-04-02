@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerifyController;
+use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,9 +29,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard.admin.index');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic');
 
 Route::get('/register',[AuthController::class,'showRegisterForm'])->name('register.form');
 Route::post('/register',[AuthController::class,'register'])->name('register');
@@ -101,6 +100,7 @@ Route::delete('/users/{id}',[UserController::class,'destroy'])->name('users.dest
 Route::get('/users/{id}',[UserController::class,'show'])->name('users.show');
 Route::post('/users/{id}/toggle-admin',[UserController::class,'toggleAdmin'])->name('users.toggle-admin');
 Route::post('/users/{id}/toggle-ban',[UserController::class,'toggleBan'])->name('users.toggle-ban');
+Route::post('/users/{id}/block-permission',[UserController::class,'blockPermission'])->name('users.block-permission');
 
 // admin chapter routes
 

@@ -84,5 +84,14 @@ class UserController extends Controller
         return $this->userService->toggleBan($id);
     }
 
+    public function blockPermissions(Request $request, $id)
+    {
+        $request->validate([
+            'permissions' => 'required|array',
+            'permissions.*' => 'string|exists:permissions,name'
+        ]);
+        $this->userService->blockPermissions($request, $id);
+    }
+
 
 }
