@@ -32,7 +32,7 @@ trait HasPermissionsTrait
 
     public function hasPermissionTo($permission)
     {
-        return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+        return ($this->hasPermissionThroughRole($permission) || $this->hasPermission($permission)) && !$this->hasBlockPermissionTo($permission);
     }
 
     public function hasPermissionThroughRole($permission)
@@ -79,6 +79,26 @@ trait HasPermissionsTrait
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, 'users_permissions');
+    }
+
+    public function blockPermissions()
+    {
+        return $this->belongsToMany(Permission::class, 'block_permissions');
+    }
+
+    public function blockPermissionsTo(...$permissions)
+    {
+        $permissions = $this->getAllPermissions($permissions);
+        if ($permissions === null) {
+            return $this;
+        }
+        $this->blockPermissions()->saveMany($permissions);
+        return $this;
+    }
+
+    public function hasBlockPermissionTo($permission)
+    {
+        return $this->blockPermissions->contains('name', $permission->name);
     }
 
     protected function hasPermission($permission)
