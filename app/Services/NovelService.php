@@ -26,9 +26,9 @@ class NovelService
         return $this->novelRepository->findById($id);
     }
 
-    public function getAuthorNovels(int $authorId)
+    public function getAuthorNovels(int $authorId, int $perPage = 10)
     {
-        return $this->novelRepository->getAuthorNovels($authorId);
+        return $this->novelRepository->getAuthorNovels($authorId, $perPage);
     }
 
     public function create(array $attributes)

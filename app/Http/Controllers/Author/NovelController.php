@@ -21,9 +21,9 @@ class NovelController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny');
+        // $this->authorize('viewAny');
         $novels = $this->novelService->getAuthorNovels(auth()->id());
-        return view('author.novels.index', compact('novels'));
+        return view('dashboard.author.novels.index', compact('novels'));
     }
 
     /**
@@ -31,10 +31,9 @@ class NovelController extends Controller
      */
     public function create()
     {
-        $this->authorize('create');
-        $rankings = $this->novelService->getRankings();
-        $tatus = $this->novelService->getStatus();
-        return view('author.novels.create', compact('rankings', 'status'));
+        // $this->authorize('create');
+        
+        return view('dashboard.author.novels.create', );
     }
 
     /**
@@ -42,9 +41,9 @@ class NovelController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $this->authorize('create');
+        // $this->authorize('create');
         $this->novelService->create($request->validated());
-        return redirect()->route('author.novels.index')->with('success', 'Novel created successfully');
+        return redirect()->route('dashboard.author.novels.index')->with('success', 'Novel created successfully');
     }
 
     /**
@@ -52,8 +51,8 @@ class NovelController extends Controller
      */
     public function show(Novel $novel)
     {
-        $this->authorize('view', $novel);
-        return view('author.novels.show', compact('novel'));
+        // $this->authorize('view', $novel);
+        return view('dashboard.author.novels.show', compact('novel'));
     }
 
     /**
@@ -61,12 +60,12 @@ class NovelController extends Controller
      */
     public function edit(Novel $novel)
     {
-        $this->authorize('update', $novel);
+        // $this->authorize('update', $novel);
 
         $rankings = $this->novelService->getRankings();
         $status = $this->novelService->getStatus();
 
-        return view('author.novels.edit', compact('novel', 'rankings', 'status'));
+        return view('dashboard.author.novels.edit', compact('novel', 'rankings', 'status'));
     }
 
     /**
@@ -74,9 +73,9 @@ class NovelController extends Controller
      */
     public function update(Request $request, Novel $novel)
     {
-        $this->authorize('update', $novel);
+        // $this->authorize('update', $novel);
         $this->novelService->update($request->validated(), $novel->id);
-        return redirect()->route('author.novels.index')->with('success', 'Novel updated successfully');
+        return redirect()->route('dashboard.author.novels.index')->with('success', 'Novel updated successfully');
     }
 
     /**
@@ -84,9 +83,9 @@ class NovelController extends Controller
      */
     public function destroy(Novel $novel)
     {
-        $this->authorize('delete', $novel);
+        // $this->authorize('delete', $novel);
         $this->novelService->delete($novel->id);
-        return redirect()->route('author.novels.index')->with('success', 'Novel deleted successfully');
+        return redirect()->route('dashboard.author.novels.index')->with('success', 'Novel deleted successfully');
     }
 
     /**
@@ -94,9 +93,9 @@ class NovelController extends Controller
      */
     public function restore(Novel $novel)
     {
-        $this->authorize('restore', $novel);
+        // $this->authorize('restore', $novel);
         $this->novelService->restore($novel->id);
-        return redirect()->route('author.novels.index')->with('success', 'Novel restored successfully');
+        return redirect()->route('dashboard.author.novels.index')->with('success', 'Novel restored successfully');
     }
 
     /**
@@ -104,9 +103,9 @@ class NovelController extends Controller
      */
     public function trash()
     {
-        $this->authorize('viewAny');
+        // $this->authorize('viewAny');
         $novels = $this->novelService->getTrash(auth()->id());
-        return view('author.novels.trash', compact('novels'));
+        return view('dashboard.author.novels.trash', compact('novels'));
     }
 
     /**
@@ -115,8 +114,8 @@ class NovelController extends Controller
 
     public function forceDelete(Novel $novel)
     {
-        $this->authorize('forceDelete', $novel);
+        // $this->authorize('forceDelete', $novel);
         $this->novelService->forceDelete($novel->id);
-        return redirect()->route('author.novels.index')->with('success', 'Novel permanently deleted successfully');
+        return redirect()->route('dashboard.author.novels.index')->with('success', 'Novel permanently deleted successfully');
     }
 }

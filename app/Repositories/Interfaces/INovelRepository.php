@@ -13,7 +13,7 @@ interface INovelRepository
     public function attachRanking(int $novelId, int $rankingId);
     public function detachRanking(int $novelId, int $rankingId);
     public function syncRankings(int $novelId, array $rankings);
-    public function getAuthorNovels(int $authorId);
+    public function getAuthorNovels(int $authorId, int $perPage = null);
 
     // force delete and restore methods
     public function trash(int $authorId = null); // get all novels that are trashed

@@ -71,11 +71,13 @@ class NovelRepository implements INovelRepository
         $novel->rankings()->sync($rankings);
     }
 
-    public function getAuthorNovels(int $authorId)
+    public function getAuthorNovels(int $authorId,$perPage = null)
     {
+        if ($perPage) {
+            return Novel::where('user_id', $authorId)->paginate($perPage);
+        }
         return Novel::where('user_id', $authorId)->get();
     }
-
    
     public function trash(int $authorId = null)
     {
