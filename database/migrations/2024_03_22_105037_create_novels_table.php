@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('cover')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->integer('views')->default(0); 
+            $table->enum('language', ['English', 'Spanish', 'French']);
             $table->enum('status', ['rejected', 'published', 'pending'])->default('pending');
-            $table->unsignedBigInteger('genre_id');
+            $table->enum('age_rating', ['all', '13+', '16+', '18+'])->default('all');
+            $table->boolean('is_public')->nullable();
             // foreign keys
             $table->foreign('statu_id')->references('id')->on('status');
             $table->foreign('user_id')->references('id')->on('users');  

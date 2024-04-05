@@ -5,7 +5,7 @@ namespace App\Repositories\Interfaces;
 interface INovelRepository
 {
     public function all();
-    public function paginate(int $perPage = 10);
+    public function paginate(int $perPage = 10, $is_public = 'true', $authorId = null);
     public function findById(int $id);
     public function create(array $attributes);
     public function update(int $id, array $attributes);

@@ -83,16 +83,16 @@ class NovelService
         return $this->novelRepository->getRankings();
     }
 
-    public function getStatus()
+    public function getGenres()
     {
-        return $this->novelRepository->getStatus();
+        return $this->novelRepository->getGenres();
     }
 
     // admin methods
 
-    public function getAdminNovels(string $status = 'pending')
+    public function getAdminNovels(bool $is_public = null)
     {
-        return $this->novelRepository->paginate(10, $status);
+        return $this->novelRepository->paginate(10, $is_public);
     }
 
     public function publish(int $id)

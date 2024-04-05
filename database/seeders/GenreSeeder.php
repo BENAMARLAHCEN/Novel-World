@@ -32,13 +32,73 @@ class GenreSeeder extends Seeder
         //     ]);
         // }
 
-        $novelIds = Novel::pluck('id')->toArray();
-        $genreIds = Genre::pluck('id')->toArray();
+        // $novelIds = Novel::pluck('id')->toArray();
+        // $genreIds = Genre::pluck('id')->toArray();
 
-        foreach ($novelIds as $novelId) {
-            $genreId = $genreIds[array_rand($genreIds)];
-            Novel::find($novelId)->update([
-                'genre_id' => $genreId,
+        // foreach ($novelIds as $novelId) {
+        //     $genreId = $genreIds[array_rand($genreIds)];
+        //     Novel::find($novelId)->update([
+        //         'genre_id' => $genreId,
+        //     ]);
+        // }
+
+        $genres = [
+            'Action',
+            'Adventure',
+            'Comedy',
+            'Drama',
+            'Fantasy',
+            'Historical',
+            'Horror',
+            'Mystery',
+            'Romance',
+            'Sci-Fi',
+            'Slice of Life',
+            'Sports',
+            'Supernatural',
+            'Tragedy',
+            'Wuxia',
+            'Xianxia',
+            'Xuanhuan',
+            'Yaoi',
+            'Yuri',
+            'Mecha',
+            'Psychological',
+            'Shounen',
+            'Shoujo',
+            'Seinen',
+            'Josei',
+            'Harem',
+            'Martial Arts',
+            'School Life',
+            'Military',
+            'Music',
+            'Parody',
+            'Police',
+            'Post-Apocalyptic',
+            'Reverse Harem',
+            'Samurai',
+            'Super Power',
+            'Vampire',
+            'Webtoons',
+            'Zombies',
+            'Isekai',
+            'Reincarnation',
+            'Magic',
+            'Demons',
+            'Ghosts',
+            'Monsters',
+            'Villainess'
+        ];
+
+        foreach ($genres as $genre) {
+            Genre::create([
+                'name' => $genre,
+                'color' => '#000000',
+                'background_color' => '#000000',
+                'border_color' => '#000000',
+                'text_color' => '#000000',
+                'icon' => 'fas fa-book',
             ]);
         }
     }

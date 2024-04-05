@@ -22,11 +22,11 @@ class NovelRepository implements INovelRepository
         return $query->get();
     }
 
-    public function paginate(int $perPage = 10, $status = null, $authorId = null)
+    public function paginate(int $perPage = 10, $is_public = null, $authorId = null)
     {
         $query = Novel::query();
-        if ($status) {
-            $query->where('status', $status);
+        if ($is_public) {
+            $query->where('is_public', $is_public);
         }
         if ($authorId) {
             $query->where('user_id', $authorId);

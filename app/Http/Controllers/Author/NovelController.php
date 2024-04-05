@@ -32,8 +32,9 @@ class NovelController extends Controller
     public function create()
     {
         // $this->authorize('create');
-        
-        return view('dashboard.author.novels.create', );
+        $rankings = $this->novelService->getRankings();
+        $genres = $this->novelService->getGenres();
+        return view('dashboard.author.novels.create', compact('rankings', 'genres'));
     }
 
     /**

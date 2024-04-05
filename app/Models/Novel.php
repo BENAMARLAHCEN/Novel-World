@@ -14,12 +14,14 @@ class Novel extends Model
     protected $fillable = [
         'title',
         'description',
-        'status_id',
         'cover',
         'slug',
         'views',
         'status',
+        'language',
         'user_id',
+        'age_rating',
+        'is_public',
     ];
 
     // slug mutator
@@ -37,7 +39,7 @@ class Novel extends Model
 
     public function genre()
     {
-        return $this->belongsTo(Genre::class);
+        return $this->belongsToMany(Genre::class, 'novels_genres');
     }
 
     public function chapters()

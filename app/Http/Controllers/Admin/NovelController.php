@@ -28,13 +28,13 @@ class NovelController extends Controller
 
     public function rejectedNovels()
     {
-        $novels = $this->novelService->getAdminNovels('rejected');
+        $novels = $this->novelService->getAdminNovels('false');
         return view('dashboard.admin.novels.index', compact('novels'));
     }
 
     public function publishedNovels()
     {
-        $novels = $this->novelService->getAdminNovels('published');
+        $novels = $this->novelService->getAdminNovels('true');
         return view('dashboard.admin.novels.index', compact('novels'));
     }
 

@@ -25,9 +25,10 @@ class StoreRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'cover' => ['required', 'image'],
-            'status_id' => ['required', 'exists:statuses,id'],
-            'rankings' => ['required', 'array'],
-            'rankings.*' => ['exists:rankings,id'],
+            'genres' => ['required', 'array'],
+            'genres.*' => ['exists:genres,id'],
+            'language' => 'required|in:English,Spanish,French',
+            'age_rating' => 'required|in:all,16+,13+,18+',            
         ];
     }
 }
