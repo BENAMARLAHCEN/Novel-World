@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Genre;
 use App\Models\Novel;
-use App\Models\Statu;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class StatuSeeder extends Seeder
+class GenreSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -34,12 +33,12 @@ class StatuSeeder extends Seeder
         // }
 
         $novelIds = Novel::pluck('id')->toArray();
-        $statusIds = Statu::pluck('id')->toArray();
+        $genreIds = Genre::pluck('id')->toArray();
 
         foreach ($novelIds as $novelId) {
-            $statusId = $statusIds[array_rand($statusIds)];
+            $genreId = $genreIds[array_rand($genreIds)];
             Novel::find($novelId)->update([
-                'statu_id' => $statusId,
+                'genre_id' => $genreId,
             ]);
         }
     }

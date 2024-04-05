@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('cover')->nullable();
-            $table->unsignedBigInteger('statu_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('views')->default(0); 
             $table->enum('status', ['rejected', 'published', 'pending'])->default('pending');
+            $table->unsignedBigInteger('genre_id');
             // foreign keys
             $table->foreign('statu_id')->references('id')->on('status');
             $table->foreign('user_id')->references('id')->on('users');  

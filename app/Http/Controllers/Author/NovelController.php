@@ -63,9 +63,9 @@ class NovelController extends Controller
         // $this->authorize('update', $novel);
 
         $rankings = $this->novelService->getRankings();
-        $status = $this->novelService->getStatus();
+        $genres = $this->novelService->getGenres();
 
-        return view('dashboard.author.novels.edit', compact('novel', 'rankings', 'status'));
+        return view('dashboard.author.novels.edit', compact('novel', 'rankings', 'genres'));
     }
 
     /**

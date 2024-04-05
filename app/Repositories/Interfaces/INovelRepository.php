@@ -21,7 +21,7 @@ interface INovelRepository
     public function forceDelete(int $id); // permanently delete a specific novel from trash
 
     // get status and ranking methods
-    public function getStatus();
+    public function getGenres();
     public function getRankings();
 
 }

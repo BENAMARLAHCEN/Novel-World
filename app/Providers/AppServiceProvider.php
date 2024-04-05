@@ -24,10 +24,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\RoleRepository::class
         );
 
-        $this->app->bind(
-            \App\Repositories\Interfaces\IStatuRepository::class,
-            \App\Repositories\StatuRepository::class
-        );
+        
 
         $this->app->bind(
             \App\Repositories\Interfaces\INovelRepository::class,
@@ -48,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\IChapterRepository::class,
             \App\Repositories\ChapterRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Interfaces\IGenreRepository::class,
+            \App\Repositories\GenreRepository::class);
 
     }
 

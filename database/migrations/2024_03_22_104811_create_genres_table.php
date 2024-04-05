@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('status', function (Blueprint $table) {
+        Schema::create('genres', function (Blueprint $table) {
             $table->id();
             $table->string('name')->uniqid();
-            $table->string('color');
-            $table->string('background_color');
-            $table->string('border_color');
-            $table->string('text_color');
-            $table->string('icon');
+            $table->string('color')->nullable();
+            $table->string('background_color')->nullable();
+            $table->string('border_color')->nullable();
+            $table->string('text_color')->nullable();
+            $table->string('icon')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('status');
+        Schema::dropIfExists('genres');
     }
 };

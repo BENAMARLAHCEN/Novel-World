@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Genre;
 use App\Models\Novel;
 use App\Models\Ranking;
 use App\Models\Statu;
@@ -97,9 +98,9 @@ class NovelRepository implements INovelRepository
         return Novel::onlyTrashed()->find($id)->forceDelete();
     }
 
-    public function getStatus()
+    public function getGenres()
     {
-        return Statu::all();
+        return Genre::all();
     }
 
     public function getRankings()

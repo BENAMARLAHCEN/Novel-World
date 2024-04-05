@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ChapterController;
+use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\NovelController;
 use App\Http\Controllers\Admin\RankingController;
 use App\Http\Controllers\Admin\RoleController;
@@ -57,14 +58,14 @@ Route::get('/roles/{id}',[RoleController::class,'show'])->name('roles.show');
 
 // status routes
 
-// Route::resource('statuses', StatuController::class)->except(['show']);
-Route::get('/status',[StatuController::class,'index'])->name('status.index');
-Route::get('/status/create',[StatuController::class,'create'])->name('status.create');
-Route::post('/status',[StatuController::class,'store'])->name('status.store');
-Route::get('/status/{status}/edit',[StatuController::class,'edit'])->name('status.edit');
-Route::put('/status/{status}',[StatuController::class,'update'])->name('status.update');
-Route::delete('/status/{id}',[StatuController::class,'destroy'])->name('status.destroy');
-Route::get('/status/{id}',[StatuController::class,'show'])->name('status.show');
+// Route::resource('genres', GenreController::class)->except(['show']);
+Route::get('/genres',[GenreController::class,'index'])->name('genres.index');
+Route::get('/genres/create',[GenreController::class,'create'])->name('genres.create');
+Route::post('/genres',[GenreController::class,'store'])->name('genres.store');
+Route::get('/genres/{genres}/edit',[GenreController::class,'edit'])->name('genres.edit');
+Route::put('/genres/{genres}',[GenreController::class,'update'])->name('genres.update');
+Route::delete('/genres/{id}',[GenreController::class,'destroy'])->name('genres.destroy');
+Route::get('/genres/{id}',[GenreController::class,'show'])->name('genres.show');
 
 // ranking routes
 

@@ -1,4 +1,4 @@
-{{-- show status form for single status --}}
+{{-- show Genre form for single Genre --}}
 
 @extends('dashboard.layouts.app')
 
@@ -7,9 +7,9 @@
         <div class="nk-content wrap">
             <div class="nk-block-head">
                 <div class="nk-block-head-content">
-                    <h2 class="nk-block-title fw-normal">Status</h2>
+                    <h2 class="nk-block-title fw-normal">Genre</h2>
                     <div class="nk-block-des">
-                        <p>View status details.</p>
+                        <p>View Genre details.</p>
                     </div>
                 </div>
             </div><!-- .nk-block-head -->
@@ -17,15 +17,15 @@
                 <div class="card card-bordered">
                     <div class="card-inner">
                         <div class="card-title">
-                            <h5 class="title">Status Details</h5>
+                            <h5 class="title">Genre Details</h5>
                         </div>
                         <div class="row g-4">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-label" for="status-name">Status Name</label>
+                                    <label class="form-label" for="genre-name">Genre Name</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="status-name" name="name"
-                                            value="{{ $status->name }}" readonly>
+                                        <input type="text" class="form-control" id="genre-name" name="name"
+                                            value="{{ $genre->name }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -34,10 +34,10 @@
                                 <div class="form-group">
                                     <label class="form-label
                                     "
-                                        for="status-color">Color</label>
+                                        for="genre-color">Color</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="status-color" name="color"
-                                            value="{{ $status->color }}" readonly>
+                                        <input type="text" class="form-control" id="genre-color" name="color"
+                                            value="{{ $genre->color }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -46,19 +46,19 @@
                                 ">
                                     <label class="form-label
                                     "
-                                        for="status-background_color">Background Color</label>
+                                        for="genre-background_color">Background Color</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="status-background_color"
-                                            name="background_color" value="{{ $status->background_color }}" readonly>
+                                        <input type="text" class="form-control" id="genre-background_color"
+                                            name="background_color" value="{{ $genre->background_color }}" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group ">
-                                    <label class="form-label" for="status-border_color">Border Color</label>
+                                    <label class="form-label" for="genre-border_color">Border Color</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="status-border_color"
-                                            name="border_color" value="{{ $status->border_color }}" readonly>
+                                        <input type="text" class="form-control" id="genre-border_color"
+                                            name="border_color" value="{{ $genre->border_color }}" readonly>
                                     </div>
                                 </div>
 
@@ -68,10 +68,10 @@
                                 ">
                                     <label class="form-label
                                     "
-                                        for="status-text_color">Text Color</label>
+                                        for="genre-text_color">Text Color</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="status-text_color" name="text_color"
-                                            value="{{ $status->text_color }}" readonly>
+                                        <input type="text" class="form-control" id="genre-text_color" name="text_color"
+                                            value="{{ $genre->text_color }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -80,10 +80,11 @@
                                 ">
                                     <label class="form-label
                                     "
-                                        for="status-icon">Icon</label>
+                                        for="genre-icon">Icon</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="status-icon" name="icon"
-                                            value="{{ $status->icon }}" readonly>
+                                        <span>
+                                            <em class="icon ni {{ $genre->icon }}"></em>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -93,10 +94,10 @@
                                 ">
                                     <label class="form-label
                                     "
-                                        for="status-created_at">Created At</label>
+                                        for="genre-created_at">Created At</label>
                                     <div class="form-control-wrap">
-                                        <input type="dateTime" class="form-control" id="status-created_at" name="created_at"
-                                            value="{{ $status->created_at }}" readonly>
+                                        <input type="dateTime" class="form-control" id="genre-created_at" name="created_at"
+                                            value="{{ $genre->created_at }}" readonly>
                                     </div>
                                 </div>
 
@@ -107,10 +108,10 @@
                                 ">
                                     <label class="form-label
                                     "
-                                        for="status-updated_at">Updated At</label>
+                                        for="genre-updated_at">Updated At</label>
                                     <div class="form-control-wrap">
-                                        <input type="dateTime" class="form-control" id="status-updated_at" name="updated_at"
-                                            value="{{ $status->updated_at }}" readonly>
+                                        <input type="dateTime" class="form-control" id="genre-updated_at" name="updated_at"
+                                            value="{{ $genre->updated_at }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -119,11 +120,11 @@
                             <div class="col-12">
                                 <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                     <li>
-                                        <a href="{{ route('status.edit', $status->id) }}"
-                                            class="btn btn-lg btn-primary">Edit Status</a>
+                                        <a href="{{ route('genres.edit', $genre->id) }}"
+                                            class="btn btn-lg btn-primary">Edit Genre</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('status.index') }}"
+                                        <a href="{{ route('genres.index') }}"
                                             class="btn btn-lg btn-outline-secondary">Cancel</a>
                                     </li>
                                 </ul>

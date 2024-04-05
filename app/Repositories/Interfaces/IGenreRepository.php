@@ -3,7 +3,7 @@
 // user repository interface to define the methods that the user repository class should implement
 namespace App\Repositories\Interfaces;
 
-interface IStatuRepository
+interface IGenreRepository
 {
     public function all();
     public function paginate(int $perPage = 10);
