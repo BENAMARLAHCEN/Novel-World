@@ -24,11 +24,13 @@ class UpdateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'cover' => ['image'],
+            // i need validation for image aspect ratio here 3:4
+            'cover' => ['image','nullable','dimensions:ratio=3/4'],
             'genres' => ['required', 'array'],
             'genres.*' => ['exists:genres,id'],
             'language' => 'required|in:English,Spanish,French',
-            'age_rating' => 'required|in:all,16+,13+,18+',
+            'age_rating' => 'required|in:all,16+,13+,18+', 
+            'status' => 'required|in:Ongoing,Completed,Hiatus,Dropped',
         ];
     }
 }

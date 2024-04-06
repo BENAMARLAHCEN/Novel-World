@@ -37,7 +37,7 @@ class Novel extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function genre()
+    public function genres()
     {
         return $this->belongsToMany(Genre::class, 'novels_genres');
     }

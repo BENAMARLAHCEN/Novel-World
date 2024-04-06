@@ -25,9 +25,7 @@ class NovelRepository implements INovelRepository
     public function paginate(int $perPage = 10, $is_public = null, $authorId = null)
     {
         $query = Novel::query();
-        if ($is_public) {
             $query->where('is_public', $is_public);
-        }
         if ($authorId) {
             $query->where('user_id', $authorId);
         }
@@ -70,6 +68,18 @@ class NovelRepository implements INovelRepository
     {
         $novel = Novel::find($novelId);
         $novel->rankings()->sync($rankings);
+    }
+
+    public function syncGenres(int $novelId, array $genres)
+    {
+        $novel = Novel::find($novelId);
+        $novel->genres()->sync($genres);
+    }
+
+    public function attachGenres(int $novelId, array $genres)
+    {
+        $novel = Novel::find($novelId);
+        $novel->genres()->attach($genres);
     }
 
     public function getAuthorNovels(int $authorId,$perPage = null)

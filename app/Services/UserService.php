@@ -230,11 +230,11 @@ class UserService
         if ($user->banned_at) {
             $user->banned_at = null;
             $user->save();
-            return redirect()->route('users.index')->with('success', 'User unbanned successfully');
+            return redirect()->back()->with('success', 'User unbanned successfully');
         } else {
             $user->banned_at = now();
             $user->save();
-            return redirect()->route('users.index')->with('success', 'User banned successfully');
+            return redirect()->back()->with('success', 'User banned successfully');
         }
     }
 

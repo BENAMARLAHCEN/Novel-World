@@ -28,7 +28,8 @@ class StoreRequest extends FormRequest
             'genres' => ['required', 'array'],
             'genres.*' => ['exists:genres,id'],
             'language' => 'required|in:English,Spanish,French',
-            'age_rating' => 'required|in:all,16+,13+,18+',            
+            'age_rating' => 'required|in:all,16+,13+,18+', 
+            'status' => 'required|in:Ongoing,Completed,Hiatus,Dropped',           
         ];
     }
 }

@@ -125,22 +125,23 @@ Route::get('/author/dashboard',[DashboardController::class,'index'])->name('auth
 
 // author novels routes
 
+Route::get('/author/novels/{id}/edit',[AuthorNovelController::class,'edit'])->name('author.novels.edit');
 Route::get('/author/novels',[AuthorNovelController::class,'index'])->name('author.novels.index');
 Route::get('/author/novels/create',[AuthorNovelController::class,'create'])->name('author.novels.create');
 Route::post('/author/novels',[AuthorNovelController::class,'store'])->name('author.novels.store');
-Route::get('/author/novels/{novel}',[AuthorNovelController::class,'show'])->name('author.novels.show');
-Route::get('/author/novels/{novel}/edit',[AuthorNovelController::class,'edit'])->name('author.novels.edit');
-Route::put('/author/novels/{novel}',[AuthorNovelController::class,'update'])->name('author.novels.update');
-Route::delete('/author/novels/{novel}',[AuthorNovelController::class,'destroy'])->name('author.novels.destroy');
+Route::get('/author/novels/{id}',[AuthorNovelController::class,'show'])->name('author.novels.show');
+Route::put('/author/novels/{id}',[AuthorNovelController::class,'update'])->name('author.novels.update');
+Route::delete('/author/novels/{id}',[AuthorNovelController::class,'destroy'])->name('author.novels.destroy');
 
-Route::post('/author/novels/trash',[AuthorNovelController::class,'trash'])->name('author.novels.trash');
+Route::get('/author/novels/trash',[AuthorNovelController::class,'trash'])->name('author.novels.trash');
 Route::post('/author/novels/{novel}/restore',[AuthorNovelController::class,'restore'])->name('author.novels.restore');
 Route::post('/author/novels/{novel}/force-delete',[AuthorNovelController::class,'forceDelete'])->name('author.novels.force-delete');
+
 // chapter routes
-// Route::get('/author/novels/{novel}/chapters',[AuthorNovelController::class,'chapters'])->name('author.novels.chapters');
-// Route::get('/author/novels/{novel}/chapters/create',[AuthorNovelController::class,'createChapter'])->name('author.novels.chapters.create');
-// Route::post('/author/novels/{novel}/chapters',[AuthorNovelController::class,'storeChapter'])->name('author.novels.chapters.store');
-// Route::get('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'showChapter'])->name('author.novels.chapters.show');
-// Route::get('/author/novels/{novel}/chapters/{chapter}/edit',[AuthorNovelController::class,'editChapter'])->name('author.novels.chapters.edit');
-// Route::put('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'updateChapter'])->name('author.novels.chapters.update');
-// Route::delete('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'destroyChapter'])->name('author.novels.chapters.destroy');
+Route::get('/author/novels/{novel}/chapters',[AuthorNovelController::class,'chapters'])->name('author.novels.chapters');
+Route::get('/author/novels/{novel}/chapters/create',[AuthorNovelController::class,'createChapter'])->name('author.novels.chapters.create');
+Route::post('/author/novels/{novel}/chapters',[AuthorNovelController::class,'storeChapter'])->name('author.novels.chapters.store');
+Route::get('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'showChapter'])->name('author.novels.chapters.show');
+Route::get('/author/novels/{novel}/chapters/{chapter}/edit',[AuthorNovelController::class,'editChapter'])->name('author.novels.chapters.edit');
+Route::put('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'updateChapter'])->name('author.novels.chapters.update');
+Route::delete('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'destroyChapter'])->name('author.novels.chapters.destroy');

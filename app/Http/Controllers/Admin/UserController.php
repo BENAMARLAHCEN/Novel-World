@@ -90,7 +90,7 @@ class UserController extends Controller
             'permissions' => 'required|array',
             'permissions.*' => 'string|exists:permissions,name'
         ]);
-        $this->userService->blockPermissions($request, $id);
+        $this->userService->blockPermission($request, $id);
     }
 
 
