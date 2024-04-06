@@ -15,7 +15,7 @@
             </div><!-- .nk-block-head -->
             <div class="card">
                 <div class="card-inner">
-                    <form action="{{ route('author.novels.store') }}" method="post" enctype="multipart/form-data"
+                    <form   method="post" enctype="multipart/form-data" action="{{ route('author.novels.store') }}"
                         class="form-validate is-alter">
                         @csrf
                         <div class="row g-gs">
@@ -25,6 +25,9 @@
                                     <div class="form-control-wrap">
                                         <input type="text" class="form-control form-control-lg" id="fva-title"
                                             name="title" required>
+                                            @error('title')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                     </div>
                                 </div>
                             </div>
@@ -33,11 +36,14 @@
                                     <label class="form-label" for="fva-genre">Genre</label>
                                     <div class="form-control-wrap">
                                         <select class="form-select form-control form-control-lg js-select2" id="fva-genre"
-                                            name="genre" required multiple>
+                                            name="genres[]" required multiple>
                                             @foreach ($genres as $genre)
                                                 <option value="{{ $genre->id }}">{{ $genre->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('genres')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
 
                                     </div>
                                 </div>
@@ -55,6 +61,9 @@
                                             <option value="Spanish">Spanish</option>
                                             <option value="French">French</option>
                                         </select>
+                                        @error('language')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
 
@@ -71,7 +80,12 @@
                                             @foreach ($rankings as $ranking)
                                                 <option value="{{ $ranking->id }}">{{ $ranking->name }}</option>
                                             @endforeach
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
                                         </select>
+                                        @error('ranking')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -82,10 +96,10 @@
                                         <select class="form-select form-control form-control-lg" id="fva-status"
                                             name="status" required>
                                             <option value="" selected disabled>Select a Status</option>
-                                            <option value="1">Ongoing</option>
-                                            <option value="2">Completed</option>
-                                            <option value="3">Hiatus</option>
-                                            <option value="4">Dropped</option>
+                                            <option value="Ongoing">Ongoing</option>
+                                            <option value="Completed">Completed</option>
+                                            <option value="Hiatus">Hiatus</option>
+                                            <option value="Dropped">Dropped</option>
                                         </select>
                                     </div>
                                 </div>
@@ -95,7 +109,7 @@
                                         <ul class="custom-control-group">
                                             <li>
                                                 <div class="custom-control custom-radio custom-control-pro no-control">
-                                                    <input type="radio" class="custom-control-input" name="fv-age_rating"
+                                                    <input type="radio" class="custom-control-input" name="age_rating"
                                                         id="fva-age_rating-1" value="all" required>
                                                     <label class="custom-control-label" for="fva-age_rating-1">All
                                                         Ages</label>
@@ -103,14 +117,14 @@
                                             </li>
                                             <li>
                                                 <div class="custom-control custom-radio custom-control-pro no-control">
-                                                    <input type="radio" class="custom-control-input" name="fv-age_rating"
+                                                    <input type="radio" class="custom-control-input" name="age_rating"
                                                         id="fva-age_rating-2" value="13+" required>
                                                     <label class="custom-control-label" for="fva-age_rating-2">13+</label>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="custom-control custom-radio custom-control-pro no-control">
-                                                    <input type="radio" class="custom-control-input" name="fv-age_rating"
+                                                    <input type="radio" class="custom-control-input" name="age_rating"
                                                         id="fva-age_rating-3" value="16+" required>
                                                     <label class="custom-control-label" for="fva-age_rating-3">16+</label>
                                                 </div>
@@ -118,12 +132,17 @@
                                             <li>
                                                 <div class="custom-control custom-radio custom-control-pro no-control">
                                                     <input type="radio" class="custom-control-input"
-                                                        name="fv-age_rating" id="fva-age_rating-4" value="18+"
+                                                        name="age_rating" id="fva-age_rating-4" value="18+"
                                                         required>
                                                     <label class="custom-control-label" for="fva-age_rating-4">18+</label>
                                                 </div>
                                             </li>
                                         </ul>
+                                        @error('age_rating')
+                                            
+                                            <div class="text-danger">{{ $message }}</div>
+                                            
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -134,8 +153,12 @@
                                     <div class="form-control-wrap">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input cover-input" id="fva-cover" name="cover" required onchange="changeCover()" accept="image/*" />
-                                            <label class="custom-file-label" for="fva-cover">Choose file</label>
+                                           @error('cover')
+                                               <div class="text-danger">{{ $message }}</div>
+                                               
+                                           @enderror
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="w-100">
@@ -168,8 +191,16 @@
                                             image.addEventListener("load", function() {
                                                 const aspectRatio = image.width / image.height;
                                                 if (Math.abs(aspectRatio - 0.75) > 0.01) {
-                                                    alert("Please select an image with a size of 3:4");
-                                                    return;
+                                                    // display message to user usong sweet alert to select image with 3:4 aspect ratio and clear the input field
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Invalid Image Aspect Ratio',
+                                                        text: 'Please select an image with 3:4 aspect ratio',
+                                                    }).then(() => {
+                                                        document.querySelector('.cover-input').value = '';
+                                                        preview.style.display = "none";
+                                                        return;
+                                                    });
                                                 }
 
                                                 reader.readAsDataURL(file);
@@ -183,6 +214,9 @@
                                     <label class="form-label" for="fva-description">Description</label>
                                     <div class="form-control-wrap">
                                         <textarea class="form-control form-control-lg" id="fva-description" name="description" required></textarea>
+                                        @error('description')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

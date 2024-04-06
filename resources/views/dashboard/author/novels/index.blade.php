@@ -96,13 +96,14 @@
                                 <span>{{ $novel->chapters->count() }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span>{{ $novel->views }}</span>
+                                <span>{{ $novel->chapters->sum('views') }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span>{{ $novel->reviews->count() }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span>{{ $novel->reviews->avg('rating') ?? 0 }}</span>
+                                <span>{{  Str::limit($novel->reviews->avg('rating') ?? 0, 3) }}</span>
+                                    {{-- $novel->reviews->avg('rating') ?? 0 }}</span> --}}
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span class="tb-sub">{{ $novel->status }}</span>
@@ -127,7 +128,7 @@
                                         <form action="{{ route('author.novels.destroy', $novel->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-trigger btn-icon delete-novel"
+                                            <button type="submit" class="btn btn-trigger btn-icon delete-novel delete"
                                                 data-toggle="tooltip" data-placement="top" title="Delete Novel">
                                                 <em class="icon ni ni-trash-fill"></em>
                                             </button>
