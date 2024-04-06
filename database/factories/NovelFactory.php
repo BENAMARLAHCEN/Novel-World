@@ -27,7 +27,7 @@ class NovelFactory extends Factory
             'cover' => $this->faker->imageUrl(),
             'user_id' => $user_id,
             'views' => 0,
-            'status' => 'pending',
+            'status' => 'Ongoing',
             'language' => 'English',
             'age_rating' => '13+',
             'is_public' => null,

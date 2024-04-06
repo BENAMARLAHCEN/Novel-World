@@ -5,21 +5,18 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RoleSeeder extends Seeder
+class UserRoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $roles = [
-            'admin',
-            'author',
-            'reader'
-        ];
+        $roles = \App\Models\Role::all();
+        $users = \App\Models\User::all();
 
-        foreach ($roles as $role) {
-            \App\Models\Role::create(['name' => $role]);
+        foreach ($users as $user) {
+            $user->roles()->attach($roles->random(rand(1, 2))->pluck('id'));
         }
     }
 }

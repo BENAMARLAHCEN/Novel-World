@@ -14,7 +14,9 @@ class ProfileSeeder extends Seeder
     public function run(): void
     {
         // get all user ids with role of author
-        $userIds = [3,4];
+        $userIds = User::whereHas('roles', function ($query) {
+            $query->whereIn('name', ['author', 'admin']);
+        })->pluck('id')->toArray();
 
         // create profile for each user
 

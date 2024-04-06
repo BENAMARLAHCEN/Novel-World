@@ -77,5 +77,14 @@ class PermissionSeeder extends Seeder
         foreach ($permissions as $permission) {
             \App\Models\Permission::create(['name' => $permission]);
         }
+
+        // Attach permissions to roles
+        $roles = \App\Models\Role::all();
+        $permissions = \App\Models\Permission::all();
+        foreach ($roles as $role) {
+            for($i = 0; $i < 5; $i++) {
+                $role->givePermissionTo($permissions->random()->name);
+            }
+        }
     }
 }
