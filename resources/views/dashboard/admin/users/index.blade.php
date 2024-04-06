@@ -239,7 +239,7 @@
         </div><!-- .nk-block -->
         <div class="card">
             <div class="card-inner justify-content-center">
-                {{ $users->links() }}
+                {{ $users->links('pagination::bootstrap-5') }}
             </div>
 
         </div>

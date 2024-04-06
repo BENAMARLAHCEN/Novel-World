@@ -106,7 +106,7 @@
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
-                                    @if ($novel->status != 'published')
+                                    @if (!$novel->is_public == 1)
                                         <li class="nk-tb-action-hidden">
 
                                             <form action="{{ route('novels.publish', $novel->id) }}" method="post">
@@ -118,7 +118,7 @@
                                             </form>
                                         </li>
                                     @endif
-                                    @if ($novel->status != 'rejected')
+                                    @if (!$novel->is_public == 0)
                                         <li class="nk-tb-action-hidden">
                                             <form action="{{ route('novels.reject', $novel->id) }}" method="post">
                                                 @csrf
@@ -137,7 +137,7 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    @if ($novel->status != 'published')
+                                                    @if (!$novel->is_public == 1)
                                                         <li>
                                                             <form action="{{ route('novels.publish', $novel->id) }}"
                                                                 method="post">
@@ -148,7 +148,7 @@
                                                             </form>
                                                         </li>
                                                     @endif
-                                                    @if ($novel->status != 'rejected')
+                                                    @if (!$novel->is_public == 0)
                                                         <li>
                                                             <form action="{{ route('novels.reject', $novel->id) }}"
                                                                 method="post">

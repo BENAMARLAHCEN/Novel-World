@@ -294,10 +294,10 @@
                                         </div>
                                     </div>
                                     <div class="nk-tb-col">
-                                        <<span class="tb-product">
+                                        <span class="tb-product">
                                             <img src="https://alphanovel.io/_next/image?url=https%3A%2F%2Fcdn.alphanovel.io%2Fbook-cover%2F030IHrSLT57KuqXrH8gS%2Ff26f1f52-2abd-49da-aec5-9f26af008a86_compressed.jpeg&w=640&q=75"
                                                 alt="" class="thumb">
-                                            <span class="title">{{ $$review->novel->title }}</span>
+                                            <span class="title">{{ $review->novel->title }}</span>
                                         </span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
