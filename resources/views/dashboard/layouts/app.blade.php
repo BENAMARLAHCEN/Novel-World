@@ -15,6 +15,7 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css?ver=3.2.3') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css?ver=3.2.3') }}">
+    @yield('style')
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar ">
@@ -187,6 +188,7 @@
     <script src="{{ asset('./assets/js/sweetalert.js?ver=3.2.3') }}"></script>
     <!-- Dark Mode -->
     <script src="{{ asset('assets/js/dark-switch.js?ver=3.2.3') }}"></script>
+    @yield('scripts')
 
 </body>
 

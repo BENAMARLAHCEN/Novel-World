@@ -154,72 +154,15 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon">
-                                <em class="icon ni ni-edit"></em>
-                            </span>
-                            <span class="nk-menu-text">Editor</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="html/copywriter/document-editor.html" class="nk-menu-link">
-                                    <span class="nk-menu-text">New</span>
-                                </a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/copywriter/document-editor-generate.html" class="nk-menu-link">
-                                    <span class="nk-menu-text">Generate</span>
-                                </a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/copywriter/document-editor-edit.html" class="nk-menu-link">
-                                    <span class="nk-menu-text">Edit</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    
                     <li class="nk-menu-item">
-                        <a href="html/copywriter/templates.html" class="nk-menu-link">
-                            <span class="nk-menu-icon">
-                                <em class="icon ni ni-layers"></em>
-                            </span>
-                            <span class="nk-menu-text">Templates</span>
-                        </a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="html/copywriter/history.html" class="nk-menu-link">
-                            <span class="nk-menu-icon">
-                                <em class="icon ni ni-clock"></em>
-                            </span>
-                            <span class="nk-menu-text">History</span>
-                        </a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="html/copywriter/pricing-plans.html" class="nk-menu-link">
-                            <span class="nk-menu-icon">
-                                <em class="icon ni ni-sign-usdc"></em>
-                            </span>
-                            <span class="nk-menu-text">Pricing Plans</span>
-                        </a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="html/copywriter/profile.html" class="nk-menu-link">
+                        <a href="{{ route('profile') }}" class="nk-menu-link">
                             <span class="nk-menu-icon">
                                 <em class="icon ni ni-user"></em>
                             </span>
                             <span class="nk-menu-text">Profile</span>
                         </a>
                     </li>
-                    <li class="nk-menu-item">
-                        <a href="html/copywriter/payment.html" target="_blank" class="nk-menu-link">
-                            <span class="nk-menu-icon">
-                                <em class="icon ni ni-wallet"></em>
-                            </span>
-                            <span class="nk-menu-text">Payments</span>
-                        </a>
-                    </li>
-
                 </ul><!-- .nk-menu -->
             </div><!-- .nk-sidebar-menu -->
         </div><!-- .nk-sidebar-content -->

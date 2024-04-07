@@ -16,7 +16,7 @@
                         <div class="toggle-expand-content" data-content="pageMenu">
                             <ul class="nk-block-tools g-3">
                                 <li class="nk-block-tools-opt d-none d-sm-block">
-                                    <a href="{{ route('author.novels.chapters', ['novel' => $novel->id]) }}"
+                                    <a href="{{ route('author.novels.chapters', ['id' => $novel->id]) }}"
                                         class="btn btn-primary">Show Chapters</a>
                                 </li>
                                 <li class="nk-block-tools-opt">
@@ -83,7 +83,7 @@
                                             class="icon ni ni-trash"></em></button>
                                 </form>
                                 {{-- view chapter --}}
-                                <a href="{{ route('author.novels.chapters.create', ['novel' => $novel->id]) }}"
+                                <a href="{{ route('author.novels.chapters.create', ['id' => $novel->id]) }}"
                                     class="btn btn-icon btn-trigger"><em class="icon ni ni-plus"></em></a>
 
                             </li>
@@ -107,6 +107,12 @@
                                             </div>
                                             <div class="profile-ud-item">
                                                 <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Language</span>
+                                                    <span class="profile-ud-value">{{ $novel->language }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
                                                     <span class="profile-ud-label">Author</span>
                                                     <span
                                                         class="profile-ud-value">{{ $novel->user->profile->pen_name }}</span>
@@ -119,6 +125,13 @@
                                                     <span class="profile-ud-value">{{ $novel->status }}</span>
                                                 </div>
                                             </div>
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Age Rating</span>
+                                                    <span class="profile-ud-value">{{ $novel->age_rating }}</span>
+                                                </div>
+                                            </div>
+
                                             <div class="profile-ud-item">
                                                 <div class="profile-ud wider">
                                                     <span class="profile-ud-label">Views</span>

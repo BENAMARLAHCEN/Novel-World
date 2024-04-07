@@ -7,7 +7,7 @@
                 <div class="nk-block-head-content">
                     <h3 class="nk-block-title page-title">Trash Novels</h3>
                     <div class="nk-block-des text-soft">
-                        <>You have total {{ $novels->total() }} Novels in trash.</p>
+                        <p>You have total {{ $novels->total() }} Novels in trash.</p>
                     </div>
                 </div><!-- .nk-block-head-content -->
                 <div class="nk-block-head-content">
@@ -59,7 +59,7 @@
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Views</span></th>
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Rewiews</span></th>
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Rating</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Deleted At</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-right">
                         </th>
                     </tr>
@@ -98,36 +98,32 @@
                             <td class="nk-tb-col tb-col-lg">
                                 <span>{{ $novel->reviews->avg('rating') ?? 0 }}</span>
                             </td>
-                            <td class="nk-tb-col tb-col-lg">
-                                <span class="tb-sub">{{ $novel->status }}</span>
+                            <td class="nk-tb-col">
+                                <span class="tb-sub">{{ $novel->deleted_at->diffForHumans() }}</span>
                             </td>
+
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li class="nk-tb-action-hidden">
-                                        <a href="{{ route('author.novels.show', $novel->id) }}"
-                                            class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top"
-                                            title="View Novel">
-                                            <em class="icon ni ni-eye"></em>
-                                        </a>
-                                    </li>
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="{{ route('author.novels.edit', $novel->id) }}"
-                                            class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top"
-                                            title="Edit Novel">
-                                            <em class="icon ni ni-edit-alt-fill"></em>
-                                        </a>
-                                    </li>
-                                    <li class="nk-tb-action-hidden">
-                                        <form action="{{ route('author.novels.destroy', $novel->id) }}" method="post">
+                                        <form action="{{ route('author.novels.restore', $novel->id) }}" method="post">
                                             @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-trigger btn-icon delete-novel"
-                                                data-toggle="tooltip" data-placement="top" title="Delete Novel">
-                                                <em class="icon ni ni-trash-fill"></em>
+                                            <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip"
+                                                data-placement="top" title="Restore Novel">
+                                                <em class="icon ni ni-repeat"></em>
                                             </button>
                                         </form>
                                     </li>
+                                    <li class="nk-tb-action-hidden">
+                                        <form action="{{ route('author.novels.force-delete', $novel->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip"
+                                                data-placement="top" title="Delete Novel Permanently">
+                                                <em class="icon ni ni-trash"></em>
+                                            </button>
+                                        </form>
 
+                                    </li>
                                 </ul>
                             </td>
                         </tr><!-- .nk-tb-item -->
