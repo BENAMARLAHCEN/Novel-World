@@ -48,13 +48,16 @@ class ChapterService
 
     // create, update, delete methods
 
-    public function create(array $attributes)
+    public function create($request , int $novelId)
     {
+        $attributes = $request->validated();
+        $attributes['novel_id'] = $novelId;
         return $this->chapterRepository->create($attributes);
     }
 
-    public function update(int $id, array $attributes)
+    public function update(int $id, $request)
     {
+        $attributes = $request->validated();
         return $this->chapterRepository->update($id, $attributes);
     }
 

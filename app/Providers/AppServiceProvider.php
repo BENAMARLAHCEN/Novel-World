@@ -50,6 +50,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\IGenreRepository::class,
             \App\Repositories\GenreRepository::class);
 
+        $this->app->bind(
+            \App\Repositories\Interfaces\IProfileRepository::class,
+            \App\Repositories\ProfileRepository::class
+        );
+
     }
 
     /**

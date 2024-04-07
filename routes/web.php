@@ -10,8 +10,10 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerifyController;
+use App\Http\Controllers\Author\ChapterController as AuthorChapterController;
 use App\Http\Controllers\Author\DashboardController;
 use App\Http\Controllers\Author\NovelController as AuthorNovelController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -133,15 +135,24 @@ Route::get('/author/novels/{id}',[AuthorNovelController::class,'show'])->name('a
 Route::put('/author/novels/{id}',[AuthorNovelController::class,'update'])->name('author.novels.update');
 Route::delete('/author/novels/{id}',[AuthorNovelController::class,'destroy'])->name('author.novels.destroy');
 
-Route::get('/author/novels/trash',[AuthorNovelController::class,'trash'])->name('author.novels.trash');
-Route::post('/author/novels/{novel}/restore',[AuthorNovelController::class,'restore'])->name('author.novels.restore');
-Route::post('/author/novels/{novel}/force-delete',[AuthorNovelController::class,'forceDelete'])->name('author.novels.force-delete');
+Route::get('/author/novels/trash/list',[AuthorNovelController::class,'trash'])->name('author.novels.trash');
+Route::post('/author/novels/{id}/restore',[AuthorNovelController::class,'restore'])->name('author.novels.restore');
+Route::delete('/author/novels/{id}/force-delete',[AuthorNovelController::class,'forceDelete'])->name('author.novels.force-delete');
 
 // chapter routes
-Route::get('/author/novels/{novel}/chapters',[AuthorNovelController::class,'chapters'])->name('author.novels.chapters');
-Route::get('/author/novels/{novel}/chapters/create',[AuthorNovelController::class,'createChapter'])->name('author.novels.chapters.create');
-Route::post('/author/novels/{novel}/chapters',[AuthorNovelController::class,'storeChapter'])->name('author.novels.chapters.store');
-Route::get('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'showChapter'])->name('author.novels.chapters.show');
-Route::get('/author/novels/{novel}/chapters/{chapter}/edit',[AuthorNovelController::class,'editChapter'])->name('author.novels.chapters.edit');
-Route::put('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'updateChapter'])->name('author.novels.chapters.update');
-Route::delete('/author/novels/{novel}/chapters/{chapter}',[AuthorNovelController::class,'destroyChapter'])->name('author.novels.chapters.destroy');
+Route::get('/author/novels/{id}/chapters',[AuthorChapterController::class,'chapters'])->name('author.novels.chapters');
+Route::get('/author/novels/{id}/chapters/create',[AuthorChapterController::class,'createChapter'])->name('author.novels.chapters.create');
+Route::post('/author/novels/{id}/chapters',[AuthorChapterController::class,'storeChapter'])->name('author.novels.chapters.store');
+Route::get('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'showChapter'])->name('author.novels.chapters.show');
+Route::get('/author/novels/{id}/chapters/{chapterId}/edit',[AuthorChapterController::class,'editChapter'])->name('author.novels.chapters.edit');
+Route::put('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'updateChapter'])->name('author.novels.chapters.update');
+Route::delete('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'destroyChapter'])->name('author.novels.chapters.destroy');
+
+// author profile routes
+
+Route::get('/dashboard/profile',[ProfileController::class,'profile'])->name('profile');
+Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update');
+Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password');
+Route::put('/dashboard/profile/info',[ProfileController::class,'updateInfo'])->name('profile.info');
+Route::put('/dashboard/profile/social',[ProfileController::class,'updateSocial'])->name('profile.social');
+Route::delete('/dashboard/profile',[ProfileController::class,'deleteAccount'])->name('profile.delete');

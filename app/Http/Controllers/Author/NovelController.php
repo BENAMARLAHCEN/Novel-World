@@ -95,12 +95,13 @@ class NovelController extends Controller
     /**
      * Restore the specified resource from storage.
      */
-    public function restore(Novel $novel)
+    public function restore($id)
     {
         // $this->authorize('restore', $novel);
-        $this->novelService->restore($novel->id);
+        $this->novelService->restore($id);
         return redirect()->route('author.novels.index')->with('success', 'Novel restored successfully');
     }
+    
 
     /**
      * Display a listing of the resource.
@@ -116,10 +117,10 @@ class NovelController extends Controller
      * Remove the specified resource from storage.
      */
 
-    public function forceDelete(Novel $novel)
+    public function forceDelete($id)
     {
         // $this->authorize('forceDelete', $novel);
-        $this->novelService->forceDelete($novel->id);
+        $this->novelService->forceDelete($id);
         return redirect()->route('author.novels.index')->with('success', 'Novel permanently deleted successfully');
     }
 }

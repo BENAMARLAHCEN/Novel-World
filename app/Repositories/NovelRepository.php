@@ -93,9 +93,9 @@ class NovelRepository implements INovelRepository
     public function trash(int $authorId = null)
     {
         if ($authorId) {
-            return Novel::onlyTrashed()->where('user_id', $authorId)->get();
+            return Novel::onlyTrashed()->where('user_id', $authorId)->paginate(10);
         }
-        return Novel::onlyTrashed()->get();
+        return Novel::onlyTrashed()->paginate(10);
     }
 
     public function restore(int $id)
