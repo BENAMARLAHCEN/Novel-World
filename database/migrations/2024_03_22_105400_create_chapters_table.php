@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Novel::class);
+            $table->foreignIdFor(\App\Models\Novel::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title');
             $table->text('content');
             $table->integer('number');

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('novels_genres', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Novel::class);
-            $table->foreignIdFor(\App\Models\Genre::class);
+            $table->foreignIdFor(\App\Models\Novel::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(\App\Models\Genre::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

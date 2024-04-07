@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('block_permissions', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\User::class);
-            $table->foreignIdFor(\App\Models\Permission::class);
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(\App\Models\Permission::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

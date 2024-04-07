@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('age_rating', ['all', '13+', '16+', '18+'])->default('all');
             $table->boolean('is_public')->nullable();
             // foreign keys
-            $table->foreign('user_id')->references('id')->on('users');  
+            $table->foreign('user_id')->references('id')->on('users');
             // add soft delete
             $table->softDeletes();
 
