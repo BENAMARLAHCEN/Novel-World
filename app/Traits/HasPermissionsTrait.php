@@ -37,12 +37,8 @@ trait HasPermissionsTrait
 
     public function hasPermissionThroughRole($permission)
     {
-        foreach ($permission->roles as $role) {
-            if ($this->roles->contains($role)) {
-                return true;
-            }
-        }
-        return false;
+
+        return (bool) $this->roles->flatMap->permissions->pluck('name')->intersect($permission)->count();
     }
 
     public function hasRole(...$roles)

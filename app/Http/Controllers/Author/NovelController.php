@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class NovelController extends Controller
 {
-    protected $novelService;
+    protected $novelService;    
 
     public function __construct(NovelService $novelService)
     {
@@ -22,7 +22,7 @@ class NovelController extends Controller
      */
     public function index()
     {
-        // $this->authorize('viewAny');
+        $this->authorize('viewAny', Novel::class);
         $novels = $this->novelService->getAuthorNovels(auth()->id());
         return view('dashboard.author.novels.index', compact('novels'));
     }

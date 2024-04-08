@@ -49,73 +49,73 @@ Route::get('/verify-email/{token}',[VerifyController::class,'verify'])->name('ve
 
 // role routes
 // Route::resource('roles', RoleController::class)->except(['show']);
-Route::get('/roles',[RoleController::class,'index'])->name('roles.index');
-Route::get('/roles/create',[RoleController::class,'create'])->name('roles.create');
-Route::post('/roles',[RoleController::class,'store'])->name('roles.store');
-Route::get('/roles/{id}/edit',[RoleController::class,'edit'])->name('roles.edit');
-Route::put('/roles/{id}',[RoleController::class,'update'])->name('roles.update');
-Route::delete('/roles/{id}',[RoleController::class,'destroy'])->name('roles.destroy');
-Route::get('/roles/{id}',[RoleController::class,'show'])->name('roles.show');
+Route::get('/roles',[RoleController::class,'index'])->name('roles.index')->middleware('auth','role:admin');
+Route::get('/roles/create',[RoleController::class,'create'])->name('roles.create')->middleware('auth','role:admin');
+Route::post('/roles',[RoleController::class,'store'])->name('roles.store')->middleware('auth','role:admin');
+Route::get('/roles/{id}/edit',[RoleController::class,'edit'])->name('roles.edit')->middleware('auth','role:admin');
+Route::put('/roles/{id}',[RoleController::class,'update'])->name('roles.update')->middleware('auth','role:admin');
+Route::delete('/roles/{id}',[RoleController::class,'destroy'])->name('roles.destroy')->middleware('auth','role:admin');
+Route::get('/roles/{id}',[RoleController::class,'show'])->name('roles.show')->middleware('auth','role:admin');
 
 
 // status routes
 
-// Route::resource('genres', GenreController::class)->except(['show']);
-Route::get('/genres',[GenreController::class,'index'])->name('genres.index');
-Route::get('/genres/create',[GenreController::class,'create'])->name('genres.create');
-Route::post('/genres',[GenreController::class,'store'])->name('genres.store');
-Route::get('/genres/{genres}/edit',[GenreController::class,'edit'])->name('genres.edit');
-Route::put('/genres/{genres}',[GenreController::class,'update'])->name('genres.update');
-Route::delete('/genres/{id}',[GenreController::class,'destroy'])->name('genres.destroy');
-Route::get('/genres/{id}',[GenreController::class,'show'])->name('genres.show');
+// Route::resource('genres', GenreController::class)->except(['show'])->middleware('auth','role:admin');
+Route::get('/genres',[GenreController::class,'index'])->name('genres.index')->middleware('auth','role:admin');
+Route::get('/genres/create',[GenreController::class,'create'])->name('genres.create')->middleware('auth','role:admin');
+Route::post('/genres',[GenreController::class,'store'])->name('genres.store')->middleware('auth','role:admin');
+Route::get('/genres/{genres}/edit',[GenreController::class,'edit'])->name('genres.edit')->middleware('auth','role:admin');
+Route::put('/genres/{genres}',[GenreController::class,'update'])->name('genres.update')->middleware('auth','role:admin');
+Route::delete('/genres/{id}',[GenreController::class,'destroy'])->name('genres.destroy')->middleware('auth','role:admin');
+Route::get('/genres/{id}',[GenreController::class,'show'])->name('genres.show')->middleware('auth','role:admin');
 
 // ranking routes
 
-// Route::resource('rankings', RankingController::class)->except(['show']);
-Route::get('/rankings',[RankingController::class,'index'])->name('rankings.index');
-Route::get('/rankings/create',[RankingController::class,'create'])->name('rankings.create');
-Route::post('/rankings',[RankingController::class,'store'])->name('rankings.store');
-Route::get('/rankings/{ranking}/edit',[RankingController::class,'edit'])->name('rankings.edit');
-Route::put('/rankings/{ranking}',[RankingController::class,'update'])->name('rankings.update');
-Route::delete('/rankings/{id}',[RankingController::class,'destroy'])->name('rankings.destroy');
-Route::get('/rankings/{id}',[RankingController::class,'show'])->name('rankings.show');
+// Route::resource('rankings', RankingController::class)->except(['show'])->middleware('auth','role:admin');
+Route::get('/rankings',[RankingController::class,'index'])->name('rankings.index')->middleware('auth','role:admin');
+Route::get('/rankings/create',[RankingController::class,'create'])->name('rankings.create')->middleware('auth','role:admin');
+Route::post('/rankings',[RankingController::class,'store'])->name('rankings.store')->middleware('auth','role:admin');
+Route::get('/rankings/{ranking}/edit',[RankingController::class,'edit'])->name('rankings.edit')->middleware('auth','role:admin');
+Route::put('/rankings/{ranking}',[RankingController::class,'update'])->name('rankings.update')->middleware('auth','role:admin');
+Route::delete('/rankings/{id}',[RankingController::class,'destroy'])->name('rankings.destroy')->middleware('auth','role:admin');
+Route::get('/rankings/{id}',[RankingController::class,'show'])->name('rankings.show')->middleware('auth','role:admin');
 
 // novel admin routes
 
-Route::get('/novels',[NovelController::class,'index'])->name('novels.index');
-Route::get('/novels/rejected',[NovelController::class,'rejectedNovels'])->name('novels.rejected');
-Route::get('/novels/published',[NovelController::class,'publishedNovels'])->name('novels.published');
-Route::get('/novels/{id}',[NovelController::class,'showNovel'])->name('novels.show');
-Route::post('/novels/{id}/reject',[NovelController::class,'rejectNovel'])->name('novels.reject');
-Route::post('/novels/{id}/publish',[NovelController::class,'publishNovel'])->name('novels.publish');
+Route::get('/novels',[NovelController::class,'index'])->name('novels.index')->middleware('auth','role:admin');
+Route::get('/novels/rejected',[NovelController::class,'rejectedNovels'])->name('novels.rejected')->middleware('auth','role:admin');
+Route::get('/novels/published',[NovelController::class,'publishedNovels'])->name('novels.published')->middleware('auth','role:admin');
+Route::get('/novels/{id}',[NovelController::class,'showNovel'])->name('novels.show')->middleware('auth','role:admin');
+Route::post('/novels/{id}/reject',[NovelController::class,'rejectNovel'])->name('novels.reject')->middleware('auth','role:admin');
+Route::post('/novels/{id}/publish',[NovelController::class,'publishNovel'])->name('novels.publish')->middleware('auth','role:admin');
 
 // user admin routes
 
-// Route::resource('users', UserController::class)->except(['show']);
+// Route::resource('users', UserController::class)->except(['show'])->middleware('auth','role:admin');
 
-Route::get('/users',[UserController::class,'index'])->name('users.index');
-Route::get('/users/admins',[UserController::class,'admins'])->name('users.admins');
-Route::get('/users/readers',[UserController::class,'readers'])->name('users.readers');
-Route::get('/users/authors',[UserController::class,'authors'])->name('users.authors');
-Route::get('/users/create',[UserController::class,'create'])->name('users.create');
-Route::post('/users',[UserController::class,'store'])->name('users.store');
-Route::get('/users/{user}/edit',[UserController::class,'edit'])->name('users.edit');
-Route::put('/users/{user}',[UserController::class,'update'])->name('users.update');
-Route::delete('/users/{id}',[UserController::class,'destroy'])->name('users.destroy');
-Route::get('/users/{id}',[UserController::class,'show'])->name('users.show');
-Route::post('/users/{id}/toggle-admin',[UserController::class,'toggleAdmin'])->name('users.toggle-admin');
-Route::post('/users/{id}/toggle-ban',[UserController::class,'toggleBan'])->name('users.toggle-ban');
-Route::post('/users/{id}/block-permission',[UserController::class,'blockPermission'])->name('users.block-permission');
+Route::get('/users',[UserController::class,'index'])->name('users.index')->middleware('auth','role:admin');
+Route::get('/users/admins',[UserController::class,'admins'])->name('users.admins')->middleware('auth','role:admin');
+Route::get('/users/readers',[UserController::class,'readers'])->name('users.readers')->middleware('auth','role:admin');
+Route::get('/users/authors',[UserController::class,'authors'])->name('users.authors')->middleware('auth','role:admin');
+Route::get('/users/create',[UserController::class,'create'])->name('users.create')->middleware('auth','role:admin');
+Route::post('/users',[UserController::class,'store'])->name('users.store')->middleware('auth','role:admin');
+Route::get('/users/{user}/edit',[UserController::class,'edit'])->name('users.edit')->middleware('auth','role:admin');
+Route::put('/users/{user}',[UserController::class,'update'])->name('users.update')->middleware('auth','role:admin');
+Route::delete('/users/{id}',[UserController::class,'destroy'])->name('users.destroy')->middleware('auth','role:admin');
+Route::get('/users/{id}',[UserController::class,'show'])->name('users.show')->middleware('auth','role:admin');
+Route::post('/users/{id}/toggle-admin',[UserController::class,'toggleAdmin'])->name('users.toggle-admin')->middleware('auth','role:admin');
+Route::post('/users/{id}/toggle-ban',[UserController::class,'toggleBan'])->name('users.toggle-ban')->middleware('auth','role:admin');
+Route::post('/users/{id}/block-permission',[UserController::class,'blockPermission'])->name('users.block-permission')->middleware('auth','role:admin');
 
 // admin chapter routes
 
-// Route::resource('chapters', ChapterController::class)->except(['create','store','update','destroy']);
-Route::get('/chapters',[ChapterController::class,'index'])->name('chapters.index');
-Route::get('/chapters/rejected',[ChapterController::class,'rejectedChapters'])->name('chapters.rejected');
-Route::get('/chapters/published',[ChapterController::class,'publishedChapters'])->name('chapters.published');
-Route::get('/chapters/{id}',[ChapterController::class,'show'])->name('chapters.show');
-Route::post('/chapters/{id}/reject',[ChapterController::class,'rejectChapter'])->name('chapters.reject');
-Route::post('/chapters/{id}/publish',[ChapterController::class,'publishChapter'])->name('chapters.publish');
+// Route::resource('chapters', ChapterController::class)->except(['create','store','update','destroy'])->middleware('auth','role:admin');
+Route::get('/chapters',[ChapterController::class,'index'])->name('chapters.index')->middleware('auth','role:admin');
+Route::get('/chapters/rejected',[ChapterController::class,'rejectedChapters'])->name('chapters.rejected')->middleware('auth','role:admin');
+Route::get('/chapters/published',[ChapterController::class,'publishedChapters'])->name('chapters.published')->middleware('auth','role:admin');
+Route::get('/chapters/{id}',[ChapterController::class,'show'])->name('chapters.show')->middleware('auth','role:admin');
+Route::post('/chapters/{id}/reject',[ChapterController::class,'rejectChapter'])->name('chapters.reject')->middleware('auth','role:admin');
+Route::post('/chapters/{id}/publish',[ChapterController::class,'publishChapter'])->name('chapters.publish')->middleware('auth','role:admin');
 
 
 
@@ -123,36 +123,36 @@ Route::post('/chapters/{id}/publish',[ChapterController::class,'publishChapter']
 
 // author dashboard 
 
-Route::get('/author/dashboard',[DashboardController::class,'index'])->name('author.dashboard');
+Route::get('/author/dashboard',[DashboardController::class,'index'])->name('author.dashboard')->middleware('auth','role:author');
 
 // author novels routes
 
-Route::get('/author/novels/{id}/edit',[AuthorNovelController::class,'edit'])->name('author.novels.edit');
-Route::get('/author/novels',[AuthorNovelController::class,'index'])->name('author.novels.index');
-Route::get('/author/novels/create',[AuthorNovelController::class,'create'])->name('author.novels.create');
-Route::post('/author/novels',[AuthorNovelController::class,'store'])->name('author.novels.store');
-Route::get('/author/novels/{id}',[AuthorNovelController::class,'show'])->name('author.novels.show');
-Route::put('/author/novels/{id}',[AuthorNovelController::class,'update'])->name('author.novels.update');
-Route::delete('/author/novels/{id}',[AuthorNovelController::class,'destroy'])->name('author.novels.destroy');
+Route::get('/author/novels/{id}/edit',[AuthorNovelController::class,'edit'])->name('author.novels.edit')->middleware('auth','role:author');
+Route::get('/author/novels',[AuthorNovelController::class,'index'])->name('author.novels.index')->middleware('auth','role:author');
+Route::get('/author/novels/create',[AuthorNovelController::class,'create'])->name('author.novels.create')->middleware('auth','role:author');
+Route::post('/author/novels',[AuthorNovelController::class,'store'])->name('author.novels.store')->middleware('auth','role:author');
+Route::get('/author/novels/{id}',[AuthorNovelController::class,'show'])->name('author.novels.show')->middleware('auth','role:author');
+Route::put('/author/novels/{id}',[AuthorNovelController::class,'update'])->name('author.novels.update')->middleware('auth','role:author');
+Route::delete('/author/novels/{id}',[AuthorNovelController::class,'destroy'])->name('author.novels.destroy')->middleware('auth','role:author');
 
-Route::get('/author/novels/trash/list',[AuthorNovelController::class,'trash'])->name('author.novels.trash');
-Route::post('/author/novels/{id}/restore',[AuthorNovelController::class,'restore'])->name('author.novels.restore');
-Route::delete('/author/novels/{id}/force-delete',[AuthorNovelController::class,'forceDelete'])->name('author.novels.force-delete');
+Route::get('/author/novels/trash/list',[AuthorNovelController::class,'trash'])->name('author.novels.trash')->middleware('auth','role:author');
+Route::post('/author/novels/{id}/restore',[AuthorNovelController::class,'restore'])->name('author.novels.restore')->middleware('auth','role:author');
+Route::delete('/author/novels/{id}/force-delete',[AuthorNovelController::class,'forceDelete'])->name('author.novels.force-delete')->middleware('auth','role:author');
 
 // chapter routes
-Route::get('/author/novels/{id}/chapters',[AuthorChapterController::class,'chapters'])->name('author.novels.chapters');
-Route::get('/author/novels/{id}/chapters/create',[AuthorChapterController::class,'createChapter'])->name('author.novels.chapters.create');
-Route::post('/author/novels/{id}/chapters',[AuthorChapterController::class,'storeChapter'])->name('author.novels.chapters.store');
-Route::get('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'showChapter'])->name('author.novels.chapters.show');
-Route::get('/author/novels/{id}/chapters/{chapterId}/edit',[AuthorChapterController::class,'editChapter'])->name('author.novels.chapters.edit');
-Route::put('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'updateChapter'])->name('author.novels.chapters.update');
-Route::delete('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'destroyChapter'])->name('author.novels.chapters.destroy');
+Route::get('/author/novels/{id}/chapters',[AuthorChapterController::class,'chapters'])->name('author.novels.chapters')->middleware('auth','role:author');
+Route::get('/author/novels/{id}/chapters/create',[AuthorChapterController::class,'createChapter'])->name('author.novels.chapters.create')->middleware('auth','role:author');
+Route::post('/author/novels/{id}/chapters',[AuthorChapterController::class,'storeChapter'])->name('author.novels.chapters.store')->middleware('auth','role:author');
+Route::get('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'showChapter'])->name('author.novels.chapters.show')->middleware('auth','role:author');
+Route::get('/author/novels/{id}/chapters/{chapterId}/edit',[AuthorChapterController::class,'editChapter'])->name('author.novels.chapters.edit')->middleware('auth','role:author');
+Route::put('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'updateChapter'])->name('author.novels.chapters.update')->middleware('auth','role:author');
+Route::delete('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterController::class,'destroyChapter'])->name('author.novels.chapters.destroy')->middleware('auth','role:author');
 
 // author profile routes
 
-Route::get('/dashboard/profile',[ProfileController::class,'profile'])->name('profile');
-Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update');
-Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password');
-Route::put('/dashboard/profile/info',[ProfileController::class,'updateInfo'])->name('profile.info');
-Route::put('/dashboard/profile/social',[ProfileController::class,'updateSocial'])->name('profile.social');
-Route::delete('/dashboard/profile',[ProfileController::class,'deleteAccount'])->name('profile.delete');
+Route::get('/dashboard/profile',[ProfileController::class,'profile'])->name('profile')->middleware('auth','role:author','role:admin');
+Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update')->middleware('auth','role:author','role:admin');
+Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password')->middleware('auth','role:author','role:admin');
+Route::put('/dashboard/profile/info',[ProfileController::class,'updateInfo'])->name('profile.info')->middleware('auth','role:author','role:admin');
+Route::put('/dashboard/profile/social',[ProfileController::class,'updateSocial'])->name('profile.social')->middleware('auth','role:author','role:admin');
+Route::delete('/dashboard/profile',[ProfileController::class,'deleteAccount'])->name('profile.delete')->middleware('auth','role:author','role:admin');

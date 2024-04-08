@@ -2,7 +2,12 @@
 <div class="nk-sidebar nk-sidebar-fixed is-light " data-content="sidebarMenu">
     <div class="nk-sidebar-element nk-sidebar-head">
         <div class="nk-sidebar-brand">
-            <a href="html/index.html" class="logo-link nk-sidebar-logo">
+            <a href="
+            @if (auth()->user()->hasRole('admin')) {{ route('statistic') }}
+            @elseif (auth()->user()->hasRole('author'))
+                {{ route('author.dashboard') }} @endif
+            "
+                class="logo-link nk-sidebar-logo">
                 <img class="logo-light logo-img" src="{{ asset('images/logo.png') }}"
                     srcset="{{ asset('images/logo2x.png') }} 2x" alt="logo">
                 <img class="logo-dark logo-img" src="{{ asset('images/logo-dark.png') }}"
@@ -22,8 +27,7 @@
         <div class="nk-sidebar-content">
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
-                    @auth
-
+                    @role('admin')
 
                         {{-- admin side --}}
                         <li class="nk-menu-item">
@@ -122,49 +126,53 @@
                                 <span class="nk-menu-text">Ranking</span>
                             </a>
                         </li><!-- .nk-menu-item -->
+                        @endrole
+                        @role('author')
 
-                    @endauth
-                    {{-- author side --}}
-                    <li class="nk-menu-heading">
-                        <h6 class="overline-title text-primary-alt">Dashboards</h6>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a href="{{ route('author.dashboard') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-presentation"></em></span>
-                            <span class="nk-menu-text">Dashboard</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon">
-                                <em class="icon ni ni-folder-list"></em>
-                            </span>
-                            <span class="nk-menu-text">Novels</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="{{route('author.novels.index')}}" class="nk-menu-link">
-                                    <span class="nk-menu-text">My Novels</span>
-                                </a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="{{route('author.novels.trash')}}" class="nk-menu-link">
-                                    <span class="nk-menu-text">Trash</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nk-menu-item">
-                        <a href="{{ route('profile') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon">
-                                <em class="icon ni ni-user"></em>
-                            </span>
-                            <span class="nk-menu-text">Profile</span>
-                        </a>
-                    </li>
-                </ul><!-- .nk-menu -->
-            </div><!-- .nk-sidebar-menu -->
-        </div><!-- .nk-sidebar-content -->
-    </div><!-- .nk-sidebar-element -->
-</div>
+                        {{-- author side --}}
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">Dashboards</h6>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{{ route('author.dashboard') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-presentation"></em></span>
+                                <span class="nk-menu-text">Dashboard</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon">
+                                    <em class="icon ni ni-folder-list"></em>
+                                </span>
+                                <span class="nk-menu-text">Novels</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="{{ route('author.novels.index') }}" class="nk-menu-link">
+                                        <span class="nk-menu-text">My Novels</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="{{ route('author.novels.trash') }}" class="nk-menu-link">
+                                        <span class="nk-menu-text">Trash</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endrole
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">Profile</h6>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{{ route('profile') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon">
+                                    <em class="icon ni ni-user"></em>
+                                </span>
+                                <span class="nk-menu-text">Profile</span>
+                            </a>
+                        </li>
+                    </ul><!-- .nk-menu -->
+                </div><!-- .nk-sidebar-menu -->
+            </div><!-- .nk-sidebar-content -->
+        </div><!-- .nk-sidebar-element -->
+    </div>

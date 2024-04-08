@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'number' => ['required', 'integer', 'unique_in_novel'],
+            'number' => ['required', 'integer'],
         ];
     }
 

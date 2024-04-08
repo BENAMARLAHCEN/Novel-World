@@ -55,7 +55,7 @@ class RoleController extends Controller
     {
         // request validation will be done here , request have role name and permissions
         $request->validate([
-            'name' => 'required|unique:roles,name,'.$id,
+            'name' => 'required',
             'permissions' => 'required|array',
             'permissions.*' => 'exists:permissions,id'
         ]);
