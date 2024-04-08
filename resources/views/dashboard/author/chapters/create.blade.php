@@ -40,7 +40,7 @@
                             <div class="form-group mt-3">
                                 <label class="form-label" for="content">Chapter Content</label>
                                 <div class="form-control-wrap">
-                                    <textarea class="tinymce-toolbar form-control" name="content">Hello, World!</textarea>
+                                    <textarea class="form-control" name="content" id="summernote">Hello, World!</textarea>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
@@ -54,11 +54,18 @@
     </div>
 @endsection
 # {{-- create new chapter with rich editor --}}
-
+<!-- include summernote css/js -->
 @section('scripts')
-<script src="https://cdn.tiny.cloud/1/9i7mbwmltamtcqoeu5uftdznmj73e2wjtrmyjl3b2a7i5l6f/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-@endsection
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script>
+    $(document).ready(function() {
+  $('#summernote').summernote({
+    height: 300
+  });
 
+});
+</script>
+@endsection
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/css/editors/tinymce.css?ver=3.2.3') }}">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endsection

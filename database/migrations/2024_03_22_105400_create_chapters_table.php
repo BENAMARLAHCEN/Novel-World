@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Novel::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title');
-            $table->text('content');
+            $table->mediumText('content');
             $table->integer('number');
             $table->enum('status', ['rejected', 'published','pending'])->default('pending');
             $table->integer('views')->default(0);

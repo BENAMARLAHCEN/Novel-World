@@ -38,7 +38,7 @@
                             <div class="form-group mt-3">
                                 <label class="form-label" for="content">Chapter Content</label>
                                 <div class="form-control-wrap">
-                                    <textarea class="tinymce-toolbar form-control" name="content">{{ $chapter->content }}</textarea>
+                                    <textarea class="form-control" id="summernote" name="content">{{ $chapter->content }}</textarea>
                                 </div>
                             </div>
 
@@ -51,5 +51,20 @@
             </div><!-- .nk-block -->
         </div><!-- .components-preview -->
     </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script>
+    $(document).ready(function() {
+  $('#summernote').summernote({
+    height: 300
+  });
+
+});
+</script>
+@endsection
+@section('style')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endsection
 

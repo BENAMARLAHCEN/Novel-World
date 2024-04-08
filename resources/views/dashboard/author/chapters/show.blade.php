@@ -1,7 +1,5 @@
 @extends('dashboard.layouts.app')
 
-@section('content')
-@extends('dashboard.layouts.app')
 
 @section('content')
 <div class="nk-content-body">
@@ -25,7 +23,7 @@
             <div class="card">
                 <div class="card-inner card-inner-xl">
                     <div class="entry">
-                        {{$chapter->content}}
+                        {!! $chapter->content !!}
                     </div>
                 </div><!-- .card-inner -->
             </div><!-- .card -->
