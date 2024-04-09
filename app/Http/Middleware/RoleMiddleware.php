@@ -19,7 +19,9 @@ class RoleMiddleware
         $role,
         $permission = null
     ): Response {
-        if (!$request->user()->hasRole($role)) {
+        $role = explode('|', $role);
+        
+        if (!$request->user()->hasRole(...$role)) {
             abort(404);
         }
         if ($permission !== null && !$request->user()->can($permission)) {

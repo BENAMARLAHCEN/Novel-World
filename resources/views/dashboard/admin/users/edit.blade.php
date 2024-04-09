@@ -1,6 +1,6 @@
 {{-- show user permission and block user permission input using select 2 --}}
 
-@extends('layouts.dashboard.admin.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
     <div class="nk-content-body">
@@ -9,7 +9,7 @@
                 <div class="nk-block-head-content">
                     <h2 class="nk-block-title fw-normal">Edit User</h2>
                     <div class="nk-block-des">
-                        <p>Edit the user ^permission for the system.</p>
+                        <p>Edit the user permission for the system.</p>
                     </div>
                 </div>
             </div><!-- .nk-block-head -->
@@ -71,8 +71,8 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                <div class="col-lg-12 mt-3">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2 justify">
                                         <li>
                                             <button type="submit" class="btn btn-lg btn-primary">Block Permission</button>
                                         </li>
@@ -83,9 +83,11 @@
                                     </ul>
                                 </div>
                             </form>
-
                         </div>
                     </div><!-- .nk-block -->
                 </div>
             </div>
-        @endsection
+        </div>
+    </div>
+@endsection
+

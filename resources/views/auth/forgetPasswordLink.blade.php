@@ -1,31 +1,65 @@
-@extends('auth.layout')
+@extends('layouts.auth')
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center w-full dark:bg-gray-950">
-        <div class="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md">
-            <h1 class="text-2xl font-bold text-center mb-4 dark:text-gray-200">Reset Password</h1>
+    <div class="card card-bordered">
+        <div class="card-inner card-inner-lg">
+            <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                    <h5 class="nk-block-title">Reset password</h5>
+                    <div class="nk-block-des">
+                        <p>Enter your email address and your new password.</p>
+                    </div>
+                </div>
+            </div>
             <form action="{{ route('password.reset') }}" method="POST">
                 @csrf
-                <input type="hidden" name="token" value="{{ $token}}">
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
-                    <input type="email" id="email" name="email" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="your@email.com" required>
-                    @error('email')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
+                <input type="hidden" name="token" value="{{ $token }}">
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="default-01">Email</label>
+                    </div>
+                    <div class="form-control-wrap">
+                        <input type="text" class="form-control form-control-lg
+                        @error('email')
+                            is-invalid
+                        @enderror
+                        " id="default-01"
+                            placeholder="Enter your email address" name="email">
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
-                    <input type="password" id="password" name="password" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter your new password" required>
-                    @error('password')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="password">Password</label>
+                    </div>
+                    <div class="form-control-wrap">
+                        <a href="#" class="form-icon form-icon-right password-switch lg" data-target="password">
+                            <em class="password-icon icon-show icon ni ni-eye"></em>
+                            <em class="password-icon icon-hide icon ni ni-eye-off"></em>
+                        </a>
+                        <input type="password" class="form-control form-control-lg
+                        @error('password')
+                            is-invalid
+                        @enderror
+                        " id="password" name="password"
+                            placeholder="Enter your password">
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirm Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Confirm your new password" required>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="password_confirmation">Confirm Password</label>
+                    </div>
+                    <div class="form-control-wrap">
+                        <input type="password" class="form-control form-control-lg
+                        @error('password')
+                            is-invalid
+                        @enderror
+                        " id="password_confirmation" name="password_confirmation"
+                            placeholder="Confirm your password">
+                    </div>
                 </div>
-                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Reset Password</button>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Reset password</button>
+                </div>
             </form>
         </div>
     </div>

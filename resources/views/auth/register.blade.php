@@ -1,56 +1,95 @@
-@extends('auth.layout')
+@extends('layouts.auth')
+
 @section('content')
-    <div class="min-h-screen flex items-center justify-center w-full dark:bg-gray-950">
-        <div class="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md" style="
-        min-width: 35%;
-    ">
-            <h1 class="text-2xl font-bold text-center mb-4 dark:text-gray-200">Welcome !</h1>
-            <form action="{{ route('register') }}" method="POST">
+    <div class="card card-bordered">
+        <div class="card-inner card-inner-lg">
+            <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                    <h4 class="nk-block-title">Register</h4>
+                    <div class="nk-block-des">
+                        <p>Create New Dashlite Account</p>
+                    </div>
+                </div>
+            </div>
+            <form action="{{ route('register') }}" method="post">
                 @csrf
-                <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
-                    <input type="text" id="name" name="name"
-                        class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        placeholder="Your Name" required>
-                    @error('name')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
+                <div class="form-group">
+                    <label class="form-label" for="name">Name</label>
+                    <div class="form-control-wrap">
+                        <input type="text" name="name" class="form-control form-control-lg
+                        @error('name')
+                            is-invalid
+                        @enderror
+                        " id="name"
+                            placeholder="Enter your name">
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email
-                        Address</label>
-                    <input type="email" id="email" name="email"
-                        class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        placeholder="your@email.com" required>
-                    @error('email')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <div class="form-control-wrap">
+                        <input type="text" class="form-control form-control-lg
+                        @error('email')
+                            is-invalid
+                        @enderror
+                        " id="email" name="email" placeholder="Enter your email address">
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <label for="password"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
-                    <input type="password" id="password" name="password"
-                        class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        placeholder="Enter your password" required>
-                    @error('password')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="form-control-wrap">
+                        <a href="#" class="form-icon form-icon-right password-switch lg" data-target="password">
+                            <em class="password-icon icon-show icon ni ni-eye"></em>
+                            <em class="password-icon icon-hide icon ni ni-eye-off"></em>
+                        </a>
+                        <input type="password" class="form-control form-control-lg
+                        @error('password')
+                            is-invalid
+                        @enderror
+                        " id="password" name="password"
+                            placeholder="Enter your password">
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <label for="password_confirmation"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirm Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation"
-                        class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        placeholder="Confirm your password" required>
+                <div class="form-group">
+                    <label class="form-label" for="password_confirmation">Confirm Password</label>
+                    <div class="form-control-wrap">
+                        <input type="password" class="form-control form-control-lg
+                        @error('password_confirmation')
+                            is-invalid
+                        @enderror
+                        " id="password_confirmation" name="password_confirmation"
+                            placeholder="Enter your password_confirmation">
+                    </div>
                 </div>
-                <div class="flex items-center justify-between mb-4">
-                    <a href="{{ route('login') }}"
-                        class="text-xs text-indigo-500 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">I
-                        have already Account!</a>
+                <div class="form-group">
+                    <div class="custom-control custom-control-xs custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="checkbox" required>
+                        <label class="custom-control-label" for="checkbox">I agree to Dashlite <a href="#">Privacy
+                                Policy</a> &amp; <a href="#"> Terms.</a></label>
+                    </div>
                 </div>
-                <button type="submit"
-                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Register</button>
+                </div>
             </form>
+            <div class="form-note-s2 text-center pt-4"> Already have an account? <a
+                    href="{{ route('login') }}"><strong>Sign in instead</strong></a>
+            </div>
+            <div class="text-center pt-4 pb-3">
+                <h6 class="overline-title overline-title-sap"><span>OR</span></h6>
+            </div>
+            <ul class="nav justify-center gx-8">
+                <li class="nav-item"><a class="link link-primary fw-normal py-2 px-3" href="#">Facebook</a></li>
+                <li class="nav-item"><a class="link link-primary fw-normal py-2 px-3" href="#">Google</a></li>
+            </ul>
         </div>
     </div>
 @endsection

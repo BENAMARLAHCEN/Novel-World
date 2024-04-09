@@ -35,7 +35,7 @@
                                 class="icon ni ni-thumbs-up"></em><span>Review</span> </a>
                     </li>
                     <li class="nav-item nav-item-trigger">
-                        <a href="#" class="btn btn-icon btn-trigger"><em class="icon ni ni-edit"></em></a>
+                        <a href="{{route('users.edit',$user->id)}}" class="btn btn-icon btn-trigger"><em class="icon ni ni-edit"></em></a>
                     </li>
                 </ul>
                 <div class="card-inner">

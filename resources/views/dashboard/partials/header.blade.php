@@ -50,7 +50,7 @@
                                 <div class="user-card">
                                     @if (auth()->user()->avatar)
                                         <div class="user-avatar bg-primary">
-                                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="">
+                                            <img src="{{ asset('storage/app/' . auth()->user()->avatar) }}" alt="">
                                         </div>
                                     @else
                                         <div class="user-avatar bg-primary">

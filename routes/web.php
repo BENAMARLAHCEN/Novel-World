@@ -105,7 +105,7 @@ Route::delete('/users/{id}',[UserController::class,'destroy'])->name('users.dest
 Route::get('/users/{id}',[UserController::class,'show'])->name('users.show')->middleware('auth','role:admin');
 Route::post('/users/{id}/toggle-admin',[UserController::class,'toggleAdmin'])->name('users.toggle-admin')->middleware('auth','role:admin');
 Route::post('/users/{id}/toggle-ban',[UserController::class,'toggleBan'])->name('users.toggle-ban')->middleware('auth','role:admin');
-Route::post('/users/{id}/block-permission',[UserController::class,'blockPermission'])->name('users.block-permission')->middleware('auth','role:admin');
+Route::post('/users/{id}/block-permission',[UserController::class,'blockPermission'])->name('users.block.permission')->middleware('auth','role:admin');
 
 // admin chapter routes
 
@@ -150,9 +150,9 @@ Route::delete('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterControlle
 
 // author profile routes
 
-Route::get('/dashboard/profile',[ProfileController::class,'profile'])->name('profile')->middleware('auth','role:author','role:admin');
-Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update')->middleware('auth','role:author','role:admin');
-Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password')->middleware('auth','role:author','role:admin');
-Route::put('/dashboard/profile/info',[ProfileController::class,'updateInfo'])->name('profile.info')->middleware('auth','role:author','role:admin');
-Route::put('/dashboard/profile/social',[ProfileController::class,'updateSocial'])->name('profile.social')->middleware('auth','role:author','role:admin');
-Route::delete('/dashboard/profile',[ProfileController::class,'deleteAccount'])->name('profile.delete')->middleware('auth','role:author','role:admin');
+Route::get('/dashboard/profile',[ProfileController::class,'profile'])->name('profile')->middleware('auth','role:admin|author');
+Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update')->middleware('auth','role:admin');
+Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password')->middleware('auth','role:admin');
+Route::put('/dashboard/profile/info',[ProfileController::class,'updateInfo'])->name('profile.info')->middleware('auth','role:admin');
+Route::put('/dashboard/profile/social',[ProfileController::class,'updateSocial'])->name('profile.social')->middleware('auth','role:admin');
+Route::delete('/dashboard/profile',[ProfileController::class,'deleteAccount'])->name('profile.delete')->middleware('auth','role:admin');

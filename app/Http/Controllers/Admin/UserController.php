@@ -52,11 +52,7 @@ class UserController extends Controller
         return view('dashboard.admin.users.show', compact('user'));
     }
 
-    public function store(StoreRequest $request)
-    {
-        $this->userService->createUser($request);
-        return redirect()->route('dashboard.admin.users.index')->with('success', 'User created successfully');
-    }
+
 
     public function edit($id)
     {
@@ -64,16 +60,7 @@ class UserController extends Controller
         return view('dashboard.admin.users.edit', compact('user'));
     }
 
-    public function update(UpdateRequest $request, $id)
-    {
-        $this->userService->updateUser($request, $id);
-    }
-
-    public function destroy($id)
-    {
-        $this->userService->deleteUser($id);
-    }
-
+   
     public function toggleAdmin($id)
     {
         $this->userService->toggleAdmin($id);

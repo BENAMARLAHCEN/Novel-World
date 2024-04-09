@@ -1,22 +1,38 @@
-@extends('auth.layout')
+@extends('layouts.auth')
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center w-full dark:bg-gray-950">
-        <div class="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md" style="
-        min-width: 35%;
-    ">
-            <h1 class="text-2xl font-bold text-center mb-4 dark:text-gray-200">Forgot Password</h1>
+    <div class="card card-bordered">
+        <div class="card-inner card-inner-lg">
+            <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                    <h5 class="nk-block-title">Reset password</h5>
+                    <div class="nk-block-des">
+                        <p>If you forgot your password, well, then we’ll email you instructions to reset your password.</p>
+                    </div>
+                </div>
+            </div>
             <form action="{{ route('forgot-password') }}" method="POST">
                 @csrf
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
-                    <input type="email" id="email" name="email" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="your@email.com" required>
-                    @error('email')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="default-01">Email</label>
+                    </div>
+                    <div class="form-control-wrap">
+                        <input type="text" class="form-control form-control-lg
+                        @error('email')
+                            is-invalid
+                        @enderror
+                        " id="default-01"
+                            placeholder="Enter your email address" name="email">
+                    </div>
                 </div>
-                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Send Password Reset Link</button>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Send Reset Link</button>
+                </div>
             </form>
+            <div class="form-note-s2 text-center pt-4">
+                <a href="{{ route('login') }}">Back to login</a>
+            </div>
         </div>
     </div>
 @endsection

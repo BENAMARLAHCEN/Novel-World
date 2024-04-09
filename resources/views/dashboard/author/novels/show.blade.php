@@ -34,9 +34,8 @@
             <div class="col-lg-3 col-md-4">
                 <div class="card product-card">
                     <div class="product-thumb">
-                        <img class="card-img-top"
-                            src="https://alphanovel.io/_next/image?url=https%3A%2F%2Fcdn.alphanovel.io%2Fbook-cover%2F030IHrSLT57KuqXrH8gS%2Ff26f1f52-2abd-49da-aec5-9f26af008a86_compressed.jpeg&w=640&q=75"
-                            alt="">
+                        <img class="card-img-top" src="{{ asset('storage/app/') }}{{$novel->cover}}" alt="">
+
                         <ul class="product-badges">
                             <li><span class="badge badge-primary">Ongoing</span></li>
                         </ul>
