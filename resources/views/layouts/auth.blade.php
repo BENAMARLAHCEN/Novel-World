@@ -19,7 +19,8 @@
 </head>
 
 <body class="nk-body npc-default pg-auth">
-    <x-success-message />
+    <x-notification-message type="success" />
+    <x-notification-message type="error" />
     <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">

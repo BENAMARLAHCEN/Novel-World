@@ -24,6 +24,8 @@ class ProfileController extends Controller
         return view('dashboard.profile');
     }
 
+    
+
 //     Route::get('/dashboard/profile',[ProfileController::class,'profile'])->name('profile');
 // Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update');
 // Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password');

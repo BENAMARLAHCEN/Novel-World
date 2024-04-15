@@ -19,7 +19,8 @@
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar ">
-    <x-success-message />
+    <x-notification-message type="success" />
+    <x-notification-message type="error" />
  
     <div class="nk-app-root">
         <!-- main @s -->
@@ -62,7 +63,6 @@
     <!-- JavaScript -->
     <script src="{{ asset('assets/js/bundle.js?ver=3.2.3') }}"></script>
     <script src="{{ asset('assets/js/scripts.js?ver=3.2.3') }}"></script>
-    <script src="{{ asset('assets/js/charts/chart-ecommerce.js?ver=3.2.3') }}"></script>
     <script src="{{ asset('./assets/js/sweetalert.js?ver=3.2.3') }}"></script>
     <!-- Dark Mode -->
     <script src="{{ asset('assets/js/dark-switch.js?ver=3.2.3') }}"></script>
