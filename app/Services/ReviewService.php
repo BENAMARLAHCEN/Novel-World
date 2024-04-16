@@ -76,5 +76,10 @@ class ReviewService
     {
         return $this->ReviewRepository->getReviewByNovelId($novelId);
     }
+
+    public function randomReviews(int $limit)
+    {
+        return $this->ReviewRepository->randomReviews($limit);
+    }
     
 }

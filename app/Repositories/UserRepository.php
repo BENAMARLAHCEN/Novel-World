@@ -55,5 +55,13 @@ class UserRepository implements IUserRepository
         return User::paginate($perPage);
     }
 
-
+    public function countOf($role = null)
+    {
+        if ($role) {
+            return User::whereHas('roles', function ($query) use ($role) {
+                $query->where('name', $role);
+            })->count();
+        }
+        return User::count();
+    }
 }

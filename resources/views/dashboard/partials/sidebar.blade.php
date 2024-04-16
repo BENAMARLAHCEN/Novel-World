@@ -8,12 +8,12 @@
                 {{ route('author.dashboard') }} @endif
             "
                 class="logo-link nk-sidebar-logo">
-                <img class="logo-light logo-img" src="{{ asset('images/logo.png') }}"
-                    srcset="{{ asset('images/logo2x.png') }} 2x" alt="logo">
-                <img class="logo-dark logo-img" src="{{ asset('images/logo-dark.png') }}"
-                    srcset="{{ asset('images/logo-dark2x.png') }} 2x" alt="logo-dark">
-                <img class="logo-small logo-img logo-img-small" src="{{ asset('images/logo-small.png') }}"
-                    srcset="{{ asset('images/logo-small2x.png') }} 2x" alt="logo-small">
+                <img class="logo-light logo-img" src="{{ asset('images/logo.svg') }}"
+                    srcset="{{ asset('images/logo2x.svg') }} 2x" alt="logo">
+                <img class="logo-dark logo-img" src="{{ asset('images/logo-dark.svg') }}"
+                    srcset="{{ asset('images/logo-dark2x.svg') }} 2x" alt="logo-dark">
+                <img class="logo-small logo-img logo-img-small" src="{{ asset('images/logo-small.svg') }}"
+                    srcset="{{ asset('images/logo-small2x.svg') }} 2x" alt="logo-small">
             </a>
         </div>
         <div class="nk-menu-trigger me-n2">

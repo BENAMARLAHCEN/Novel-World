@@ -55,4 +55,9 @@ class ChapterRepository implements IChapterRepository
     {
         return Chapter::where('novel_id', $novelId)->get();
     }
+
+    public function getViewsCount($status = 'published')
+    {
+        return Chapter::where('status', $status)->sum('views');
+    }
 }

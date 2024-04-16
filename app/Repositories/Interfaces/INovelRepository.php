@@ -25,4 +25,10 @@ interface INovelRepository
     public function getGenres();
     public function getRankings();
 
+    // home page methods
+
+    public function getOngoingNovels();
+    public function getCompletedNovels();
+    public function getTopNovels();
+
 }

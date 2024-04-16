@@ -15841,43 +15841,43 @@ svg {
   margin-top: 0;
 }
 
-.badge-dot.badge-primary {
+.badge-primary {
   color: #6576ff;
 }
 
-.badge-dot.badge-secondary {
+.badge-secondary {
   color: #364a63;
 }
 
-.badge-dot.badge-success {
+.badge-success {
   color: #1ee0ac;
 }
 
-.badge-dot.badge-info {
+.badge-info {
   color: #09c2de;
 }
 
-.badge-dot.badge-warning {
+.badge-warning {
   color: #f4bd0e;
 }
 
-.badge-dot.badge-danger {
+.badge-danger {
   color: #e85347;
 }
 
-.badge-dot.badge-light {
+.badge-light {
   color: #b7c2d0;
 }
 
-.badge-dot.badge-dark {
+.badge-dark {
   color: #1c2b46;
 }
 
-.badge-dot.badge-gray {
+.badge-gray {
   color: #8091a7;
 }
 
-.badge-dot.badge-lighter {
+.badge-lighter {
   color: #e5e9f2;
 }
 
@@ -31401,3 +31401,20 @@ body.dark-mode {
   right: calc(2px + .125rem);
   background-color: #fff;
 }
+
+.user-avatar,
+                                            [class^=user-avatar]:not([class*=-group]) {
+                                                border-radius: 50%;
+                                                height: 40px;
+                                                width: 40px;
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                color: #fff;
+                                                background: #798bff;
+                                                font-size: 14px;
+                                                font-weight: 500;
+                                                letter-spacing: 0.06em;
+                                                flex-shrink: 0;
+                                                position: relative;
+                                            }

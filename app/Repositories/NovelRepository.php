@@ -25,7 +25,7 @@ class NovelRepository implements INovelRepository
     public function paginate(int $perPage = 10, $is_public = null, $authorId = null)
     {
         $query = Novel::query();
-            $query->where('is_public', $is_public);
+        $query->where('is_public', $is_public);
         if ($authorId) {
             $query->where('user_id', $authorId);
         }
@@ -82,14 +82,14 @@ class NovelRepository implements INovelRepository
         $novel->genres()->attach($genres);
     }
 
-    public function getAuthorNovels(int $authorId,$perPage = null)
+    public function getAuthorNovels(int $authorId, $perPage = null)
     {
         if ($perPage) {
             return Novel::where('user_id', $authorId)->paginate($perPage);
         }
         return Novel::where('user_id', $authorId)->get();
     }
-   
+
     public function trash(int $authorId = null)
     {
         if ($authorId) {
@@ -117,4 +117,24 @@ class NovelRepository implements INovelRepository
     {
         return Ranking::all();
     }
+
+    public function getOngoingNovels()
+    {
+        return Novel::where('status', 'ongoing')
+        ->where('is_public', 1)
+        ->latest()->limit(12)->get();
+    }
+
+    public function getCompletedNovels()
+    {
+        return Novel::where('status', 'completed')->where('is_public', 1)->inRandomOrder()->limit(12)->get();
+    }
+
+    public function getTopNovels()
+    {
+        return Novel::where('is_public', 1)->whereHas('chapters', function ($query) {
+            $query->where('status', 'published');
+        })->withCount('chapters')->orderBy('chapters_count', 'desc')->limit(2)->get();
+    }
+    
 }

@@ -125,4 +125,27 @@ class NovelService
         return $this->novelRepository->update($id, ['is_public' => 0]);
     }
 
+    public function getOngoingNovels()
+    {
+        return $this->novelRepository->getOngoingNovels();
+    }
+
+    public function getCompletedNovels()
+    {
+        return $this->novelRepository->getCompletedNovels();
+    }
+
+    public function getTopNovels()
+    {
+        return $this->novelRepository->getTopNovels();
+    }
+
+    public function getNovelsCount()
+    {
+        return $this->getAdminNovels('1')->total();
+    }
+
+    
+    
+
 }

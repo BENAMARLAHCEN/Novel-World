@@ -246,4 +246,9 @@ class UserService
         return redirect()->route('users.index')->with('success', 'Permission revoked successfully');
     }
 
+
+    public function getCount($users)
+    {
+        return $this->userRepository->countOf($users);
+    }
 }

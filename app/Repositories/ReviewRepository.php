@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Review; 
 use App\Repositories\Interfaces\IReviewRepository;
 
-class ReviewRepository extends IReviewRepository 
+class ReviewRepository implements IReviewRepository 
 { 
     
     public function all()
@@ -36,5 +36,10 @@ class ReviewRepository extends IReviewRepository
     public function delete(int $id)
     {
         return Review::destroy($id);
+    }
+
+    public function randomReviews(int $limit)
+    {
+        return Review::inRandomOrder()->limit($limit)->get();
     }
 }

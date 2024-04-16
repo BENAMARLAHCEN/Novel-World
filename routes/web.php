@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\VerifyController;
 use App\Http\Controllers\Author\ChapterController as AuthorChapterController;
 use App\Http\Controllers\Author\DashboardController;
 use App\Http\Controllers\Author\NovelController as AuthorNovelController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +29,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('home');
-});
+});*/
+Route::get('/', [HomeController::class, 'home'])->name('home');
+
 
 
 Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic');

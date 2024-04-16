@@ -335,20 +335,7 @@
     });
   };
 
-  // Dark Mode Switch @since v2.0
-  NioApp.ModeSwitch = function () {
-    var toggle = $('.dark-switch');
-    if ($body.hasClass('dark-mode')) {
-      toggle.addClass('active');
-    } else {
-      toggle.removeClass('active');
-    }
-    toggle.on('click', function (e) {
-      e.preventDefault();
-      $(this).toggleClass('active');
-      $body.toggleClass('dark-mode');
-    });
-  };
+
   NioApp.Select2.init = function () {
     // NioApp.Select2('.select');
     NioApp.Select2('.form-select');

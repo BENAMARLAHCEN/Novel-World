@@ -30,7 +30,7 @@
                     <div class="container header-container">
                         <div class="header-wrap">
                             <div class="header-logo">
-                                <a href="html/index.html" class="logo-link">
+                                <a href="/" class="logo-link">
                                     <img class="logo-light logo-img" src="./images/logo.svg"
                                         srcset="./images/logo2x.svg 2x" alt="logo">
                                     <img class="logo-dark logo-img" src="./images/logo-dark.svg"
@@ -47,18 +47,17 @@
                                 <nav class="header-menu" data-content="mainNav">
                                     <ul class="menu-list ms-lg-auto">
                                         <li class="menu-item"><a href="#home" class="menu-link nav-link">Home</a></li>
-                                        <li class="menu-item"><a href="#service" class="menu-link nav-link">Service</a>
+                                        <li class="menu-item"><a href="/update" class="menu-link nav-link">Update</a></li>
+                                        <li class="menu-item"><a href="/filter" class="menu-link nav-link">Filter</a></li>
+                                        <li class="menu-item"><a href="#service" class="menu-link nav-link">Novel</a>
                                         </li>
                                         <li class="menu-item"><a href="#reviews" class="menu-link nav-link">Reviews</a>
-                                        </li>
-                                        <li class="menu-item"><a href="#feature" class="menu-link nav-link">Features</a>
                                         </li>
                                         <li class="menu-item"><a href="#faqs" class="menu-link nav-link">Faqs</a></li>
                                     </ul>
                                     <ul class="menu-btns">
                                         <li>
-                                            <a href="/login" target="_blank" class="btn btn-primary btn-lg">Download
-                                                the app</a>
+                                            <a href="/login"  class="btn btn-primary btn-lg">Login</a>
                                         </li>
                                     </ul>
                                 </nav><!-- .nk-nav-menu -->
@@ -108,11 +107,11 @@
                     <div class="row g-3 align-items-center justify-content-md-between py-4 py-md-5">
                         <div class="col-md-3">
                             <div class="footer-logo">
-                                <a href="html/index.html" class="logo-link">
-                                    <img class="logo-light logo-img" src="./images/logo.png"
-                                        srcset="./images/logo2x.png 2x" alt="logo">
-                                    <img class="logo-dark logo-img" src="./images/logo-dark.png"
-                                        srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                                <a href="/" class="logo-link">
+                                    <img class="logo-light logo-img" src="./images/logo.svg"
+                                        srcset="./images/logo2x.svg 2x" alt="logo">
+                                    <img class="logo-dark logo-img" src="./images/logo-dark.svg"
+                                        srcset="./images/logo-dark2x.svg 2x" alt="logo-dark">
                                 </a>
                             </div><!-- .footer-logo -->
                         </div><!-- .col -->
@@ -128,15 +127,15 @@
                     <hr class="hr border-light mb-0 mt-n1">
                     <div class="row g-3 align-items-center justify-content-md-between py-4">
                         <div class="col-md-8">
-                            <div class="text-base">Copyright &copy; 2023 Dashlite. Template Made by <a
-                                    class="text-base fw-bold" href="#">Softnio</a></div>
+                            <div class="text-base">Copyright &copy; World Novel 2024 - All Rights Reserved, Developed
+                                by <a href="https://github.com/BENAMARLAHCEN/Novel-World" target="_blank">Lahcen</a></div>
                         </div><!-- .col -->
                         <div class="col-md-4 d-flex justify-content-md-end">
                             <ul class="social">
-                                <li><a href="#"><em class="icon ni ni-twitter"></em></a></li>
-                                <li><a href="#"><em class="icon ni ni-facebook-f"></em></a></li>
-                                <li><a href="#"><em class="icon ni ni-instagram"></em></a></li>
-                                <li><a href="#"><em class="icon ni ni-pinterest"></em></a></li>
+                                <li><a href="https://www.facebook.com/lahcen.benamar.5494/"><em class="icon ni ni-facebook-f"></em></a></li>
+                                <li><a href="https://github.com/BENAMARLAHCEN"><em class="icon ni ni-github"></em></a></li>
+                                <li><a href="https://www.linkedin.com/in/lahcen-ben-amar-6203b4153/"><em class="icon ni ni-linkedin"></em></a></li>
+
                             </ul><!-- .footer-icon -->
                         </div><!-- .col -->
                     </div><!-- .row -->

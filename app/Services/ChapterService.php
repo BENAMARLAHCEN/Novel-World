@@ -65,4 +65,9 @@ class ChapterService
     {
         return $this->chapterRepository->delete($id);
     }
+
+    public function getViewsCount()
+    {
+        return $this->chapterRepository->getViewsCount('published');
+    }
 }
