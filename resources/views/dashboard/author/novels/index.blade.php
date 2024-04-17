@@ -142,6 +142,9 @@
                 </tbody>
             </table>
         </div><!-- .nk-block -->
+        <div>
+            {{ $novels->links('pagination::bootstrap-5') }}
+        </div>
         <div class="card">
             <div class="card-inner">
                 <div class="d-sm-flex justify-content-between align-center">

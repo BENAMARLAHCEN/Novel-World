@@ -104,6 +104,7 @@
             const status = document.getElementById('status');
             const search = document.getElementById('searchBtn');
             var paginage = 1;
+            fetchNovels();
 
 
             search.addEventListener('click', function() {
