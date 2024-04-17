@@ -47,7 +47,7 @@
                                 <nav class="header-menu" data-content="mainNav">
                                     <ul class="menu-list ms-lg-auto">
                                         <li class="menu-item"><a href="#home" class="menu-link nav-link">Home</a></li>
-                                        <li class="menu-item"><a href="/update" class="menu-link nav-link">Update</a></li>
+                                        <li class="menu-item"><a href="/updates" class="menu-link nav-link">Update</a></li>
                                         <li class="menu-item"><a href="/filter" class="menu-link nav-link">Filter</a></li>
                                         <li class="menu-item"><a href="#service" class="menu-link nav-link">Novel</a>
                                         </li>

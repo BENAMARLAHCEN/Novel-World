@@ -70,4 +70,29 @@ class ChapterService
     {
         return $this->chapterRepository->getViewsCount('published');
     }
+
+    public function getChaptersByNovel(int $novelId)
+    {
+        return $this->chapterRepository->getChaptersByNovelId($novelId);
+    }
+
+    public function getChapterByNumber(int $novelId, int $number)
+    {
+        return $this->chapterRepository->getChapterByNumber($novelId, $number);
+    }
+    public function incrementViews(int $id)
+    {
+        return $this->chapterRepository->update($id, ['views' => $this->chapterRepository->findById($id)->views + 1]);
+    }
+
+    public function getNextChapter(int $novelId, int $number)
+    {
+        return $this->chapterRepository->getNextChapter($novelId, $number);
+    }
+
+    public function getPreviousChapter(int $novelId, int $number)
+    {
+        return $this->chapterRepository->getPreviousChapter($novelId, $number);
+    }
+
 }

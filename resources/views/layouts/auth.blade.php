@@ -62,6 +62,20 @@
     <script src="{{ asset('./assets/js/sweetalert.js?ver=3.2.3') }}"></script>
     @yield('scripts')
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function switchDarkMode() {
+                if (localStorage.getItem("darkMode") === 'true') {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+            }
+
+            switchDarkMode();
+        });
+
+    </script>
 </body>
 
 </html>

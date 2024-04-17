@@ -34,7 +34,7 @@
             <div class="col-lg-3 col-md-4">
                 <div class="card product-card">
                     <div class="product-thumb">
-                        <img class="card-img-top" src="{{ asset('storage/app/') }}{{$novel->cover}}" alt="">
+                        <img class="card-img-top" src="{{ $novel->cover }}" alt="">
 
                         <ul class="product-badges">
                             <li><span class="badge badge-primary">Ongoing</span></li>

@@ -41,8 +41,9 @@ class NovelService
         unset($attributes['genres']);
         // store novel cover image
         if ($request->hasFile('cover')) {
-            
-            $attributes['cover'] = $request->file('cover')->store('novels');
+            $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
+            $request->file('cover')->move(storage_path('novels'), $fileName);
+            $attributes['cover'] = "novels/".$fileName;
         }
 
         $novel = $this->novelRepository->create($attributes);
@@ -60,12 +61,16 @@ class NovelService
         $genres = $attributes['genres'];
         unset($attributes['genres']);
         // update novel cover image
+      
         if ($request->hasFile('cover')) {
-            $attributes['cover'] = $request->file('cover')->store('novels');
+            $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
+            $request->file('cover')->storeAs('novels', $fileName);
+            
+            $attributes['cover'] = $fileName;
             // delete old cover image
             $oldCover = $this->novelRepository->findById($id)->cover;
             if ($oldCover) {
-                Storage::delete($oldCover);
+                Storage::delete(storage_path('novels/' . $oldCover));
             }
         }
 
@@ -145,7 +150,21 @@ class NovelService
         return $this->getAdminNovels('1')->total();
     }
 
+    public function search($request)
+    {
+        $attributes = $request->validated();
+        return $this->novelRepository->search($attributes);
+    }
+
+    public function getNovelBySlug(string $slug)
+    {
+        return $this->novelRepository->findBySlug($slug);
+    }
     
+    public function getNovelsWithLatestChapter()
+    {
+        return $this->novelRepository->getNovelsWithLatestChapter();
+    }
     
 
 }

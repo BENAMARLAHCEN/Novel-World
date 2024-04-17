@@ -38,38 +38,37 @@ class HomeController extends Controller
         return view('home', compact('ongoing', 'completed', 'topNovels', 'reviews', 'authorsCount', 'novelsCount', 'viewsCount'));
     }
 
-    public function index()
-    {
-        $novels = $this->novelService->getNovelsByLatestChapter();
-        $chapters = $this->chapterService->getTopChapters();
-        $gener = $this->generService->getGenresByNovelCount();
-        $reviews = $this->reviewService->randomReviews();
-
-        $topNovels = $this->novelService->getTopNovels();
-        $authors = $this->userService->getTopAuthors();
-
-        return view('home', compact('novels', 'chapters', 'gener', 'reviews', 'users'));
+    public function updates(){
+        // get all novels with their latest chapter and paginate order by latest chapter
+        $novels = $this->novelService->getNovelsWithLatestChapter();
+        return view('updates', compact('novels'));
     }
+        
 
-    public function search(Request $request)
-    {
-        $novels = $this->novelService->search($request);
-        return view('search', compact('novels'));
-    }
 
     public function novel($slug)
     {
         $novel = $this->novelService->getNovelBySlug($slug);
         $chapters = $this->chapterService->getChaptersByNovel($novel->id);
-        $reviews = $this->reviewService->getReviewsByNovel($novel->id);
+        $reviews = $novel->reviews;
         return view('novel', compact('novel', 'chapters', 'reviews'));
     }
 
-    public function chapter($slug)
+    public function chapter($slug, $number)
     {
-        $chapter = $this->chapterService->getChapterBySlug($slug);
-        return view('chapter', compact('chapter'));
+        $novel = $this->novelService->getNovelBySlug($slug);
+        if($novel){
+            $chapter = $this->chapterService->getChapterByNumber($novel->id, $number);
+            $this->chapterService->incrementViews($chapter->id);
+            $nextChapter = $this->chapterService->getNextChapter($novel->id, $number);
+            $previousChapter = $this->chapterService->getPreviousChapter($novel->id, $number);
+            return view('read', compact('chapter' , 'novel', 'nextChapter', 'previousChapter'));
+        }
+        return redirect()->back()->with('error', 'Chapter not found');
     }
+
+
+        
 
 
 }

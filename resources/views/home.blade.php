@@ -50,8 +50,8 @@
 
                     @foreach ($ongoing as $novel)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 ">
-                            {{-- novel card --}}
-                            <div>
+                            {{-- novel card 
+                            <a href="{{ route('novel.show',$novel->slug) }}" >                             
                                 <div>
                                     <img src="{{ asset('images/novel.webp') }}" alt="novel" class="img-fluid rounded">
                                 </div>
@@ -59,14 +59,15 @@
                                     <div class="title text-truncate h4">{{ $novel->title }}</div>
                                     <div class="overflow-hidden">
                                         <div class="">
-                                            <em class="icon ni ni-book-read"></em> {{ $novel->chapters->count() }} Chapters
+                                            <em class="icon ni ni-book-read"></em> {{ $novel->chapters->where('status','published')->count() }} Chapters
                                         </div>
                                         <div class="">
                                             <em class="icon ni ni-eye"></em> {{ $novel->chapters->sum('views') }} Views
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>--}}
+                            <x-novel-card :novel="$novel" />
                         </div><!-- .col -->
                     @endforeach
 
@@ -91,22 +92,7 @@
                     @foreach ($completed as $novel)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 ">
                             {{-- novel card --}}
-                            <div>
-                                <div>
-                                    <img src="{{ asset('images/novel.webp') }}" alt="novel" class="img-fluid rounded">
-                                </div>
-                                <div class="">
-                                    <div class="title text-truncate h4">{{ $novel->title }}</div>
-                                    <div class="overflow-hidden">
-                                        <div class="">
-                                            <em class="icon ni ni-book-read"></em> {{ $novel->chapters->count() }} Chapters
-                                        </div>
-                                        <div class="">
-                                            <em class="icon ni ni-eye"></em> {{ $novel->chapters->sum('views') }} Views
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <x-novel-card :novel="$novel" />
                         </div><!-- .col -->
                     @endforeach
 
@@ -217,7 +203,8 @@
                             </div>
                         </div>
                         <ul class="btns-inline">
-                            <li><a href="#" class="btn btn-lg btn-primary">Read Now</a></li>
+                            <li><a href="{{ route('novel.show', $topNovels[0]->slug) }}"
+                                    class="btn btn-lg btn-primary">Read Now</a></li>
                         </ul>
                     </div><!-- .text-block -->
                 </div><!-- .col -->
@@ -265,7 +252,8 @@
                             </div>
                         </div>
                         <ul class="btns-inline">
-                            <li><a href="#" class="btn btn-lg btn-primary">Read Now</a></li>
+                            <li><a href="{{ route('novel.show', $topNovels[1]->slug) }}"
+                                class="btn btn-lg btn-primary">Read Now</a></li>
                         </ul>
                     </div><!-- .text-block -->
                 </div><!-- .col -->
@@ -493,7 +481,7 @@
                                                     body: JSON.stringify(data)
                                                 }).then(response => {
                                                     console.log(response);
-                                                    if (response.ok) {
+                                                    if (response.success) {
                                                         alert('Question sent successfully');
                                                     } else {
                                                         if (response.errors) {

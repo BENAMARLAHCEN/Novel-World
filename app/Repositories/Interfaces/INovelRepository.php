@@ -31,4 +31,10 @@ interface INovelRepository
     public function getCompletedNovels();
     public function getTopNovels();
 
+    public function search($data, $perPage = 10);
+    public function findBySlug($slug);
+
+    public function getNovelsWithLatestChapter($perPage = 10);
+    public function getNovelsWithMostViews($perPage = 10);
+
 }

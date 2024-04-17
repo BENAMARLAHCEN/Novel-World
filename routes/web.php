@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\VerifyController;
 use App\Http\Controllers\Author\ChapterController as AuthorChapterController;
 use App\Http\Controllers\Author\DashboardController;
 use App\Http\Controllers\Author\NovelController as AuthorNovelController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticController;
@@ -34,6 +35,10 @@ Route::get('/', function () {
     return view('home');
 });*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
+Route::get('/novel/{slug}', [HomeController::class, 'novel'])->name('novel.show');
+Route::get('/novel/{slug}/{number}', [HomeController::class, 'chapter'])->name('chapter.show');
+Route::get('/updates',[HomeController::class,'updates'])->name('updates');
 
 
 

@@ -3,7 +3,7 @@
 @if ($message = Session::get($type))
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            NioApp.Toast('{{ $message }}', 'success');
+            NioApp.Toast('{{ $message }}', '{{$type}}');
         });
     </script>
 @endif

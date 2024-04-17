@@ -17,4 +17,15 @@ interface IChapterRepository
     public function delete(int $id);
 
     public function getNovelChapters(int $novelId);
+
+    public function getChaptersByNovelId(int $novelId);
+
+    public function getViewsCount($status = 'published');
+
+    public function getChapterByNumber(int $novelId, int $chapterNumber);
+
+    public function getNextChapter(int $novelId, int $chapterNumber);
+
+    public function getPreviousChapter(int $novelId, int $chapterNumber);
+
 }
