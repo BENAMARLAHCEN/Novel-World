@@ -31418,3 +31418,201 @@ body.dark-mode {
                                                 flex-shrink: 0;
                                                 position: relative;
                                             }
+
+                            .custom-control-group {
+                                display: inline-flex;
+                                align-items: center;
+                                flex-wrap: wrap;
+                                margin: -0.375rem;
+                            }
+
+                            .custom-control-group>* {
+                                padding: 0.375rem;
+                            }
+
+                            .custom-control {
+                                position: relative;
+                                z-index: 1;
+                                display: inline-flex;
+                                min-height: 1.5rem;
+                                padding-left: 2.25rem;
+                            }
+
+                            .custom-control-input {
+                                position: absolute;
+                                left: 0;
+                                z-index: -1;
+                                width: 1.5rem;
+                                height: 1.471875rem;
+                                opacity: 0;
+                            }
+
+                            .custom-control-input:checked~.custom-control-label::before {
+                                color: #fff;
+                                border-color: #854fff;
+                                background-color: #854fff;
+                                box-shadow: none;
+                            }
+
+                            .custom-control-input:focus~.custom-control-label::before {
+                                box-shadow: 0 0 0 3px rgba(133, 79, 255, 0.1);
+                            }
+
+                            .custom-control-input:focus:not(:checked)~.custom-control-label::before {
+                                border-color: #854fff;
+                            }
+
+                            .custom-control-input:not(:disabled):active~.custom-control-label::before {
+                                color: #fff;
+                                background-color: #854fff;
+                                border-color: #854fff;
+                                box-shadow: none;
+                            }
+
+                            .custom-control-input[disabled]~.custom-control-label,
+                            .custom-control-input:disabled~.custom-control-label {
+                                color: #3c4d62;
+                            }
+
+                            .custom-control-label {
+                                position: relative;
+                                margin-bottom: 0;
+                                vertical-align: top;
+                            }
+
+                            .custom-control-label:before,
+                            .custom-control-label:after {
+                                z-index: 1;
+                            }
+
+                           
+
+
+                            .custom-control {
+                                display: inline-flex;
+                                min-height: 1.5rem;
+                            }
+
+                            .custom-control-label {
+                                font-size: 14px;
+                                line-height: 1.25rem;
+                                padding-top: 0.125rem;
+                            }
+
+                            .custom-control-label::before,
+                            .custom-control-label::after {
+                                top: 0;
+                            }
+
+                            .custom-control-label:after {
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                background-image: none !important;
+                                font-family: "Nioicon";
+                                color: #fff;
+                                opacity: 0;
+                            }
+
+                            .custom-checkbox .custom-control-label:after {
+                                content: "\e9bd";
+                            }
+
+                            .custom-radio .custom-control-label:after {
+                                content: "\e980";
+                            }
+
+                            .custom-control .custom-control-input:checked~.custom-control-label::after {
+                                opacity: 1;
+                            }
+
+                            .custom-control .custom-control-input[disabled]~.custom-control-label,
+                            .custom-control .custom-control-input:disabled~.custom-control-label {
+                                opacity: 0.7;
+                                color: #364a63;
+                            }
+
+                            .custom-control-pro {
+                                padding-left: 0;
+                                position: relative;
+                            }
+
+                            .custom-control-pro.no-control.checked {
+                                z-index: 3;
+                            }
+
+                            .custom-control-pro.no-control.focused {
+                                z-index: 2;
+                            }
+
+                            .custom-control-pro.no-control .custom-control-label {
+                                padding: 0.375rem 1.125rem;
+                                border-width: 2px;
+                            }
+
+                            .custom-control-pro.no-control .custom-control-input:checked~.custom-control-label {
+                                border-color: #854fff;
+                                box-shadow: none;
+                                z-index: 2;
+                            }
+
+                            .custom-control-pro.no-control .custom-control-input:not(:disabled):active~.custom-control-label {
+                                border-color: #854fff;
+                                box-shadow: none;
+                            }
+
+                            .custom-control-pro.no-control .custom-control-input[disabled]~.custom-control-label,
+                            .custom-control-pro.no-control .custom-control-input:disabled~.custom-control-label {
+                                color: #3c4d62;
+                            }
+
+                            .custom-control-pro .custom-control-label {
+                                border: 1px solid #e5e9f2;
+                                padding: 1.125rem 1.125rem 1.125rem 3.375rem;
+                                font-size: 13px;
+                                line-height: 1.25rem;
+                                border-radius: 4px;
+                                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                                display: inline-flex;
+                                align-items: center;
+                                background-color: #fff;
+                            }
+
+                            .custom-control-pro .custom-control-label::before,
+                            .custom-control-pro .custom-control-label::after {
+                                top: 50%;
+                                transform: translateY(-50%);
+                                left: 1.125rem;
+                            }
+
+                            .custom-control-pro .custom-control-label .icon {
+                                font-size: 1.4em;
+                                line-height: inherit;
+                            }
+
+                            .custom-control-pro .custom-control-label .icon-lg {
+                                font-size: 2.2em;
+                            }
+
+                            .custom-control-pro .custom-control-label>span {
+                                white-space: nowrap;
+                            }
+
+                            .custom-control-pro .custom-control-label>span:only-child {
+                                width: 100%;
+                            }
+
+                            .custom-control-pro .custom-control-label .icon+span,
+                            .custom-control-pro .custom-control-label span+.icon {
+                                padding-left: 8px;
+                            }
+
+                            .custom-control-pro-icon.custom-control-pro .custom-control-label {
+                                padding-left: 0;
+                                padding-right: 0;
+                            }
+
+                            .custom-control-pro-icon.custom-control-pro .custom-control-label .icon {
+                                text-align: center;
+                                width: 2.125rem;
+                            }

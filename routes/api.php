@@ -23,4 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/question', [QuestionController::class, 'sendQuestion']);
 
 
-Route::post('/filter', [FilterController::class, 'search']);
+Route::get('/filter', [FilterController::class, 'search']);
