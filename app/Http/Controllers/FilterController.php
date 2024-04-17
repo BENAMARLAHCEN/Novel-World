@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FilterRequest;
 use App\Services\ChapterService;
 use App\Services\GenreService;
 use App\Services\NovelService;
@@ -22,11 +23,11 @@ class FilterController extends Controller
 
     public function filter(Request $request)
     {
-        $geners = $this->generService->all();
-        return view('filter');
+        $genres = $this->generService->all();
+        return view('filter', compact('genres'));
     }
 
-    public function search(Request $request)
+    public function search(FilterRequest $request)
     {
         $novels = $this->novelService->search($request);
         return view('search', compact('novels'));

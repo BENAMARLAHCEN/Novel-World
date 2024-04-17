@@ -140,19 +140,18 @@ class NovelRepository implements INovelRepository
     public function search($data, $perPage = 10)
     {
         $query = Novel::query();
-        if (isset($data['search']) && !empty($data['search'])) {
-            $query->where('title', 'like', '%' . $data['search'] . '%');
+        if (isset($data['titles']) && !empty($data['titles'])) {
+            $query->where('title', 'like', '%' . $data['titles'] . '%');
         }
-        /*
-        if (isset($data['author'])) {
-            $query->whereHas('user', function ($query) use ($data) {
-                $query->where('name', 'like', '%' . $data['author'] . '%');
-            });
-        }*/
-        if (isset($data['genre']) && ($data['genre'] != 'all' || $data['genre']->count() > 0)) {
-            $genres = explode(',', $data['genre']);
-            $query->whereHas('genres', function ($query) use ($genres) {
-                $query->whereIn('id', $genres);
+        
+        if (isset($data['status']) && $data['status'] != 'all') {
+            $query->where('status', $data['status']);
+        }
+        
+        if (isset($data['genres']) && ($data['genres'] != 'all' || !empty($data['genres']))) {           
+            $query->whereHas('genres', function ($query) use ($data) {
+                $genres = explode(',', $data['genres']);
+                $query->whereIn('genres.id', $genres);
             });
         }
         return $query->paginate($perPage);

@@ -152,8 +152,10 @@ class NovelService
 
     public function search($request)
     {
-        $attributes = $request->validated();
-        return $this->novelRepository->search($attributes);
+        $data = $request->all();
+        // $data['genres'] = explode(',', $data['genres']);
+        // dd($data);
+        return $this->novelRepository->search($data);
     }
 
     public function getNovelBySlug(string $slug)
