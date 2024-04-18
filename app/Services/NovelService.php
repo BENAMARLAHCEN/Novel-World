@@ -168,5 +168,12 @@ class NovelService
         return $this->novelRepository->getNovelsWithLatestChapter();
     }
     
-
+    public function getFavorites()
+    {
+        $novelIds = auth()->user()->favorites->pluck('id');
+        if ($novelIds->isEmpty()) {
+            return [];
+        }
+        return $this->novelRepository->getFavorites($novelIds);
+    }
 }

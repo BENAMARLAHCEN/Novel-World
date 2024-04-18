@@ -16,6 +16,8 @@ use App\Http\Controllers\Author\NovelController as AuthorNovelController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Reader\FavoriteController;
+use App\Http\Controllers\Reader\ReviewController;
 use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +42,15 @@ Route::get('/novel/{slug}', [HomeController::class, 'novel'])->name('novel.show'
 Route::get('/novel/{slug}/{number}', [HomeController::class, 'chapter'])->name('chapter.show');
 Route::get('/updates',[HomeController::class,'updates'])->name('updates');
 
+Route::get('/profile',[ProfileController::class,'show'])->name('profile.show');
 
+Route::get('/reviews',[ReviewController::class,'index'])->name('reviews.index');
+Route::post('/reviews',[ReviewController::class,'store'])->name('reviews.store');
+Route::put('/reviews/{id}',[ReviewController::class,'update'])->name('reviews.update');
+Route::delete('/reviews/{id}',[ReviewController::class,'destroy'])->name('reviews.destroy');
+
+Route::get('/favorites',[FavoriteController::class,'index'])->name('favorites.index');
+Route::post('/favorites/{novel_id}',[FavoriteController::class,'toggleFavorite'])->name('favorites.toggle');
 
 Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic');
 

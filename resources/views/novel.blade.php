@@ -182,11 +182,13 @@
                 </a>
             </div>
             <div class="modal-body">
-                <form action="#" class="form-validate is-alter">
+                <form action="{{ route('reviews.store') }}" method="post"
+                class="form-validate is-alter">
+                @csrf
                     <div class="form-group">
                         <label class="form-label" for="rating">Rating</label>
                         <div class="form-control-wrap">
-                            <select class="form-select form-control form-control-lg" id="rating" required>
+                            <select class="form-select form-control form-control-lg" id="rating" required name="rating">
                                 <option value="1">1 Star</option>
                                 <option value="2">2 Stars</option>
                                 <option value="3">3 Stars</option>
@@ -200,9 +202,11 @@
                     <div class="form-group">
                         <label class="form-label" for="review">Review</label>
                         <div class="form-control-wrap">
-                            <textarea class="form-control form-control-lg" id="review" required></textarea>
-                        </div>
+                            <textarea class="form-control form-control-lg" id="review" required name="content"
+                                placeholder="Write your review here" rows="5"> </textarea>
+                        </div> 
                     </div>
+                    <input type="hidden" name="novel_id" value="{{ $novel->id }}">
                     
                     <div class="form-group">
                         <button type="submit" class="btn btn-lg btn-primary">Submit Review</button>

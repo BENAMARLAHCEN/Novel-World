@@ -251,4 +251,9 @@ class UserService
     {
         return $this->userRepository->countOf($users);
     }
+
+    public function findById($id)
+    {
+        return $this->userRepository->findById($id);
+    }
 }
