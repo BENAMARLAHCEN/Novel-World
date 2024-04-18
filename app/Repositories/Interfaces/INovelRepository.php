@@ -37,4 +37,6 @@ interface INovelRepository
     public function getNovelsWithLatestChapter($perPage = 10);
     public function getNovelsWithMostViews($perPage = 10);
 
+    public function getFavorites($novelId, $perPage = 10);
+
 }

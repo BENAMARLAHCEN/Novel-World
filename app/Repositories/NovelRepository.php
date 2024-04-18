@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Genre;
 use App\Models\Novel;
 use App\Models\Ranking;
-use App\Models\Statu;
 use App\Repositories\Interfaces\INovelRepository;
 
 class NovelRepository implements INovelRepository
@@ -180,5 +179,10 @@ class NovelRepository implements INovelRepository
         return Novel::where('is_public', 1)->whereHas('chapters', function ($query) {
             $query->where('status', 'published');
         })->withCount('views')->orderBy('views_count', 'desc')->paginate($perPage);
+    }
+
+    public function getFavorites($novelId, $perPage = 10)
+    {
+        return Novel::where('is_public', 1)->whereIn('id', $novelId)->paginate($perPage);
     }
 }
