@@ -42,4 +42,20 @@ class ReviewRepository implements IReviewRepository
     {
         return Review::inRandomOrder()->limit($limit)->get();
     }
+
+    public function getReviewByUserId(int $userId, int $perPage = null)
+    {
+        if ($perPage) {
+            return Review::where('user_id', $userId)->paginate($perPage);
+        }
+        return Review::where('user_id', $userId)->get();
+    }
+
+    public function getReviewByNovelId(int $novelId, int $perPage = null)
+    {
+        if ($perPage) {
+            return Review::where('novel_id', $novelId)->paginate($perPage);
+        }
+        return Review::where('novel_id', $novelId)->get();
+    }
 }

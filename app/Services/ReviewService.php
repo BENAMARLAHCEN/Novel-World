@@ -30,6 +30,7 @@ class ReviewService
 
     public function store(array $attributes)
     {
+        $attributes['user_id'] = auth()->id();
         DB::beginTransaction();
         try {
             $Review = $this->ReviewRepository->create($attributes);
@@ -67,9 +68,9 @@ class ReviewService
         }
     }
 
-    public function getReviewByUserId(int $userId)
+    public function getUserReviews(int $userId, int $perPage = null)
     {
-        return $this->ReviewRepository->getReviewByUserId($userId);
+        return $this->ReviewRepository->getReviewByUserId($userId, $perPage);
     }
 
     public function getReviewByNovelId(int $novelId)

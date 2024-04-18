@@ -11,4 +11,6 @@ interface IReviewRepository
     public function update(int $id, array $attributes);
     public function delete(int $id);
     public function randomReviews(int $limit);
+    public function getReviewByUserId(int $userId);
+    public function getReviewByNovelId(int $novelId);
 }
