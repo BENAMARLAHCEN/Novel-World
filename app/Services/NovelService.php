@@ -40,10 +40,19 @@ class NovelService
         $genres = $attributes['genres'];
         unset($attributes['genres']);
         // store novel cover image
+        // if ($request->hasFile('cover')) {
+        //     $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
+        //     $request->file('cover')->move(storage_path('novels'), $fileName);
+        //     $attributes['cover'] = "novels/".$fileName;
+        // }
         if ($request->hasFile('cover')) {
             $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
-            $request->file('cover')->move(storage_path('novels'), $fileName);
-            $attributes['cover'] = "novels/".$fileName;
+            // Store the file in the "novels" folder within the storage/app/public directory
+            $path = $request->file('cover')->storeAs('novels', $fileName);
+            // dd($path);
+            // Remove the 'public/' prefix from the stored path
+            $path = str_replace('storage/', '', $path);
+            $attributes['cover'] = $path;
         }
 
         $novel = $this->novelRepository->create($attributes);
