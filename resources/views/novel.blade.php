@@ -7,7 +7,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-4">
                     <div class="header-img mb-4">
-                        <img src="{{$novel->cover}}" alt="hero" class="img-fluid">
+                        <img src="{{ $novel->cover }}" alt="hero" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-8">

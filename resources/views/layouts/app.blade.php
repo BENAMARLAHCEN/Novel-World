@@ -39,6 +39,9 @@
                                 </a>
                             </div>
                             <div class=" d-flex gap-2 gap-md-4 align-items-center px-3">
+                                <div>
+                                    <a class="dark-switch" href="#"><em class="icon ni ni-moon"></em></a>
+                                </div>
                                 <div class="header-toggle">
                                     <button class="menu-toggler" data-target="mainNav">
                                         <em class="menu-on icon ni ni-menu"></em>
@@ -47,38 +50,74 @@
                                 </div><!-- .header-nav-toggle -->
                                 <nav class="header-menu" data-content="mainNav">
                                     <ul class="menu-list ms-lg-auto">
-                                        <li class="menu-item"><a href="#home" class="menu-link nav-link">Home</a></li>
-                                        <li class="menu-item"><a href="/updates" class="menu-link nav-link">Update</a></li>
-                                        <li class="menu-item"><a href="/filter" class="menu-link nav-link">Filter</a></li>
+                                        <li class="menu-item"><a href="/" class="menu-link nav-link">Home</a></li>
+                                        <li class="menu-item"><a href="/filter" class="menu-link nav-link">Filter</a>
+                                        </li>
+                                        @role('admin')
+                                            <li class="menu-item"><a href="{{ route('statistic') }}"
+                                                    class="menu-link nav-link">Dashboard</a></li>
+                                        @endrole
+                                        @role('author')
+                                            <li class="menu-item"><a href="{{ route('author.dashboard') }}"
+                                                    class="menu-link nav-link">WorkSpace</a></li>
+                                        @endrole
+
+                                        @if(\Request::routeIs('home'))
                                         <li class="menu-item"><a href="#service" class="menu-link nav-link">Novel</a>
                                         </li>
                                         <li class="menu-item"><a href="#reviews" class="menu-link nav-link">Reviews</a>
                                         </li>
                                         <li class="menu-item"><a href="#faqs" class="menu-link nav-link">Faqs</a></li>
+                                        <li class="menu-item"><a href="#footer" class="menu-link nav-link">Contact</a>
+                                        </li>
+                                        @endif
+
+
                                     </ul>
+                                    @guest
+                                        
                                     <ul class="menu-btns">
                                         <li>
-                                            <a href="/login"  class="btn btn-primary btn-lg">Login</a>
+                                            <a href="/login" class="btn btn-primary btn-lg">Login</a>
                                         </li>
                                     </ul>
+                                    @endguest
                                 </nav><!-- .nk-nav-menu -->
-                                <div class="dropdown user-dropdown">
+                                @auth
+                                  <div class="dropdown user-dropdown">
                                     <a href="#" class="dropdown-toggle me-n1" data-bs-toggle="dropdown">
-                                            <div class="user-avatar sm">
-                                                <em class="icon ni ni-user-alt"></em>
-                                            </div>
+                                        <div class="user-avatar sm">
+                                            <em class="icon ni ni-user-alt"></em>
+                                        </div>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-md dropdown-menu-end">
-                                        
+
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
-                                                <li><a href="{{route('profile')}}"><em
-                                                            class="icon ni ni-setting-alt"></em><span>Account Setting</span></a>
-                                                </li>
-                                                <li><a href="{{route('profile')}}"><em
-                                                            class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                                <li><a class="dark-switch" href="#"><em
-                                                            class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
+                                                @role('admin', 'author')
+                                                    <li><a href="{{ route('profile') }}"><em
+                                                                class="icon ni ni-setting-alt"></em><span>Account
+                                                                Setting</span></a>
+                                                    </li>
+                                                @endrole
+
+                                                <li><a
+                                                        href="
+                                                    @role('admin', 'author')
+                                                        {{ route('profile') }}
+                                                    @else
+                                                        {{ route('profile.show') }}
+                                                    @endrole
+                                                    "><em
+                                                            class="icon ni ni-user-alt"></em><span>View
+                                                            Profile</span></a></li>
+                                                @role('reader')
+                                                    <li><a href="{{ route('favorites.index') }}"><em
+                                                                class="icon ni ni-heart"></em><span>Favorite</span></a></li>
+
+                                                    <li><a href="{{ route('reviews.index') }}"><em
+                                                                class="icon ni ni-star"></em><span>Review</span></a></li>
+                                                @endrole
                                             </ul>
                                         </div>
                                         <div class="dropdown-inner">
@@ -86,15 +125,17 @@
                                                 <li><a href="#"
                                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><em
                                                             class="icon ni ni-signout"></em><span>Sign out</span></a>
-                                                    <form action="{{ route('logout') }}" method="post" id="logout-form"
-                                                        class="logout">
+                                                    <form action="{{ route('logout') }}" method="post"
+                                                        id="logout-form" class="logout">
                                                         @csrf
                                                     </form>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div>  
+                                @endauth
+                                
                             </div>
                         </div><!-- .header-warp-->
                     </div><!-- .container-->
@@ -129,13 +170,17 @@
                     <div class="row g-3 align-items-center justify-content-md-between py-4">
                         <div class="col-md-8">
                             <div class="text-base">Copyright &copy; World Novel 2024 - All Rights Reserved, Developed
-                                by <a href="https://github.com/BENAMARLAHCEN/Novel-World" target="_blank">Lahcen</a></div>
+                                by <a href="https://github.com/BENAMARLAHCEN/Novel-World" target="_blank">Lahcen</a>
+                            </div>
                         </div><!-- .col -->
                         <div class="col-md-4 d-flex justify-content-md-end">
                             <ul class="social">
-                                <li><a href="https://www.facebook.com/lahcen.benamar.5494/"><em class="icon ni ni-facebook-f"></em></a></li>
-                                <li><a href="https://github.com/BENAMARLAHCEN"><em class="icon ni ni-github"></em></a></li>
-                                <li><a href="https://www.linkedin.com/in/lahcen-ben-amar-6203b4153/"><em class="icon ni ni-linkedin"></em></a></li>
+                                <li><a href="https://www.facebook.com/lahcen.benamar.5494/"><em
+                                            class="icon ni ni-facebook-f"></em></a></li>
+                                <li><a href="https://github.com/BENAMARLAHCEN"><em class="icon ni ni-github"></em></a>
+                                </li>
+                                <li><a href="https://www.linkedin.com/in/lahcen-ben-amar-6203b4153/"><em
+                                            class="icon ni ni-linkedin"></em></a></li>
 
                             </ul><!-- .footer-icon -->
                         </div><!-- .col -->
@@ -152,7 +197,7 @@
     <script src="{{ asset('assets/js/home.js?ver=3.2.3') }}"></script>
     <script src="{{ asset('./assets/js/sweetalert.js?ver=3.2.3') }}"></script>
     <!-- Dark Mode -->
-    <script src="{{ asset('assets/js/dark-switch.js?ver=3.2.3') }}"></script>    
+    <script src="{{ asset('assets/js/dark-switch.js?ver=3.2.3') }}"></script>
     <script src="{{ asset('assets/js/fetch.js?ver=3.2.3') }}"></script>
     @yield('scripts')
 

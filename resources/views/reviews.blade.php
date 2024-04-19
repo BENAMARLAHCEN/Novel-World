@@ -39,9 +39,9 @@
                                                                     method="post">
                                                                     @csrf
                                                                     @method('delete')
-                                                                    <a class="btn-icon btn-icon-sm btn-icon-primary" style="cursor: pointer; color: #f00;" >
+                                                                    <button class="" style="cursor: pointer; color: #f00; border: none; background: none;">
                                                                         <em class="icon ni ni-trash"></em>
-                                                                    </a>
+                                                                    </button>
                                                                 </form>  
                                                                                                                               
                                                             @endif

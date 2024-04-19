@@ -12,9 +12,9 @@
                                 Here you can read and write your own stories. You can also read stories from other authors.
                         </div>
                         <ul class="header-action btns-inline">
-                            <li><a href="#" class="btn btn-primary btn-lg"><span>Getting
+                            <li><a href="register" class="btn btn-primary btn-lg"><span>Getting
                                         Started</span></a></li>
-                            <li><a href="#" class="btn btn-danger btn-lg"><span>Read Stories</span></a>
+                            <li><a href="register" class="btn btn-danger btn-lg"><span>Read Stories</span></a>
                             </li>
                         </ul>
                     </div><!-- .header-caption -->
@@ -36,12 +36,12 @@
 @endsection
 
 @section('content')
-    <section class="section section-service" id="service">
+    <section class="section section-ongoing" id="ongoing">
         <div class="container">
             <div class="section-head">
                 <div class="border-bottom d-flex justify-content-between align-items-center">
                     <h2 class="title">New Ongoing Releases</h2>
-                    <a href="#" class="link">View All</a>
+                    <a href="{{route('filter')}}" class="link">View All</a>
                 </div>
             </div><!-- .section-head -->
             <div class="section-content">
@@ -50,23 +50,7 @@
 
                     @foreach ($ongoing as $novel)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 ">
-                            {{-- novel card 
-                            <a href="{{ route('novel.show',$novel->slug) }}" >                             
-                                <div>
-                                    <img src="{{ asset('images/novel.webp') }}" alt="novel" class="img-fluid rounded">
-                                </div>
-                                <div class="">
-                                    <div class="title text-truncate h4">{{ $novel->title }}</div>
-                                    <div class="overflow-hidden">
-                                        <div class="">
-                                            <em class="icon ni ni-book-read"></em> {{ $novel->chapters->where('status','published')->count() }} Chapters
-                                        </div>
-                                        <div class="">
-                                            <em class="icon ni ni-eye"></em> {{ $novel->chapters->sum('views') }} Views
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>--}}
+                            {{-- novel card --}}
                             <x-novel-card :novel="$novel" />
                         </div><!-- .col -->
                     @endforeach
@@ -77,12 +61,12 @@
         </div><!-- .container -->
     </section><!-- .section -->
 
-    <section class="section section-service" id="service">
+    <section class="section section-completed" id="completed">
         <div class="container">
             <div class="section-head">
                 <div class="border-bottom d-flex justify-content-between align-items-center">
-                    <h2 class="title">Compteted Novels</h2>
-                    <a href="#" class="link">View All</a>
+                    <h2 class="title">Completed Novels</h2>
+                    <a href="{{route('filter')}}" class="link">View All</a>
                 </div>
             </div><!-- .section-head -->
             <div class="section-content">

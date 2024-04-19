@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\NovelController;
 use App\Http\Controllers\Admin\RankingController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\StatuController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -54,7 +53,7 @@ Route::get('/favorites',[FavoriteController::class,'index'])->name('favorites.in
 Route::post('/favorite',[FavoriteController::class,'store'])->name('favorites.add');
 Route::delete('/favorite',[FavoriteController::class,'destroy'])->name('favorites.remove');
 
-Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic');
+Route::get('/statistics', [StatisticController::class, 'index'])->name('statistic');
 
 Route::get('/register',[AuthController::class,'showRegisterForm'])->name('register.form');
 Route::post('/register',[AuthController::class,'register'])->name('register');

@@ -3,7 +3,7 @@
 {{-- novel card --}}
 <a href="{{ route('novel.show', $novel->slug) }}">
     <div>
-        <img src="{{ asset('images/novel.webp') }}" alt="novel" class="img-fluid rounded">
+        <img src="{{ $novel->cover }}" alt="novel" class="img-fluid rounded">
     </div>
 </a>
 <div class="">

@@ -24,8 +24,8 @@
                             <div class="BookCover_wrapper__GQBjr">
                                 <div class="BookCover_image__2Qidm"><img alt="Book cover" fetchpriority="high" width="225"
                                         height="300" decoding="async" data-nimg="1" style="color:transparent"
-                                        srcset="https://alphanovel.io/_next/image?url=https%3A%2F%2Fcdn.alphanovel.io%2Fbook-cover%2F030IHrSLT57KuqXrH8gS%2Ff26f1f52-2abd-49da-aec5-9f26af008a86_compressed.jpeg&amp;w=256&amp;q=75 1x, https://alphanovel.io/_next/image?url=https%3A%2F%2Fcdn.alphanovel.io%2Fbook-cover%2F030IHrSLT57KuqXrH8gS%2Ff26f1f52-2abd-49da-aec5-9f26af008a86_compressed.jpeg&amp;w=640&amp;q=75 2x"
-                                        src="https://alphanovel.io/_next/image?url=https%3A%2F%2Fcdn.alphanovel.io%2Fbook-cover%2F030IHrSLT57KuqXrH8gS%2Ff26f1f52-2abd-49da-aec5-9f26af008a86_compressed.jpeg&w=640&q=75">
+                                        srcset="{{$novel->cover}} 1x, {{$novel->cover}} 2x"
+                                        src="{{$novel->cover}}">
                                 </div>
                                 <div class="BookCover_labels__d7mhn"><span class="AlphaLabel AlphaLabel--primary">Updated</span>
                                 </div>
@@ -43,7 +43,7 @@
                                 <li class="NovelDetailsCard_info__item__TSgp3"><span class="AlphaText--gray">Chapters:</span>
                                     <!-- -->{{$novel->chapters->count()}}</li>
                                 <li class="NovelDetailsCard_info__item__TSgp3"><!-- --><span class="AlphaText--gray">Status:</span>
-                                    {{$novel->statu->name}}</li>
+                                    {{$novel->status}}</li>
                                 <li class="NovelDetailsCard_info__item__TSgp3"><span class="AlphaText--gray">Age Rating:</span>
                                     <!-- --><!-- -->18+</li>
                             </ul>
