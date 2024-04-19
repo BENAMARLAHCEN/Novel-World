@@ -80,8 +80,6 @@
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @section('content')
@@ -94,61 +92,72 @@
         </div><!-- .container -->
 
     </section><!-- .section -->
-
 @endsection
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const novels = document.getElementById('novels');
-            const searchTitle = document.getElementById('searchTitle');
-            const status = document.getElementById('status');
-            const search = document.getElementById('searchBtn');
-            var paginage = 1;
+<script>
+    var paginage = 1;
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const search = document.getElementById('searchBtn');
+        fetchNovels();
+        search.addEventListener('click', function() {
             fetchNovels();
-
-
-            search.addEventListener('click', function() {
-                fetchNovels();
-            });
-
-            function fetchNovels() {
-                const btnCheck = document.querySelectorAll(".checked");
-                let genre = [];
-                for (let i = 0; i < btnCheck.length; i++) {
-                    genre.push(btnCheck[i].id);
-                }
-                let url =
-                    `/api/filter?titles=${searchTitle.value}&status=${status.value}&genres=${genre}&page=${paginage}`;
-
-                fetch(url)
-                    .then(response => response.text()) // Assuming the response is plain HTML
-                    .then(html => {
-                        novels.innerHTML = html; // Inserting the HTML directly
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
-                        novels.innerHTML = '<p>Failed to load data. Please try again later.</p>';
-                    });
-            };
-
-            function nextPage() {
-                paginage++;
-                fetchNovels();
-            }
-            const next = document.getElementById('next');
-            if (next) {
-                next.addEventListener('click', nextPage());
-            }
-
-
-            function previousPage() {
-                paginage--;
-                fetchNovels();
-            }
-            const previous = document.getElementById('previous');
-            if (previous) {
-                previous.addEventListener('click', previousPage());
-            }
-                                
         });
-    </script>
+        function fetchNovels() {
+            const status = document.getElementById('status');
+        const novels = document.getElementById('novels');
+        const searchTitle = document.getElementById('searchTitle');
+            const btnCheck = document.querySelectorAll(".checked");
+            let genre = [];
+            for (let i = 0; i < btnCheck.length; i++) {
+                genre.push(btnCheck[i].id);
+            }
+            let url =
+                `api/filter?titles=${searchTitle.value}&status=${status.value}&genres=${genre}&page=${paginage}`;
+    
+            fetch(url)
+                .then(response => response.text()) // Assuming the response is plain HTML
+                .then(html => {
+                    novels.innerHTML = html; // Inserting the HTML directly
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    novels.innerHTML = '<p>Failed to load data. Please try again later.</p>';
+                });
+        };
+
+    });
+
+    function nextPage() {
+        paginage++;
+        fetchNovels();
+    }
+
+    function previousPage() {
+        paginage--;
+        fetchNovels();
+    }
+    function fetchNovels() {
+        const status = document.getElementById('status');
+        const novels = document.getElementById('novels');
+        const searchTitle = document.getElementById('searchTitle');
+            const btnCheck = document.querySelectorAll(".checked");
+            let genre = [];
+            for (let i = 0; i < btnCheck.length; i++) {
+                genre.push(btnCheck[i].id);
+            }
+            let url =
+                `/api/filter?titles=${searchTitle.value}&status=${status.value}&genres=${genre}&page=${paginage}`;
+    
+            fetch(url)
+                .then(response => response.text()) // Assuming the response is plain HTML
+                .then(html => {
+                    novels.innerHTML = html; // Inserting the HTML directly
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    novels.innerHTML = '<p>Failed to load data. Please try again later.</p>';
+                });
+        };
+
+</script>

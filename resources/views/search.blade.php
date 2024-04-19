@@ -10,7 +10,8 @@
 <div class="row g-2 g-md-3">
     @if ($novels->previousPageUrl())
         <div class="col-md-6">
-            <button  class="btn btn-primary w-100" id="previous">Previous</button>
+            <button onclick="previousPage()"
+               class="btn btn-primary w-100" id="previous">Previous</button>
         </div>
     @endif
     @if ($novels->nextPageUrl())

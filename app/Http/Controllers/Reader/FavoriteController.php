@@ -29,7 +29,11 @@ class FavoriteController extends Controller
 
     public function store(Request $request)
     {
-        $this->userService->toggleFavorite($request->novel_id);
+        return $this->userService->toggleFavorite($request->novel_id);
+    }
+    public function destroy(Request $request)
+    {
+        return $this->userService->toggleFavorite($request->novel_id);
     }
 
 }

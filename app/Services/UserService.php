@@ -138,14 +138,16 @@ class UserService
 
     public function toggleFavorite($novelId)
     {
+
         $user = $this->userRepository->findById(auth()->id());
         $novel = $user->favorites()->where('novel_id', $novelId)->first();
+        
         if ($novel) {
-            $user->favorites()->detach($novelId);
-            return response()->json(['message' => 'Novel removed from favorites successfully']);
+            $user->favorites()->detach($novelId);            
+            return response()->json(['success' => 'Novel removed from favorites successfully']);
         } else {
             $user->favorites()->attach($novelId);
-            return response()->json(['message' => 'Novel added to favorites successfully']);
+            return response()->json(['success' => 'Novel added to favorites successfully']);
         }
     }
 

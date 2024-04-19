@@ -38,6 +38,7 @@ Route::get('/', function () {
 });*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
+Route::post('/search', [FilterController::class, 'search'])->name('search');
 Route::get('/novel/{slug}', [HomeController::class, 'novel'])->name('novel.show');
 Route::get('/novel/{slug}/{number}', [HomeController::class, 'chapter'])->name('chapter.show');
 Route::get('/updates',[HomeController::class,'updates'])->name('updates');
@@ -50,7 +51,8 @@ Route::put('/reviews/{id}',[ReviewController::class,'update'])->name('reviews.up
 Route::delete('/reviews/{id}',[ReviewController::class,'destroy'])->name('reviews.destroy');
 
 Route::get('/favorites',[FavoriteController::class,'index'])->name('favorites.index');
-Route::post('/favorites/{novel_id}',[FavoriteController::class,'toggleFavorite'])->name('favorites.toggle');
+Route::post('/favorite',[FavoriteController::class,'store'])->name('favorites.add');
+Route::delete('/favorite',[FavoriteController::class,'destroy'])->name('favorites.remove');
 
 Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic');
 
