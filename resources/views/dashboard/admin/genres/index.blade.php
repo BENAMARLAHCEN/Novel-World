@@ -40,11 +40,9 @@
                             </div>
                         </th>
                         <th class="nk-tb-col"><span class="sub-text">Gener</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Color</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Background Color</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Border Color</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Text Color</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Icon</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Novels</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Creted At</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Updated At</span></th>
                         <th class="nk-tb-col nk-tb-col-tools">
                             <ul class="nk-tb-actions gx-1 my-n1">
                                 <li>
@@ -93,22 +91,13 @@
                                 </a>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span class="tb-sub" style="color: {{ $genre->color }}">{{ $genre->color }}</span>
+                                <span class="tb-sub" >{{ $genre->novels->count() }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span class="tb-sub"
-                                    style="color: {{ $genre->background_color }}">{{ $genre->background_color }}</span>
+                                <span class="tb-sub">{{ $genre->created_at }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span class="tb-sub"
-                                    style="color: {{ $genre->border_color }}">{{ $genre->border_color }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-lg">
-                                <span class="tb-sub"
-                                    style="color: {{ $genre->text_color }}">{{ $genre->text_color }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-lg">
-                                <span class="tb-sub" style="color: {{ $genre->icon }}">{{ $genre->icon }}</span>
+                                <span class="tb-sub">{{ $genre->updated_at }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">

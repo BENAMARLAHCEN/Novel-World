@@ -116,7 +116,6 @@ Route::get('/users',[UserController::class,'index'])->name('users.index')->middl
 Route::get('/users/admins',[UserController::class,'admins'])->name('users.admins')->middleware('auth','role:admin');
 Route::get('/users/readers',[UserController::class,'readers'])->name('users.readers')->middleware('auth','role:admin');
 Route::get('/users/authors',[UserController::class,'authors'])->name('users.authors')->middleware('auth','role:admin');
-Route::get('/users/create',[UserController::class,'create'])->name('users.create')->middleware('auth','role:admin');
 Route::post('/users',[UserController::class,'store'])->name('users.store')->middleware('auth','role:admin');
 Route::get('/users/{user}/edit',[UserController::class,'edit'])->name('users.edit')->middleware('auth','role:admin');
 Route::put('/users/{user}',[UserController::class,'update'])->name('users.update')->middleware('auth','role:admin');
@@ -124,7 +123,7 @@ Route::delete('/users/{id}',[UserController::class,'destroy'])->name('users.dest
 Route::get('/users/{id}',[UserController::class,'show'])->name('users.show')->middleware('auth','role:admin');
 Route::post('/users/{id}/toggle-admin',[UserController::class,'toggleAdmin'])->name('users.toggle-admin')->middleware('auth','role:admin');
 Route::post('/users/{id}/toggle-ban',[UserController::class,'toggleBan'])->name('users.toggle-ban')->middleware('auth','role:admin');
-Route::post('/users/{id}/block-permission',[UserController::class,'blockPermission'])->name('users.block.permission')->middleware('auth','role:admin');
+Route::post('/users/{id}/block-permission',[UserController::class,'blockPermissions'])->name('users.block.permission')->middleware('auth','role:admin');
 
 // admin chapter routes
 

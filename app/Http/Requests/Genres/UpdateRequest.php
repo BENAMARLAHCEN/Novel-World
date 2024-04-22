@@ -23,11 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:genres,name,' . $this->genres->id,
-            'color' => 'required|string|max:255',
-            'background_color' => 'required|string|max:255',
-            'border_color' => 'required|string|max:255',
-            'text_color' => 'required|string|max:255',
-            'icon' => 'required|string|max:255',
+     
         ];
     }
 }

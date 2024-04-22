@@ -30,6 +30,15 @@ trait HasPermissionsTrait
         return $this->givePermissionsTo($permissions);
     }
 
+    public function getUserRolesPer(){
+        $roles = $this->roles()->get();
+        $permissions = [];
+        foreach ($roles as $role) {
+            $permissions = array_merge($permissions, $role->permissions()->get()->pluck('name')->toArray());
+        }
+        return $permissions;
+    }
+
     public function hasPermissionTo($permission)
     {
         return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
@@ -92,9 +101,14 @@ trait HasPermissionsTrait
         return $this;
     }
 
+    public function detachBlockPermissions()
+    {
+        $this->blockPermissions()->detach();
+    }
+
     public function hasBlockPermissionTo($permission)
     {
-        return $this->blockPermissions->contains('name', $permission->name);
+        return $this->blockPermissions->contains('name', $permission);
     }
 
     protected function hasPermission($permission)

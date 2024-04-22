@@ -12,11 +12,6 @@ class Genre extends Model
 
     protected $fillable = [
         'name',
-        'color',
-        'background_color',
-        'border_color',
-        'text_color',
-        'icon',
     ];
 
     public function novels()

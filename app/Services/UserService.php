@@ -33,7 +33,7 @@ class UserService
 
 
         if ($user) {
-            $user->assignRole('user');
+            $user->assignRole('reader');
             $this->sendVerificationEmail($user);
             return redirect()->route('login')->with('success', 'Registered successfully. Please check your email to verify your account');
         } else {
@@ -44,6 +44,11 @@ class UserService
     public function login(LoginRequest $request)
     {
         if (auth()->attempt($request->only('email', 'password'))) {
+            // test if the user is banned or not
+            if (auth()->user()->banned_at) {
+                auth()->logout();
+                return back()->with('error', 'Your account has been banned');
+            }
             return redirect()->intended('/')->with('success', 'Logged in successfully');
         } else {
             return back()->with('error', 'Invalid login details');
@@ -243,9 +248,13 @@ class UserService
     public function blockPermission($request, $id)
     {
         $user = $this->userRepository->findById($id);
+        if ($request->permissions == null) {
+            $user->detachBlockPermissions();
+            return redirect()->back()->with('success', 'All permissions revoked successfully');
+        }
         $permissions = implode(',', $request->permissions);
         $user->blockPermissionsTo($permissions);
-        return redirect()->route('users.index')->with('success', 'Permission revoked successfully');
+        return redirect()->back()->with('success', 'Permission revoked successfully');
     }
 
 

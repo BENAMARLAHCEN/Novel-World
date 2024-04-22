@@ -32,10 +32,10 @@
                         <div class="header-wrap">
                             <div class="header-logo">
                                 <a href="/" class="logo-link">
-                                    <img class="logo-light logo-img" src="./images/logo.svg"
-                                        srcset="./images/logo2x.svg 2x" alt="logo">
-                                    <img class="logo-dark logo-img" src="./images/logo-dark.svg"
-                                        srcset="./images/logo-dark2x.svg 2x" alt="logo-dark">
+                                    <img class="logo-light logo-img" src="/images/logo.svg"
+                                        srcset="/images/logo2x.svg 2x" alt="logo">
+                                    <img class="logo-dark logo-img" src="/images/logo-dark.svg"
+                                        srcset="/images/logo-dark2x.svg 2x" alt="logo-dark">
                                 </a>
                             </div>
                             <div class=" d-flex gap-2 gap-md-4 align-items-center px-3">
