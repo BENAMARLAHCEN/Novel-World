@@ -72,15 +72,17 @@ class NovelService
         // update novel cover image
       
         if ($request->hasFile('cover')) {
-            $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
-            $request->file('cover')->storeAs('novels', $fileName);
-            
-            $attributes['cover'] = $fileName;
-            // delete old cover image
             $oldCover = $this->novelRepository->findById($id)->cover;
+            $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
+            // Store the file in the "novels" folder within the storage/app/public directory
+            $path = $request->file('cover')->storeAs('novels', $fileName);
             if ($oldCover) {
-                Storage::delete(storage_path('novels/' . $oldCover));
+                Storage::delete(storage_path($oldCover));
             }
+            // Remove the 'public/' prefix from the stored path
+            $path = str_replace('storage/', '', $path);
+            $attributes['cover'] = $path;
+            // delete old cover image
         }
 
         $novel = $this->novelRepository->update($id, $attributes);

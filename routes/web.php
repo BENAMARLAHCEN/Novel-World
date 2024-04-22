@@ -53,7 +53,7 @@ Route::get('/favorites',[FavoriteController::class,'index'])->name('favorites.in
 Route::post('/favorite',[FavoriteController::class,'store'])->name('favorites.add');
 Route::delete('/favorite',[FavoriteController::class,'destroy'])->name('favorites.remove');
 
-Route::get('/statistics', [StatisticController::class, 'index'])->name('statistic');
+Route::get('/statistics', [StatisticController::class, 'index'])->name('statistic')->middleware('auth','role:admin');
 
 Route::get('/register',[AuthController::class,'showRegisterForm'])->name('register.form');
 Route::post('/register',[AuthController::class,'register'])->name('register');

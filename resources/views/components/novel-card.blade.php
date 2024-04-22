@@ -33,11 +33,11 @@
             @auth
             <div id="favorite{{$novel->id}}" >
                 @if (auth()->user()->favorites->contains('id', $novel->id))        
-                <a class="btn btn-icon btn-icon-sm btn-icon-primary" data-novel-id="{{ $novel->id }}" onclick="disfavorite({{$novel->id}})">
+                <a class="btn btn-icon btn-icon-sm btn-icon-primary" data-novel-id="{{ $novel->id }}" onclick="disfavorite({{$novel->id}}) "id="fav{{$novel->id}}">
                     <em class="icon ni ni-heart-fill"></em>
                 </a>
                 @else
-                <a class="btn btn-icon btn-icon-sm btn-icon-primary" data-novel-id="{{ $novel->id }}" onclick="favorite({{$novel->id}})">
+                <a class="btn btn-icon btn-icon-sm btn-icon-primary" data-novel-id="{{ $novel->id }}" onclick="favorite({{$novel->id}})"id="fav{{$novel->id}}">
                     <em class="icon ni ni-heart"></em>
                 </a>
                 @endif

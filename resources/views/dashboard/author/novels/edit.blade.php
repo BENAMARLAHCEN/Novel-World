@@ -168,7 +168,7 @@
                                     </div>
                                 </div>
                                 <div class="w-100">
-                                    <img src="{{ url("storage/app/$novel->cover") }}"
+                                    <img src="{{ $novel->cover }}"
                                     alt="" id="cover-preview" class="img-fluid rounded mt-2 cover-preview-img"
                                         style="display: block;">
                                     <style>
