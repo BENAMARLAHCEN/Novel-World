@@ -82,7 +82,8 @@ class ChapterService
     }
     public function incrementViews(int $id)
     {
-        return $this->chapterRepository->update($id, ['views' => $this->chapterRepository->findById($id)->views + 1]);
+        $views = $this->chapterRepository->findById($id)->views;
+        return $this->chapterRepository->update($id, ['views' => $views + 1]);
     }
 
     public function getNextChapter(int $novelId, int $number)
