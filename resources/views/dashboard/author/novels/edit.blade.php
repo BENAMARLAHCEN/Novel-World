@@ -77,23 +77,7 @@
                             </div>
                             {{-- ranking --}}
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="fva-ranking">Ranking</label>
-                                    <div class="form-control-wrap">
-                                        <select class="form-select form-control form-control-lg js-select2" id="fva-ranking"
-                                            name="ranking" required>
-                                            <option value="" selected disabled>Select a Ranking</option>
-                                            @foreach ($rankings as $ranking)
-                                                <option value="{{ $ranking->id }}">{{ $ranking->name }}</option>
-                                            @endforeach
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                        </select>
-                                        @error('ranking')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
+                               
 
                                 <div class="form-group">
                                     <label class="form-label" for="fva-status">Status</label>

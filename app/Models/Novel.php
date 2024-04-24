@@ -16,7 +16,6 @@ class Novel extends Model
         'description',
         'cover',
         'slug',
-        'views',
         'status',
         'language',
         'user_id',

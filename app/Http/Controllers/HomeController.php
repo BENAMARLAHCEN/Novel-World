@@ -59,12 +59,15 @@ class HomeController extends Controller
         $novel = $this->novelService->getNovelBySlug($slug);
         if($novel){
             $chapter = $this->chapterService->getChapterByNumber($novel->id, $number);
-            $this->chapterService->incrementViews($chapter->id);
+            if(!$chapter){
+                return redirect()->back()->with('error', 'Chapter not found');
+            }
+            $view = $this->chapterService->incrementViews($chapter->id);
             $nextChapter = $this->chapterService->getNextChapter($novel->id, $number);
             $previousChapter = $this->chapterService->getPreviousChapter($novel->id, $number);
             return view('read', compact('chapter' , 'novel', 'nextChapter', 'previousChapter'));
         }
-        return redirect()->back()->with('error', 'Chapter not found');
+        return redirect()->back()->with('error', 'Novel not found');
     }
 
 
