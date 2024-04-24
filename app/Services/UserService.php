@@ -30,10 +30,11 @@ class UserService
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-
-
         if ($user) {
             $user->assignRole('reader');
+            if ($request->has('author')) {
+                $user->assignRole('author');
+            }
             $this->sendVerificationEmail($user);
             return redirect()->route('login')->with('success', 'Registered successfully. Please check your email to verify your account');
         } else {
@@ -132,6 +133,13 @@ class UserService
             $message->to($user->email);
             $message->subject('Verify your email address');
         });
+    }
+
+    public function beAuthor()
+    {
+        $user = $this->userRepository->findById(auth()->id());
+        $user->assignRole('author');
+        return redirect()->route('author.dashboard')->with('success', 'You are now an author');
     }
 
     // user favorite a novel methods

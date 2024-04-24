@@ -42,4 +42,11 @@ class AuthController extends Controller
         return $this->userService->logout();
     }
 
+    public function beAuthor()
+    {
+        return $this->userService->beAuthor();
+    }
+
+
+
 }
