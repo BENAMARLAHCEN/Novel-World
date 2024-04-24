@@ -30,6 +30,9 @@ class ReviewService
 
     public function store(array $attributes)
     {
+        if (auth()->user()->reviews()->where('novel_id', $attributes['novel_id'])->exists()) {
+            return back()->with('error', 'You have already reviewed this novel');
+        }
         $attributes['user_id'] = auth()->id();
         DB::beginTransaction();
         try {

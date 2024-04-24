@@ -15,7 +15,7 @@ class ReviewRepository implements IReviewRepository
 
     public function paginate(int $perPage = 10)
     {
-        return Review::paginate($perPage);
+        return Review::paginate($perPage)->latest();
     }
 
     public function findById(int $id)
@@ -48,7 +48,7 @@ class ReviewRepository implements IReviewRepository
         if ($perPage) {
             return Review::where('user_id', $userId)->paginate($perPage);
         }
-        return Review::where('user_id', $userId)->get();
+        return Review::where('user_id', $userId)->get()->latest();
     }
 
     public function getReviewByNovelId(int $novelId, int $perPage = null)
@@ -56,6 +56,6 @@ class ReviewRepository implements IReviewRepository
         if ($perPage) {
             return Review::where('novel_id', $novelId)->paginate($perPage);
         }
-        return Review::where('novel_id', $novelId)->get();
+        return Review::where('novel_id', $novelId)->get()->latest();
     }
 }
