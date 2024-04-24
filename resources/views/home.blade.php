@@ -36,7 +36,7 @@
 @endsection
 
 @section('content')
-    <section class="section section-ongoing" id="ongoing">
+    <section class="section section-novels" id="novels">
         <div class="container">
             <div class="section-head">
                 <div class="border-bottom d-flex justify-content-between align-items-center">
@@ -151,7 +151,7 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-5">
                     <div class="img-block img-block-s1 left">
-                        <img src="{{ asset('images/gfx/novel1.webp') }}" alt="Dashlite">
+                        <img src="{{ $topNovels[0]->cover }}" alt="{{$topNovels[0]->title}}">
                     </div>
                 </div><!-- .col -->
                 <div class="col-lg-6">
@@ -200,7 +200,7 @@
             <div class="row flex-row-reverse justify-content-between align-items-center">
                 <div class="col-lg-5">
                     <div class="img-block img-block-s1 right">
-                        <img src="{{ asset('images/gfx/novel2.webp') }}" alt="Dashlite">
+                        <img src="{{ $topNovels[1]->cover }}" alt="{{$topNovels[1]->title}}">
                     </div>
                 </div><!-- .col -->
                 <div class="col-lg-6">

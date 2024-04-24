@@ -14,7 +14,6 @@
     <title>Novel World</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css?ver=3.2.3') }}">
-    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css?ver=3.2.3') }}">
     @yield('style')
 </head>
 

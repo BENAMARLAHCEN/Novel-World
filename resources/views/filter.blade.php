@@ -97,34 +97,36 @@
 <script>
     var paginage = 1;
     document.addEventListener('DOMContentLoaded', function() {
-        
+
         const search = document.getElementById('searchBtn');
         fetchNovels();
         search.addEventListener('click', function() {
+            paginage = 1;
             fetchNovels();
         });
-        function fetchNovels() {
-            const status = document.getElementById('status');
-        const novels = document.getElementById('novels');
-        const searchTitle = document.getElementById('searchTitle');
-            const btnCheck = document.querySelectorAll(".checked");
-            let genre = [];
-            for (let i = 0; i < btnCheck.length; i++) {
-                genre.push(btnCheck[i].id);
-            }
-            let url =
-                `api/filter?titles=${searchTitle.value}&status=${status.value}&genres=${genre}&page=${paginage}`;
-    
-            fetch(url)
-                .then(response => response.text()) // Assuming the response is plain HTML
-                .then(html => {
-                    novels.innerHTML = html; // Inserting the HTML directly
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                    novels.innerHTML = '<p>Failed to load data. Please try again later.</p>';
-                });
-        };
+
+        // function fetchNovels() {
+        //     const status = document.getElementById('status');
+        //     const novels = document.getElementById('novels');
+        //     const searchTitle = document.getElementById('searchTitle');
+        //     const btnCheck = document.querySelectorAll(".checked");
+        //     let genre = [];
+        //     for (let i = 0; i < btnCheck.length; i++) {
+        //         genre.push(btnCheck[i].id);
+        //     }
+        //     let url =
+        //         `api/filter?titles=${searchTitle.value}&status=${status.value}&genres=${genre}&page=${paginage}`;
+
+        //     fetch(url)
+        //         .then(response => response.text()) // Assuming the response is plain HTML
+        //         .then(html => {
+        //             novels.innerHTML = html; // Inserting the HTML directly
+        //         })
+        //         .catch(error => {
+        //             console.error('Error fetching data:', error);
+        //             novels.innerHTML = '<p>Failed to load data. Please try again later.</p>';
+        //         });
+        // };
 
     });
 
@@ -137,27 +139,27 @@
         paginage--;
         fetchNovels();
     }
+
     function fetchNovels() {
         const status = document.getElementById('status');
         const novels = document.getElementById('novels');
         const searchTitle = document.getElementById('searchTitle');
-            const btnCheck = document.querySelectorAll(".checked");
-            let genre = [];
-            for (let i = 0; i < btnCheck.length; i++) {
-                genre.push(btnCheck[i].id);
-            }
-            let url =
-                `/api/filter?titles=${searchTitle.value}&status=${status.value}&genres=${genre}&page=${paginage}`;
-    
-            fetch(url)
-                .then(response => response.text()) // Assuming the response is plain HTML
-                .then(html => {
-                    novels.innerHTML = html; // Inserting the HTML directly
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                    novels.innerHTML = '<p>Failed to load data. Please try again later.</p>';
-                });
-        };
+        const btnCheck = document.querySelectorAll(".checked");
+        let genre = [];
+        for (let i = 0; i < btnCheck.length; i++) {
+            genre.push(btnCheck[i].id);
+        }
+        let url =
+            `/api/filter?titles=${searchTitle.value}&status=${status.value}&genres=${genre}&page=${paginage}`;
 
+        fetch(url)
+            .then(response => response.text()) // Assuming the response is plain HTML
+            .then(html => {
+                novels.innerHTML = html; // Inserting the HTML directly
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                novels.innerHTML = '<p>Failed to load data. Please try again later.</p>';
+            });
+    };
 </script>
