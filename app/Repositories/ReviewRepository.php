@@ -58,4 +58,9 @@ class ReviewRepository implements IReviewRepository
         }
         return Review::where('novel_id', $novelId)->get()->latest();
     }
+
+    public function count()
+    {
+        return Review::count();
+    }
 }

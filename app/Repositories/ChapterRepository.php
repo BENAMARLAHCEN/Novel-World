@@ -94,4 +94,9 @@ class ChapterRepository implements IChapterRepository
         ->first();
     }
 
+    public function count()
+    {
+        return Chapter::count();
+    }
+
 }

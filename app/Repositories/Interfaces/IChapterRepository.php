@@ -27,5 +27,6 @@ interface IChapterRepository
     public function getNextChapter(int $novelId, int $chapterNumber);
 
     public function getPreviousChapter(int $novelId, int $chapterNumber);
+    public function count();
 
 }

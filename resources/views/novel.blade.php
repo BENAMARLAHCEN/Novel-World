@@ -139,6 +139,7 @@
                         <h2 class="title">What Our Readers Say</h2>
                     </div>
                 </div><!-- .col -->
+                @role('reader')
                 <div class="">
                     <div class="section-head">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -146,6 +147,7 @@
                     </div>
 
                 </div><!-- .col -->
+                @endrole
             </div><!-- .row -->
             <div class="row gx-gs ">
                 @foreach ($reviews as $review)
@@ -190,6 +192,7 @@
         </div><!-- .container -->
     </section><!-- .section -->
 
+    @role('reader')
     <!-- Modal Form -->
     <div class="modal fade" id="modalForm">
         <div class="modal-dialog" role="document">
@@ -238,4 +241,5 @@
             </div>
         </div>
     </div>
+    @endrole
 @endsection

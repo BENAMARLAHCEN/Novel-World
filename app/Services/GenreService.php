@@ -40,4 +40,9 @@ class GenreService
     {
         return $this->genreRepository->delete($id);
     }
+
+    public function getCount()
+    {
+        return $this->genreRepository->count();
+    }
 }

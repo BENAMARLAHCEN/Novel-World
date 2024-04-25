@@ -85,5 +85,10 @@ class ReviewService
     {
         return $this->ReviewRepository->randomReviews($limit);
     }
+
+    public function getCount()
+    {
+        return $this->ReviewRepository->count();
+    }
     
 }

@@ -14,4 +14,5 @@ interface IUserRepository
     public function all();
     public function paginate(int $perPage,$role);
     public function countOf($role = null);
+    public function getTopAuthors($limit);
 }

@@ -96,4 +96,8 @@ class ChapterService
         return $this->chapterRepository->getPreviousChapter($novelId, $number);
     }
 
+    public function getCount()
+    {
+        return $this->chapterRepository->count();
+    }
 }

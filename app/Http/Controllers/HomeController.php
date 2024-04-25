@@ -49,6 +49,9 @@ class HomeController extends Controller
     public function novel($slug)
     {
         $novel = $this->novelService->getNovelBySlug($slug);
+        if($novel->is_public != 1){
+            return redirect('/')->with('error', 'Novel not found');
+        }
         $chapters = $this->chapterService->getChaptersByNovel($novel->id);
         $reviews = $novel->reviews;
         return view('novel', compact('novel', 'chapters', 'reviews'));
@@ -58,6 +61,9 @@ class HomeController extends Controller
     {
         $novel = $this->novelService->getNovelBySlug($slug);
         if($novel){
+            if($novel->is_public != 1){
+                return redirect('/')->with('error', 'Novel not found');
+            }
             $chapter = $this->chapterService->getChapterByNumber($novel->id, $number);
             if(!$chapter){
                 return redirect()->back()->with('error', 'Chapter not found');

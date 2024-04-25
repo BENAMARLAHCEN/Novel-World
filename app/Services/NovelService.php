@@ -14,6 +14,11 @@ class NovelService
         $this->novelRepository = $novelRepository;
     }
 
+    public function getCount()
+    {
+        return $this->novelRepository->count();
+    }
+
     public function all(int $perPage = null)
     {
         if ($perPage) {
@@ -151,9 +156,9 @@ class NovelService
         return $this->novelRepository->getCompletedNovels();
     }
 
-    public function getTopNovels()
+    public function getTopNovels($limit = 2)
     {
-        return $this->novelRepository->getTopNovels();
+        return $this->novelRepository->getTopNovels($limit);
     }
 
     public function getNovelsCount()

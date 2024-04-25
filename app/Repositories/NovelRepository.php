@@ -129,7 +129,7 @@ class NovelRepository implements INovelRepository
         return Novel::latest()->where('status', 'completed')->where('is_public', 1)->inRandomOrder()->limit(12)->get();
     }
 
-    public function getTopNovels()
+    public function getTopNovels($limit = 2)
     {
         return Novel::where('is_public', 1)->whereHas('chapters', function ($query) {
             $query->where('status', 'published');
@@ -184,5 +184,10 @@ class NovelRepository implements INovelRepository
     public function getFavorites($novelId, $perPage = 10)
     {
         return Novel::where('is_public', 1)->whereIn('id', $novelId)->paginate($perPage)->latest();
+    }
+
+    public function count()
+    {
+        return Novel::count();
     }
 }

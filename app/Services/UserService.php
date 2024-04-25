@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Repositories\Interfaces\IUserRepository;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -34,6 +35,11 @@ class UserService
             $user->assignRole('reader');
             if ($request->has('author')) {
                 $user->assignRole('author');
+                $pen_name =  $user->name . '-' . Str::random(5);
+                Profile::create([
+                    'user_id' => auth()->id(),
+                    'pen_name' => $pen_name
+                ]);
             }
             $this->sendVerificationEmail($user);
             return redirect()->route('login')->with('success', 'Registered successfully. Please check your email to verify your account');
@@ -139,6 +145,12 @@ class UserService
     {
         $user = $this->userRepository->findById(auth()->id());
         $user->assignRole('author');
+        // generete a profile for the author with a pen name unique to the author
+        $pen_name =  $user->name . '-' . Str::random(5);
+        Profile::create([
+            'user_id' => auth()->id(),
+            'pen_name' => $pen_name
+        ]);
         return redirect()->route('author.dashboard')->with('success', 'You are now an author');
     }
 
@@ -154,9 +166,9 @@ class UserService
 
         $user = $this->userRepository->findById(auth()->id());
         $novel = $user->favorites()->where('novel_id', $novelId)->first();
-        
+
         if ($novel) {
-            $user->favorites()->detach($novelId);            
+            $user->favorites()->detach($novelId);
             return response()->json(['success' => 'Novel removed from favorites successfully']);
         } else {
             $user->favorites()->attach($novelId);
@@ -187,15 +199,15 @@ class UserService
 
     // admin user management methods
 
-    public function getAllUsers(int $perPage = null,$role=null)
+    public function getAllUsers(int $perPage = null, $role = null)
     {
 
         if ($perPage) {
-            return $this->userRepository->paginate($perPage,$role);
+            return $this->userRepository->paginate($perPage, $role);
         }
         return $this->userRepository->all();
     }
-    
+
     public function getUser($id)
     {
         return $this->userRepository->findById($id);
@@ -266,7 +278,7 @@ class UserService
     }
 
 
-    public function getCount($users)
+    public function getCount($users = null)
     {
         return $this->userRepository->countOf($users);
     }
@@ -274,5 +286,10 @@ class UserService
     public function findById($id)
     {
         return $this->userRepository->findById($id);
+    }
+
+    public function getTopAuthors()
+    {
+        return $this->userRepository->getTopAuthors(5);
     }
 }

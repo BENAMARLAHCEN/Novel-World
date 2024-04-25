@@ -64,4 +64,11 @@ class UserRepository implements IUserRepository
         }
         return User::count();
     }
+
+    public function getTopAuthors($limit)
+    {
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'author');
+        })->withCount('novels')->orderBy('novels_count', 'desc')->limit($limit)->get();
+    }
 }

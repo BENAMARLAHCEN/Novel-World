@@ -13,4 +13,5 @@ interface IReviewRepository
     public function randomReviews(int $limit);
     public function getReviewByUserId(int $userId);
     public function getReviewByNovelId(int $novelId);
+    public function count();
 }
