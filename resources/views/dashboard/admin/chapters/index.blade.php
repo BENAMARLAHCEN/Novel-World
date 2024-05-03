@@ -55,7 +55,6 @@
                                 <span class="tb-sub text">Chapter-{{ $chapter->number }} {{ $chapter->title }}</span>
                             </td>
                             <td class="nk-tb-col  tb-col-mb">
-
                                 <span class="tb-product">
                                     <img src="{{ $chapter->novel->cover }}"
                                         alt="" class="thumb">

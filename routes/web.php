@@ -45,31 +45,33 @@ Route::get('/filter', [FilterController::class, 'filter'])->name('filter');
 Route::post('/search', [FilterController::class, 'search'])->name('search');
 Route::get('/novel/{slug}', [HomeController::class, 'novel'])->name('novel.show');
 Route::get('/novel/{slug}/{number}', [HomeController::class, 'chapter'])->name('chapter.show');
-Route::get('/updates',[HomeController::class,'updates'])->name('updates');
 
-Route::get('/profile',[ProfileController::class,'show'])->name('profile.show');
+Route::get('/profile',[ProfileController::class,'show'])->name('profile.show')->middleware('auth','role:reader');
 
-Route::get('/reviews',[ReviewController::class,'index'])->name('reviews.index');
-Route::post('/reviews',[ReviewController::class,'store'])->name('reviews.store');
-Route::put('/reviews/{id}',[ReviewController::class,'update'])->name('reviews.update');
-Route::delete('/reviews/{id}',[ReviewController::class,'destroy'])->name('reviews.destroy');
+Route::get('/reviews',[ReviewController::class,'index'])->name('reviews.index')->middleware('auth','role:reader');
+Route::post('/reviews',[ReviewController::class,'store'])->name('reviews.store')->middleware('auth','role:reader');
+Route::put('/reviews/{id}',[ReviewController::class,'update'])->name('reviews.update')->middleware('auth','role:reader');
+Route::delete('/reviews/{id}',[ReviewController::class,'destroy'])->name('reviews.destroy')->middleware('auth','role:reader');
 
-Route::get('/favorites',[FavoriteController::class,'index'])->name('favorites.index');
-Route::post('/favorite',[FavoriteController::class,'store'])->name('favorites.add');
-Route::delete('/favorite',[FavoriteController::class,'destroy'])->name('favorites.remove');
+Route::get('/favorites',[FavoriteController::class,'index'])->name('favorites.index')->middleware('auth');
+Route::post('/favorite',[FavoriteController::class,'store'])->name('favorites.add')->middleware('auth');
+Route::delete('/favorite',[FavoriteController::class,'destroy'])->name('favorites.remove')->middleware('auth');
 
 Route::get('/statistics', [StatisticController::class, 'index'])->name('statistic')->middleware('auth','role:admin');
 
-Route::get('/register',[AuthController::class,'showRegisterForm'])->name('register.form');
-Route::post('/register',[AuthController::class,'register'])->name('register');
-Route::get('/login',[AuthController::class,'showLoginForm'])->name('login.form');
-Route::post('/login',[AuthController::class,'login'])->name('login');
+// Auth routes
+Route::middleware(['guest'])->group(function () {
+    Route::get('/register',[AuthController::class,'showRegisterForm'])->name('register.form');
+    Route::post('/register',[AuthController::class,'register'])->name('register');
+    Route::get('/login',[AuthController::class,'showLoginForm'])->name('login.form');
+    Route::post('/login',[AuthController::class,'login'])->name('login');
+    Route::get('/forgot-password',[ForgotPasswordController::class,'showForgotPasswordForm'])->name('forgot-password.form');
+    Route::post('/forgot-password',[ForgotPasswordController::class,'forgotPassword'])->name('forgot-password');
+    Route::get('/reset-password/{token}',[ForgotPasswordController::class,'showResetPasswordForm'])->name('reset-password.form');
+    Route::post('/reset-password',[ForgotPasswordController::class,'resetPassword'])->name('password.reset');
+    Route::get('/verify-email/{token}',[VerifyController::class,'verify'])->name('verify-email');
+});
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
-Route::get('/forgot-password',[ForgotPasswordController::class,'showForgotPasswordForm'])->name('forgot-password.form');
-Route::post('/forgot-password',[ForgotPasswordController::class,'forgotPassword'])->name('forgot-password');
-Route::get('/reset-password/{token}',[ForgotPasswordController::class,'showResetPasswordForm'])->name('reset-password.form');
-Route::post('/reset-password',[ForgotPasswordController::class,'resetPassword'])->name('password.reset');
-Route::get('/verify-email/{token}',[VerifyController::class,'verify'])->name('verify-email');
 
 // role routes
 // Route::resource('roles', RoleController::class)->except(['show']);
@@ -93,16 +95,6 @@ Route::put('/genres/{genres}',[GenreController::class,'update'])->name('genres.u
 Route::delete('/genres/{id}',[GenreController::class,'destroy'])->name('genres.destroy')->middleware('auth','role:admin');
 Route::get('/genres/{id}',[GenreController::class,'show'])->name('genres.show')->middleware('auth','role:admin');
 
-// ranking routes
-
-// Route::resource('rankings', RankingController::class)->except(['show'])->middleware('auth','role:admin');
-Route::get('/rankings',[RankingController::class,'index'])->name('rankings.index')->middleware('auth','role:admin');
-Route::get('/rankings/create',[RankingController::class,'create'])->name('rankings.create')->middleware('auth','role:admin');
-Route::post('/rankings',[RankingController::class,'store'])->name('rankings.store')->middleware('auth','role:admin');
-Route::get('/rankings/{ranking}/edit',[RankingController::class,'edit'])->name('rankings.edit')->middleware('auth','role:admin');
-Route::put('/rankings/{ranking}',[RankingController::class,'update'])->name('rankings.update')->middleware('auth','role:admin');
-Route::delete('/rankings/{id}',[RankingController::class,'destroy'])->name('rankings.destroy')->middleware('auth','role:admin');
-Route::get('/rankings/{id}',[RankingController::class,'show'])->name('rankings.show')->middleware('auth','role:admin');
 
 // novel admin routes
 
@@ -174,8 +166,8 @@ Route::delete('/author/novels/{id}/chapters/{chapterId}',[AuthorChapterControlle
 // author profile routes
 
 Route::get('/dashboard/profile',[ProfileController::class,'profile'])->name('profile')->middleware('auth','role:admin|author');
-Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update')->middleware('auth','role:admin');
-Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password')->middleware('auth','role:admin');
-Route::put('/dashboard/profile/info',[ProfileController::class,'updateInfo'])->name('profile.info')->middleware('auth','role:admin');
-Route::put('/dashboard/profile/social',[ProfileController::class,'updateSocial'])->name('profile.social')->middleware('auth','role:admin');
-Route::delete('/dashboard/profile',[ProfileController::class,'deleteAccount'])->name('profile.delete')->middleware('auth','role:admin');
+Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update')->middleware('auth');
+Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password')->middleware('auth');
+Route::put('/dashboard/profile/info',[ProfileController::class,'updateInfo'])->name('profile.info')->middleware('auth','role:admin|author');
+Route::put('/dashboard/profile/social',[ProfileController::class,'updateSocial'])->name('profile.social')->middleware('auth','role:admin|author');
+Route::delete('/dashboard/profile',[ProfileController::class,'deleteAccount'])->name('profile.delete')->middleware('auth');

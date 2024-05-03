@@ -171,7 +171,7 @@ class NovelService
         $data = $request->all();
         // $data['genres'] = explode(',', $data['genres']);
         // dd($data);
-        return $this->novelRepository->search($data);
+        return $this->novelRepository->search($data,12);
     }
 
     public function getNovelBySlug(string $slug)

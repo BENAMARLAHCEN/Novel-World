@@ -183,7 +183,7 @@ class NovelRepository implements INovelRepository
 
     public function getFavorites($novelId, $perPage = 10)
     {
-        return Novel::where('is_public', 1)->whereIn('id', $novelId)->paginate($perPage)->latest();
+        return Novel::where('is_public', 1)->whereIn('id', $novelId)->paginate($perPage);
     }
 
     public function count()

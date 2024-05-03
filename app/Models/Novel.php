@@ -46,10 +46,7 @@ class Novel extends Model
         return $this->hasMany(Chapter::class);
     }
 
-    public function rankings()
-    {
-        return $this->belongsToMany(Ranking::class);
-    }
+
 
     public function getRouteKeyName()
     {

@@ -22,7 +22,7 @@
                         <div class="nk-block">
                             <div class="nk-block-head">
                                 <div class="nk-block-head-content">
-                                    <h4 class="nk-block-title">Cahpter {{ $chapter->number }} : {{ $chapter->title }}</h4>
+                                    <h4 class="nk-block-title">Chapter {{ $chapter->number }} : {{ $chapter->title }}</h4>
                                 </div>
                             </div><!-- .nk-block-head -->
                             <div class="nk-block">

@@ -83,35 +83,7 @@
             @endforeach
         </div>
     </div><!-- .nk-block -->
-    <div class="nk-block-head">
-        <div class="nk-block-between">
-            <div class="nk-block-head-content">
-                <h4 class="nk-block-title">Top 5 Authors</h4>
-            </div>
-            <div class="nk-block-head-content">
-                <a href="{{ route('users.index') }}" class="link link-primary">View All</a>
-            </div>
-        </div>
-    </div><!-- .nk-block-head -->
-    <div class="nk-block">
-        <div class="row g-gs">
-            @foreach ($topAuthors as $author)
-                <div class="col-sm-6 col-lg-4 col-xxl-3">
-                    <div class="card card-bordered card-full">
-                        <div class="nk-card-head">
-                            <div class="nk-card-title">{{ $author->name }}</div>
-                        </div>
-                        <div class="nk-card-text">
-                            <p>{{ Str::limit($author->bio, 100) }}</p>
-                        </div>
-                        <div class="nk-card-footer">
-                            <a href="{{ route('users.show', $author) }}" class="btn btn-primary">View</a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div><!-- .nk-block -->                      
+                  
 </div>
 
 @endsection

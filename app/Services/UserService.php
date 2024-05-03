@@ -37,7 +37,7 @@ class UserService
                 $user->assignRole('author');
                 $pen_name =  $user->name . '-' . Str::random(5);
                 Profile::create([
-                    'user_id' => auth()->id(),
+                    'user_id' => $user->id,
                     'pen_name' => $pen_name
                 ]);
             }

@@ -120,12 +120,7 @@
                                 <span class="nk-menu-text">Genres</span>
                             </a>
                         </li><!-- .nk-menu-item -->
-                        <li class="nk-menu-item">
-                            <a href="{{ route('rankings.index') }}" class="nk-menu-link">
-                                <span class="nk-menu-icon"><em class="icon ni ni-tag-alt-fill"></em></span>
-                                <span class="nk-menu-text">Ranking</span>
-                            </a>
-                        </li><!-- .nk-menu-item -->
+                        
                         @endrole
                         @role('author')
 
