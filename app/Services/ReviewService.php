@@ -30,6 +30,10 @@ class ReviewService
 
     public function store(array $attributes)
     {
+        if (auth()->user()->reviews()->where('novel_id', $attributes['novel_id'])->exists()) {
+            return back()->with('error', 'You have already reviewed this novel');
+        }
+        $attributes['user_id'] = auth()->id();
         DB::beginTransaction();
         try {
             $Review = $this->ReviewRepository->create($attributes);
@@ -67,9 +71,9 @@ class ReviewService
         }
     }
 
-    public function getReviewByUserId(int $userId)
+    public function getUserReviews(int $userId, int $perPage = null)
     {
-        return $this->ReviewRepository->getReviewByUserId($userId);
+        return $this->ReviewRepository->getReviewByUserId($userId, $perPage);
     }
 
     public function getReviewByNovelId(int $novelId)
@@ -80,6 +84,11 @@ class ReviewService
     public function randomReviews(int $limit)
     {
         return $this->ReviewRepository->randomReviews($limit);
+    }
+
+    public function getCount()
+    {
+        return $this->ReviewRepository->count();
     }
     
 }

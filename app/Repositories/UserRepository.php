@@ -48,11 +48,11 @@ class UserRepository implements IUserRepository
     public function paginate(int $perPage,$role)
     {
         if ($role) {
-            return User::whereHas('roles', function ($query) use ($role) {
+            return User::latest()->whereHas('roles', function ($query) use ($role) {
                 $query->where('name', $role);
             })->paginate($perPage);
         }
-        return User::paginate($perPage);
+        return User::latest()->paginate($perPage);
     }
 
     public function countOf($role = null)
@@ -63,5 +63,12 @@ class UserRepository implements IUserRepository
             })->count();
         }
         return User::count();
+    }
+
+    public function getTopAuthors($limit)
+    {
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'author');
+        })->withCount('novels')->orderBy('novels_count', 'desc')->limit($limit)->get();
     }
 }

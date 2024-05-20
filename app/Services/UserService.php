@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Repositories\Interfaces\IUserRepository;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -30,10 +31,16 @@ class UserService
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-
-
         if ($user) {
-            $user->assignRole('user');
+            $user->assignRole('reader');
+            if ($request->has('author')) {
+                $user->assignRole('author');
+                $pen_name =  $user->name . '-' . Str::random(5);
+                Profile::create([
+                    'user_id' => $user->id,
+                    'pen_name' => $pen_name
+                ]);
+            }
             $this->sendVerificationEmail($user);
             return redirect()->route('login')->with('success', 'Registered successfully. Please check your email to verify your account');
         } else {
@@ -44,6 +51,11 @@ class UserService
     public function login(LoginRequest $request)
     {
         if (auth()->attempt($request->only('email', 'password'))) {
+            // test if the user is banned or not
+            if (auth()->user()->banned_at) {
+                auth()->logout();
+                return back()->with('error', 'Your account has been banned');
+            }
             return redirect()->intended('/')->with('success', 'Logged in successfully');
         } else {
             return back()->with('error', 'Invalid login details');
@@ -129,6 +141,19 @@ class UserService
         });
     }
 
+    public function beAuthor()
+    {
+        $user = $this->userRepository->findById(auth()->id());
+        $user->assignRole('author');
+        // generete a profile for the author with a pen name unique to the author
+        $pen_name =  $user->name . '-' . Str::random(5);
+        Profile::create([
+            'user_id' => auth()->id(),
+            'pen_name' => $pen_name
+        ]);
+        return redirect()->route('author.dashboard')->with('success', 'You are now an author');
+    }
+
     // user favorite a novel methods
 
     public function getFavorites()
@@ -138,14 +163,16 @@ class UserService
 
     public function toggleFavorite($novelId)
     {
+
         $user = $this->userRepository->findById(auth()->id());
         $novel = $user->favorites()->where('novel_id', $novelId)->first();
+
         if ($novel) {
             $user->favorites()->detach($novelId);
-            return response()->json(['message' => 'Novel removed from favorites successfully']);
+            return response()->json(['success' => 'Novel removed from favorites successfully']);
         } else {
             $user->favorites()->attach($novelId);
-            return response()->json(['message' => 'Novel added to favorites successfully']);
+            return response()->json(['success' => 'Novel added to favorites successfully']);
         }
     }
 
@@ -172,15 +199,15 @@ class UserService
 
     // admin user management methods
 
-    public function getAllUsers(int $perPage = null,$role=null)
+    public function getAllUsers(int $perPage = null, $role = null)
     {
 
         if ($perPage) {
-            return $this->userRepository->paginate($perPage,$role);
+            return $this->userRepository->paginate($perPage, $role);
         }
         return $this->userRepository->all();
     }
-    
+
     public function getUser($id)
     {
         return $this->userRepository->findById($id);
@@ -241,14 +268,28 @@ class UserService
     public function blockPermission($request, $id)
     {
         $user = $this->userRepository->findById($id);
+        if ($request->permissions == null) {
+            $user->detachBlockPermissions();
+            return redirect()->back()->with('success', 'All permissions revoked successfully');
+        }
         $permissions = implode(',', $request->permissions);
         $user->blockPermissionsTo($permissions);
-        return redirect()->route('users.index')->with('success', 'Permission revoked successfully');
+        return redirect()->back()->with('success', 'Permission revoked successfully');
     }
 
 
-    public function getCount($users)
+    public function getCount($users = null)
     {
         return $this->userRepository->countOf($users);
+    }
+
+    public function findById($id)
+    {
+        return $this->userRepository->findById($id);
+    }
+
+    public function getTopAuthors()
+    {
+        return $this->userRepository->getTopAuthors(5);
     }
 }

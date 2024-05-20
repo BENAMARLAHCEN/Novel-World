@@ -8,15 +8,18 @@ use App\Http\Requests\Profile\UpdateInfoRequest;
 use App\Http\Requests\Profile\UpdatePwRequest;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Services\ProfileService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     protected $profileService;
+    protected $userService;
 
-    public function __construct(ProfileService $profileService)
+    public function __construct(ProfileService $profileService, UserService $userService)
     {
         $this->profileService = $profileService;
+        $this->userService = $userService;
     }
 
     public function profile()
@@ -24,15 +27,7 @@ class ProfileController extends Controller
         return view('dashboard.profile');
     }
 
-    
-
-//     Route::get('/dashboard/profile',[ProfileController::class,'profile'])->name('profile');
-// Route::put('/dashboard/profile',[ProfileController::class,'updateProfile'])->name('profile.update');
-// Route::put('/dashboard/profile/password',[ProfileController::class,'updatePassword'])->name('profile.password');
-// Route::put('/dashboard/profile/info',[ProfileController::class,'updateInfo'])->name('profile.info');
-// Route::put('/dashboard/profile/social',[ProfileController::class,'updateSocial'])->name('profile.social');
-// Route::delete('/dashboard/profile',[ProfileController::class,'deleteAccount'])->name('profile.delete');
-    
+   
         public function updateProfile(UpdateRequest $request)
         {
             $this->profileService->updateProfile($request);
@@ -60,6 +55,11 @@ class ProfileController extends Controller
         public function deleteAccount(DeletRequest $request)
         {
             $this->profileService->deleteAccount($request->validated());
+        }
+
+        public function show()
+        {
+            return view('profile');
         }
 
 }

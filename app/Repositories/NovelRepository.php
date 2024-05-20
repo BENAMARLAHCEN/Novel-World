@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Genre;
 use App\Models\Novel;
 use App\Models\Ranking;
-use App\Models\Statu;
 use App\Repositories\Interfaces\INovelRepository;
 
 class NovelRepository implements INovelRepository
@@ -19,7 +18,7 @@ class NovelRepository implements INovelRepository
         if ($authorId) {
             $query->where('user_id', $authorId);
         }
-        return $query->get();
+        return $query->latest()->get();
     }
 
     public function paginate(int $perPage = 10, $is_public = null, $authorId = null)
@@ -29,7 +28,7 @@ class NovelRepository implements INovelRepository
         if ($authorId) {
             $query->where('user_id', $authorId);
         }
-        return $query->paginate($perPage);
+        return $query->latest()->paginate($perPage);
     }
 
     public function findById(int $id)
@@ -85,22 +84,22 @@ class NovelRepository implements INovelRepository
     public function getAuthorNovels(int $authorId, $perPage = null)
     {
         if ($perPage) {
-            return Novel::where('user_id', $authorId)->paginate($perPage);
+            return Novel::latest()->where('user_id', $authorId)->paginate($perPage);
         }
-        return Novel::where('user_id', $authorId)->get();
+        return Novel::latest()->where('user_id', $authorId)->get();
     }
 
     public function trash(int $authorId = null)
     {
         if ($authorId) {
-            return Novel::onlyTrashed()->where('user_id', $authorId)->paginate(10);
+            return Novel::latest()->onlyTrashed()->where('user_id', $authorId)->paginate(10);
         }
-        return Novel::onlyTrashed()->paginate(10);
+        return Novel::latest()->onlyTrashed()->paginate(10);
     }
 
     public function restore(int $id)
     {
-        return Novel::onlyTrashed()->find($id)->restore();
+        return Novel::latest()->onlyTrashed()->find($id)->restore();
     }
 
     public function forceDelete(int $id)
@@ -127,10 +126,10 @@ class NovelRepository implements INovelRepository
 
     public function getCompletedNovels()
     {
-        return Novel::where('status', 'completed')->where('is_public', 1)->inRandomOrder()->limit(12)->get();
+        return Novel::latest()->where('status', 'completed')->where('is_public', 1)->inRandomOrder()->limit(12)->get();
     }
 
-    public function getTopNovels()
+    public function getTopNovels($limit = 2)
     {
         return Novel::where('is_public', 1)->whereHas('chapters', function ($query) {
             $query->where('status', 'published');
@@ -154,7 +153,7 @@ class NovelRepository implements INovelRepository
                 $query->whereIn('genres.id', $genres);
             });
         }
-        return $query->paginate($perPage);
+        return $query->where('is_public', 1)->latest()->paginate($perPage);
     }
         
 
@@ -180,5 +179,15 @@ class NovelRepository implements INovelRepository
         return Novel::where('is_public', 1)->whereHas('chapters', function ($query) {
             $query->where('status', 'published');
         })->withCount('views')->orderBy('views_count', 'desc')->paginate($perPage);
+    }
+
+    public function getFavorites($novelId, $perPage = 10)
+    {
+        return Novel::where('is_public', 1)->whereIn('id', $novelId)->paginate($perPage);
+    }
+
+    public function count()
+    {
+        return Novel::count();
     }
 }

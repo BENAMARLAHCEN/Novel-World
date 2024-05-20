@@ -60,11 +60,6 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="nk-block-tools-opt">
-                                    <a href=" {{ route('users.create') }}"
-                                        class="btn btn-primary d-none d-md-inline-flex"><em
-                                            class="icon ni ni-plus"></em><span>Add User</span></a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -104,15 +99,6 @@
                                     @if (request()->routeIs('users.readers')) ni-user-setting @endif
                                     "></em>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
-                                    <ul class="link-list-plain">
-                                        <li>
-                                            <a href="{{ route('users.create') }}">
-                                                <em class="icon ni ni ni-user-add-fill"></em><span>Add User</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </th>
                     </tr>

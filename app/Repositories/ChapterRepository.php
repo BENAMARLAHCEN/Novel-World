@@ -16,7 +16,7 @@ class ChapterRepository implements IChapterRepository
         if ($status) {
             $query->where('status', $status);
         }
-        return $query->get();
+        return $query->get()->latest()->sortBy('number');
     }
 
     public function paginate(int $perPage = 10,$status = null, $novelId = null)
@@ -28,7 +28,7 @@ class ChapterRepository implements IChapterRepository
         if ($status) {
             $query->where('status', $status);
         }
-        return $query->paginate($perPage);
+        return $query->latest()->paginate($perPage);
     }
 
     public function findById(int $id)
@@ -53,7 +53,7 @@ class ChapterRepository implements IChapterRepository
 
     public function getNovelChapters(int $novelId)
     {
-        return Chapter::where('novel_id', $novelId)->get();
+        return Chapter::where('novel_id', $novelId)->get()->sortBy('number');
     }
 
     public function getViewsCount($status = 'published')
@@ -72,6 +72,7 @@ class ChapterRepository implements IChapterRepository
     {
         return Chapter::where('novel_id', $novelId)
         ->where('number', $number)
+        ->where('status', 'published')
         ->first();
     }
 
@@ -91,6 +92,11 @@ class ChapterRepository implements IChapterRepository
         ->where('status', 'published')
         ->orderBy('number', 'desc')
         ->first();
+    }
+
+    public function count()
+    {
+        return Chapter::count();
     }
 
 }

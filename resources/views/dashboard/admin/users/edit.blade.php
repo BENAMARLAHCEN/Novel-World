@@ -1,3 +1,4 @@
+
 {{-- show user permission and block user permission input using select 2 --}}
 
 @extends('dashboard.layouts.app')
@@ -59,10 +60,10 @@
                                         <select class="form-select js-select2 @error('permissions') is-invalid @enderror"
                                             id="role-permissions" name="permissions[]"
                                             data-placeholder="Select multiple permissions" multiple="multiple">
-                                            @foreach ($user->permissions as $permission)
-                                                <option value="{{ $permission->name }}"
-                                                    @if ($user->hasBlockedPermission($permission->name)) selected @endif>
-                                                    {{ $permission->name }}</option>
+                                            @foreach ($user->getUserRolesPer() as $permission)
+                                                <option value="{{ $permission}}"
+                                                    @if ($user->hasBlockPermissionTo($permission)) selected @endif>
+                                                    {{ $permission }}</option>
                                             @endforeach
                                         </select>
 

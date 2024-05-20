@@ -1,36 +1,3 @@
-{{--     protected $fillable = [
-        'title',
-        'description',
-        'status_id',
-        'cover',
-        'slug',
-        'genre_id',
-        'views',
-        'published',
-        'user_id',
-    ];
-    
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function status()
-    {
-        return $this->belongsTo(Statu::class);
-    }
-
-    public function chapters()
-    {
-        return $this->hasMany(Chapter::class);
-    }
-
-    public function rankings()
-    {
-        return $this->belongsToMany(Ranking::class);
-    }
-    --}}
-
 @extends('dashboard.layouts.app')
 
 @section('content')
@@ -87,7 +54,7 @@
                             <td class="nk-tb-col">
 
                                 <span class="tb-product">
-                                    <img src="https://alphanovel.io/_next/image?url=https%3A%2F%2Fcdn.alphanovel.io%2Fbook-cover%2F030IHrSLT57KuqXrH8gS%2Ff26f1f52-2abd-49da-aec5-9f26af008a86_compressed.jpeg&w=640&q=75"
+                                    <img src="{{ $novel->cover }}"
                                         alt="" class="thumb">
                                     <span class="title">{{ $novel->title }}</span>
                                 </span>

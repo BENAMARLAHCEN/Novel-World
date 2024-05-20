@@ -16,7 +16,9 @@ class ReviewFactory extends Factory
      */
     public function definition(): array
     {
-        $userIds = \App\Models\User::pluck('id')->toArray();
+        $userIds = \App\Models\User::whereHas('roles', function ($query) {
+            $query->where('name', 'reader');
+        })->pluck('id')->toArray();
         $novelIds = \App\Models\Novel::pluck('id')->toArray();
         return [
             'rating' => $this->faker->numberBetween(1, 5),

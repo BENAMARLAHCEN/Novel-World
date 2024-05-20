@@ -73,11 +73,8 @@ class UserController extends Controller
 
     public function blockPermissions(Request $request, $id)
     {
-        $request->validate([
-            'permissions' => 'required|array',
-            'permissions.*' => 'string|exists:permissions,name'
-        ]);
-        $this->userService->blockPermission($request, $id);
+        
+        return $this->userService->blockPermission($request, $id);
     }
 
 

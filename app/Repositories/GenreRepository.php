@@ -36,4 +36,9 @@ class GenreRepository implements IGenreRepository
     {
         Genre::destroy($id);
     }
+
+    public function count()
+    {
+        return Genre::count();
+    }
 }

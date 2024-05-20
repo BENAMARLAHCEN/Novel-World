@@ -14,6 +14,11 @@ class NovelService
         $this->novelRepository = $novelRepository;
     }
 
+    public function getCount()
+    {
+        return $this->novelRepository->count();
+    }
+
     public function all(int $perPage = null)
     {
         if ($perPage) {
@@ -40,10 +45,19 @@ class NovelService
         $genres = $attributes['genres'];
         unset($attributes['genres']);
         // store novel cover image
+        // if ($request->hasFile('cover')) {
+        //     $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
+        //     $request->file('cover')->move(storage_path('novels'), $fileName);
+        //     $attributes['cover'] = "novels/".$fileName;
+        // }
         if ($request->hasFile('cover')) {
             $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
-            $request->file('cover')->move(storage_path('novels'), $fileName);
-            $attributes['cover'] = "novels/".$fileName;
+            // Store the file in the "novels" folder within the storage/app/public directory
+            $path = $request->file('cover')->storeAs('novels', $fileName);
+            // dd($path);
+            // Remove the 'public/' prefix from the stored path
+            $path = str_replace('storage/', '', $path);
+            $attributes['cover'] = $path;
         }
 
         $novel = $this->novelRepository->create($attributes);
@@ -63,15 +77,17 @@ class NovelService
         // update novel cover image
       
         if ($request->hasFile('cover')) {
-            $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
-            $request->file('cover')->storeAs('novels', $fileName);
-            
-            $attributes['cover'] = $fileName;
-            // delete old cover image
             $oldCover = $this->novelRepository->findById($id)->cover;
+            $fileName = time() . '_' . $request->file('cover')->getClientOriginalName();
+            // Store the file in the "novels" folder within the storage/app/public directory
+            $path = $request->file('cover')->storeAs('novels', $fileName);
             if ($oldCover) {
-                Storage::delete(storage_path('novels/' . $oldCover));
+                Storage::delete(storage_path($oldCover));
             }
+            // Remove the 'public/' prefix from the stored path
+            $path = str_replace('storage/', '', $path);
+            $attributes['cover'] = $path;
+            // delete old cover image
         }
 
         $novel = $this->novelRepository->update($id, $attributes);
@@ -140,9 +156,9 @@ class NovelService
         return $this->novelRepository->getCompletedNovels();
     }
 
-    public function getTopNovels()
+    public function getTopNovels($limit = 2)
     {
-        return $this->novelRepository->getTopNovels();
+        return $this->novelRepository->getTopNovels($limit);
     }
 
     public function getNovelsCount()
@@ -155,7 +171,7 @@ class NovelService
         $data = $request->all();
         // $data['genres'] = explode(',', $data['genres']);
         // dd($data);
-        return $this->novelRepository->search($data);
+        return $this->novelRepository->search($data,12);
     }
 
     public function getNovelBySlug(string $slug)
@@ -168,5 +184,12 @@ class NovelService
         return $this->novelRepository->getNovelsWithLatestChapter();
     }
     
-
+    public function getFavorites()
+    {
+        $novelIds = auth()->user()->favorites->pluck('id');
+        if ($novelIds->isEmpty()) {
+            return [];
+        }
+        return $this->novelRepository->getFavorites($novelIds);
+    }
 }

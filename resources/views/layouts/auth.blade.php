@@ -14,7 +14,6 @@
     <title>Novel World</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css?ver=3.2.3') }}">
-    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css?ver=3.2.3') }}">
     @yield('style')
 </head>
 
@@ -43,7 +42,8 @@
                         <div class="container wide-lg">
 
                             <div class="nk-block-content text-center text-lg-left">
-                                <p class="text-soft">&copy; 2023 Dashlite. All Rights Reserved.</p>
+                                <p class="text-soft">Copyright &copy; World Novel 2024 - All Rights Reserved, Developed
+                                    by <a href="https://github.com/BENAMARLAHCEN/Novel-World" target="_blank">Lahcen</a>
                             </div>
 
                         </div>

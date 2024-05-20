@@ -7,7 +7,7 @@
                 <div class="nk-block-head-content">
                     <h4 class="nk-block-title">Register</h4>
                     <div class="nk-block-des">
-                        <p>Create New Dashlite Account</p>
+                        <p>Create New World Novel Account</p>
                     </div>
                 </div>
             </div>
@@ -69,13 +69,20 @@
                             placeholder="Enter your password_confirmation">
                     </div>
                 </div>
+                {{-- checkbox for declari i need to be author --}}
                 <div class="form-group">
+                    <div class="custom-control custom-control-xs custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="checkbox" name="author" value="1">
+                        <label class="custom-control-label" for="checkbox">I want to be an author</label>
+                    </div>
+                </div>
+                {{-- <div class="form-group">
                     <div class="custom-control custom-control-xs custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="checkbox" required>
                         <label class="custom-control-label" for="checkbox">I agree to Dashlite <a href="#">Privacy
                                 Policy</a> &amp; <a href="#"> Terms.</a></label>
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Register</button>
                 </div>

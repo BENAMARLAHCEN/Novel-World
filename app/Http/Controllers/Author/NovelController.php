@@ -33,9 +33,8 @@ class NovelController extends Controller
     public function create()
     {
         $this->authorize('create', Novel::class);
-        $rankings = $this->novelService->getRankings();
         $genres = $this->novelService->getGenres();
-        return view('dashboard.author.novels.create', compact('rankings', 'genres'));
+        return view('dashboard.author.novels.create', compact( 'genres'));
     }
 
     /**
@@ -63,13 +62,11 @@ class NovelController extends Controller
      */
     public function edit($id)
     {
-        
-        $rankings = $this->novelService->getRankings();
         $genres = $this->novelService->getGenres();
         $novel = $this->novelService->findById($id);
         $this->authorize('update', $novel);
 
-        return view('dashboard.author.novels.edit', compact('novel', 'rankings', 'genres'));
+        return view('dashboard.author.novels.edit', compact('novel', 'genres'));
     }
 
     /**

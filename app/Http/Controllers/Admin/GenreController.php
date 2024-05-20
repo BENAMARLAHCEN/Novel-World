@@ -23,7 +23,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genres = $this->genreService->all(5);
+        $genres = $this->genreService->all(10);
         return view('dashboard.admin.genres.index', compact('genres'));
     }
 

@@ -82,15 +82,11 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col">
-                                <div class="user-card">
-                                    <div class="user-avatar bg-dim-primary d-none d-sm-flex">
-                                        <span>{{ $novel->title[0] }}</span>
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="tb-lead">{{ $novel->title }}</span>
-                                        {{-- <span>{{ $novel->author->name }}</span> --}}
-                                    </div>
-                                </div>
+                                <span class="tb-product">
+                                    <img src="{{ $novel->cover }}"
+                                        alt="" class="thumb">
+                                    <span class="title">{{ $novel->title }}</span>
+                                </span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span>{{ $novel->chapters->count() }}</span>

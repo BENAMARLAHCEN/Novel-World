@@ -29,12 +29,16 @@ interface INovelRepository
 
     public function getOngoingNovels();
     public function getCompletedNovels();
-    public function getTopNovels();
+    public function getTopNovels($limit = 2);
 
     public function search($data, $perPage = 10);
     public function findBySlug($slug);
 
     public function getNovelsWithLatestChapter($perPage = 10);
     public function getNovelsWithMostViews($perPage = 10);
+
+    public function getFavorites($novelId, $perPage = 10);
+
+    public function count();
 
 }
